@@ -112,27 +112,25 @@
 
 
 
-  <meta name="description" content="关于java8 中的stream，Optional以及我对java8画的一张思维导图">
-<meta name="keywords" content="java">
+  <meta name="description" content="三个主题  Mockito中的获取mock方法的调用参数 python多个@patch Docker的Container和宿主机同步时区">
+<meta name="keywords" content="java,python,docker">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java8-stream以及其他">
-<meta property="og:url" content="https://chandlersong.github.io/2018/07/11/java8-stream以及其他/index.html">
+<meta property="og:title" content="拾遗集2018-2">
+<meta property="og:url" content="https://chandlersong.github.io/2018/07/16/拾遗集2018-2/index.html">
 <meta property="og:site_name" content="cs blog">
-<meta property="og:description" content="关于java8 中的stream，Optional以及我对java8画的一张思维导图">
+<meta property="og:description" content="三个主题  Mockito中的获取mock方法的调用参数 python多个@patch Docker的Container和宿主机同步时区">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://on-img.com/chart_image/5b2b374fe4b0d4a19d7f7e6e.png?_=1530969194910">
-<meta property="og:updated_time" content="2018-07-11T14:09:38.176Z">
+<meta property="og:updated_time" content="2018-07-16T13:23:52.947Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java8-stream以及其他">
-<meta name="twitter:description" content="关于java8 中的stream，Optional以及我对java8画的一张思维导图">
-<meta name="twitter:image" content="http://on-img.com/chart_image/5b2b374fe4b0d4a19d7f7e6e.png?_=1530969194910">
+<meta name="twitter:title" content="拾遗集2018-2">
+<meta name="twitter:description" content="三个主题  Mockito中的获取mock方法的调用参数 python多个@patch Docker的Container和宿主机同步时区">
 
 
 
 
 
 
-  <link rel="canonical" href="https://chandlersong.github.io/2018/07/11/java8-stream以及其他/"/>
+  <link rel="canonical" href="https://chandlersong.github.io/2018/07/16/拾遗集2018-2/"/>
 
 
 
@@ -142,7 +140,7 @@
   };
 </script>
 
-  <title>java8-stream以及其他 | cs blog</title>
+  <title>拾遗集2018-2 | cs blog</title>
   
 
 
@@ -320,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chandlersong.github.io/2018/07/11/java8-stream以及其他/">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.github.io/2018/07/16/拾遗集2018-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chandler song">
@@ -337,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">java8-stream以及其他
+          <h1 class="post-title" itemprop="name headline">拾遗集2018-2
               
             
           </h1>
@@ -362,13 +360,9 @@
                 
               
 
-              <time title="创建时间：2018-07-11 22:07:44 / 修改时间：22:09:38" itemprop="dateCreated datePublished" datetime="2018-07-11T22:07:44+08:00">2018-07-11</time>
+              <time title="创建时间：2018-07-16 21:23:52" itemprop="dateCreated datePublished" datetime="2018-07-16T21:23:52+08:00">2018-07-16</time>
             
 
-            
-              
-
-              
             
           </span>
 
@@ -384,7 +378,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java笔记/" itemprop="url" rel="index"><span itemprop="name">java笔记</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/拾遗/" itemprop="url" rel="index"><span itemprop="name">拾遗</span></a></span>
 
                 
                 
@@ -399,8 +393,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/07/11/java8-stream以及其他/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/11/java8-stream以及其他/" itemprop="commentCount"></span>
+                <a href="/2018/07/16/拾遗集2018-2/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/16/拾遗集2018-2/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -428,47 +422,38 @@
       
 
       
-        <p>关于java8 中的stream，Optional以及我对java8画的一张思维导图<br><a id="more"></a></p>
-<h1 id="总的思维导图"><a href="#总的思维导图" class="headerlink" title="总的思维导图"></a>总的思维导图</h1><p><img src="http://on-img.com/chart_image/5b2b374fe4b0d4a19d7f7e6e.png?_=1530969194910" alt="image"></p>
-<h1 id="Stream-API"><a href="#Stream-API" class="headerlink" title="Stream API"></a>Stream API</h1><h2 id="流的特点"><a href="#流的特点" class="headerlink" title="流的特点"></a>流的特点</h2><p>当操作stream的时候，需要考虑每一个步骤的操作对象。</p>
+        <p>三个主题</p>
 <ul>
-<li><strong>pipelines</strong> 在官方文档其提出这个概念，相对于循环，我觉得最大的区别就在于此，以前循环，就是在考虑一个循环的过程，而现在考虑的是一个对象如何在<strong>pipelines上面流淌</strong>。</li>
-<li>对象类型：包括输入输出。觉得很多方法，要考虑好pipelines上下问的连接输入输出。</li>
-<li>操作方式：是对本对象操作，还是类型转化，还是统计。</li>
+<li>Mockito中的获取mock方法的调用参数</li>
+<li>python多个@patch</li>
+<li>Docker的Container和宿主机同步时区</li>
 </ul>
-<p>这里我的概念还是有点模糊，只是淡淡的感觉，不要做几件事情。<br>一来，我觉得stream的核心还是一次只做一件事情。这样语法也简单。方便阅读。<br>二来，当有几件事情的时候，很多方法用起来就很变扭。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>方法分类为 <em>intermediate</em>和<em>terminal</em>两种。前者是过程，后者是终结。<br>方法其实有有很多。但是每个方法都有其特定的事情，在写留的时候，我觉得第一步还是在于分解和规划。分解在于把你的事情分解成一个<em>intermediate</em>或<em>terminal</em>能够处理的事情。而规划，则是这些事情的前后顺序</p>
-<blockquote>
-<p>Intermediate：<br>map (mapToInt, flatMap 等)、 filter、 distinct、 sorted、 peek、 limit、 skip、 parallel、 sequential、 unordered<br>Terminal：<br>forEach、 forEachOrdered、 toArray、 reduce、 collect、 min、 max、 count、 anyMatch、 allMatch、 noneMatch、 findFirst、 findAny、 iterator</p>
-</blockquote>
-<p>这里列举了几个方法。<br>看了一圈，基本来说，大部分看名字都知道怎么用。这里展开就没有太大的意义。</p>
-<h3 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">T <span class="title">reduce</span><span class="params">(T identity, BinaryOperator&lt;T&gt; accumulator)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">Optional&lt;T&gt; <span class="title">reduce</span><span class="params">(BinaryOperator&lt;T&gt; accumulator)</span>  </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">&lt;U&gt; U <span class="title">reduce</span><span class="params">(U identity,</span></span></span><br><span class="line"><span class="function"><span class="params">             BiFunction&lt;U,? <span class="keyword">super</span> T,U&gt; accumulator,</span></span></span><br><span class="line"><span class="function"><span class="params">             BinaryOperator&lt;U&gt; combiner)</span></span></span><br></pre></td></tr></table></figure>
-<p><code>BinaryOperator&lt;T&gt; accumulator</code> 这个是核心方法。reduce的核心就是在这里。</p>
-<h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><p>就是转换对象。</p>
-<h3 id="collect-和-Collectors"><a href="#collect-和-Collectors" class="headerlink" title="collect 和 Collectors"></a>collect 和 Collectors</h3><h4 id="Collectors"><a href="#Collectors" class="headerlink" title="Collectors"></a>Collectors</h4><p>主要是这四个方法</p>
-<ul>
-<li>creation of a new result container (supplier())  <ul>
-<li>创建新的结果容器。就是返回值的对象。</li>
-</ul>
-</li>
-<li>incorporating a new data element into a result container (accumulator()) <ul>
-<li>把一个新元素放入容器。简单说的，就是如何把结果A，放入返回值，感觉返回值像是当个生成的。</li>
-</ul>
-</li>
-<li>combining two result containers into one (combiner())<ul>
-<li>返回值的组合</li>
-</ul>
-</li>
-<li>performing an optional final transform on the container (finisher())<ul>
-<li>之后的操作</li>
-</ul>
-</li>
-</ul>
-<p>在这里，collect的本质是一种归集(accumulates)。</p>
-<h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><p><a href="https://www.ibm.com/developerworks/cn/java/j-lo-java8streamapi/index.html" target="_blank" rel="noopener">介绍文档</a><br><a href="https://docs.oracle.com/javase/8/docs/api/index.html?overview-summary.html" target="_blank" rel="noopener">官方文档</a></p>
-<h1 id="Optional"><a href="#Optional" class="headerlink" title="Optional"></a>Optional</h1><h2 id="orElseGet"><a href="#orElseGet" class="headerlink" title="orElseGet"></a>orElseGet</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;Object&gt; test = Optional.empty();</span><br><span class="line"></span><br><span class="line">Object o1 = test.orElseGet(() -&gt; <span class="keyword">new</span> Object());</span><br><span class="line">Object o2 = test.orElseGet(() -&gt; <span class="keyword">new</span> Object());</span><br><span class="line"></span><br><span class="line">logger.info(<span class="string">"o1 and o2 is same:&#123;&#125;"</span>,(o1==o2));</span><br><span class="line">logger.info(<span class="string">"test.get():&#123;&#125;"</span>,test.orElse(<span class="string">"still null"</span>));</span><br><span class="line">Object o3 = test.orElseGet(<span class="keyword">this</span>::createObject);</span><br><span class="line">Object o4 = test.orElseGet(<span class="keyword">this</span>::createObject);</span><br><span class="line">logger.info(<span class="string">"o3 and o4 is same:&#123;&#125;"</span>,(o3==o4));</span><br></pre></td></tr></table></figure>
-<p>可以看到，OrElseGet是每次调用的。这里并不是要用懒加载。这个方法都会被调用一次。</p>
-<h1 id="reference-1"><a href="#reference-1" class="headerlink" title="reference"></a>reference</h1><h2 id="java8"><a href="#java8" class="headerlink" title="java8"></a>java8</h2><p><a href="http://www.importnew.com/11908.html#optional" target="_blank" rel="noopener">参考一</a><br><a href="https://www.jianshu.com/p/5b800057f2d8" target="_blank" rel="noopener">参考二</a></p>
+<a id="more"></a>
+<h1 id="Mockito中的获取mock方法的调用参数"><a href="#Mockito中的获取mock方法的调用参数" class="headerlink" title="Mockito中的获取mock方法的调用参数"></a>Mockito中的获取mock方法的调用参数</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ArgumentCaptor&lt;Person&gt; peopleCaptor = ArgumentCaptor.forClass(Person.class);</span><br><span class="line">verify(mock, times(<span class="number">2</span>)).doSomething(peopleCaptor.capture());</span><br><span class="line"></span><br><span class="line">List&lt;Person&gt; capturedPeople = peopleCaptor.getAllValues();</span><br><span class="line">assertEquals(<span class="string">"John"</span>, capturedPeople.get(<span class="number">0</span>).getName());</span><br><span class="line">assertEquals(<span class="string">"Jane"</span>, capturedPeople.get(<span class="number">1</span>).getName());</span><br></pre></td></tr></table></figure>
+<ol>
+<li>建立<strong>ArgumentCaptor</strong>对象</li>
+<li>在verify的时候调用，就是例子中的<code>$verify(mock, times(2)).doSomething(peopleCaptor.capture());$</code>，<code>$doSomething$</code>是其中的方法。</li>
+</ol>
+<p><a href="https://stackoverflow.com/questions/5981605/can-mockito-capture-arguments-of-a-method-called-multiple-times" target="_blank" rel="noopener">stackoverflow–proactif</a></p>
+<h1 id="python多个-patch"><a href="#python多个-patch" class="headerlink" title="python多个@patch"></a>python多个@patch</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@patch("urllib.request.urlopen")</span></span><br><span class="line"><span class="meta">@patch("pandas.read_csv")</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_hello_world</span><span class="params">(self, pandas_read_csv,request_urlopen)</span>:</span></span><br></pre></td></tr></table></figure>
+<p>关键在于，注入到方法的时候，<strong>顺序要倒着</strong>。</p>
+<h1 id="Docker的Container和宿主机同步时区"><a href="#Docker的Container和宿主机同步时区" class="headerlink" title="Docker的Container和宿主机同步时区"></a>Docker的Container和宿主机同步时区</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -t -i -p 8080:8080 -p 8090:8090 -v /etc/localtime:/etc/localtime:ro tomcat:7.0.69-jre8 /bin/bash</span><br></pre></td></tr></table></figure>
+<p>核心是 <strong>-v /etc/localtime:/etc/localtime</strong><br>其实还可以同步/etc/timezone,但是实际操作中，这个要访问权限，貌似不是默认开的</p>
+<p>==用java的话，timezone获得的时区出错==。<a href="https://stackoverflow.com/questions/41770464/openjdk-1-8-0-in-docker-container-has-different-timezone-than-etc-timezone-and" target="_blank" rel="noopener">timezone问题分析</a>  </p>
+<p>但是发觉文中的方法太繁琐。最后觉得还是</p>
+<h2 id="设置环境变量TZ"><a href="#设置环境变量TZ" class="headerlink" title="设置环境变量TZ"></a>设置环境变量TZ</h2><p>从结果上来看，这个有点玄学。我用<code>exec /bin/bash</code>强行登陆上去，用date命令发现准确，但是我java程序，则是一直取的逝去不对。我host的CST，但是java取的是UTC。</p>
+<h2 id="通过Volumne"><a href="#通过Volumne" class="headerlink" title="通过Volumne"></a>通过Volumne</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">volumnes：</span></span><br><span class="line"><span class="bullet">   -</span> <span class="string">/etc/localtime:/etc/localtime：ro</span></span><br><span class="line"><span class="bullet">   -</span> <span class="string">/etc/timezone:/etc/timezone：ro</span></span><br></pre></td></tr></table></figure>
+<p>我觉得这个方法，可能对<strong>OS的发行</strong>版比较依赖。因为我的测试环境是CentOS。发觉无效。但是网上说这个方法可行。<br>就个人来说，觉得这个方法比较有美感。</p>
+<p><a href="https://serverfault.com/questions/683605/docker-container-time-timezone-will-not-reflect-changes" target="_blank" rel="noopener">stackoverflow-thhan说可行</a></p>
+<h2 id="命令行改"><a href="#命令行改" class="headerlink" title="命令行改"></a>命令行改</h2><h3 id="ubuntu"><a href="#ubuntu" class="headerlink" title="ubuntu"></a>ubuntu</h3><figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"Asia/Shanghai"</span> &gt; /etc/timezone</span></span><br><span class="line"><span class="bash">RUN dpkg-reconfigure -f noninteractive tzdata</span></span><br></pre></td></tr></table></figure>
+<p>核心代码是这两句，由于没环境，所以也没有试过<br><a href="https://tommy.net.cn/2015/02/05/config-timezone-in-docker/" target="_blank" rel="noopener">具体可以参考Tommy Lau</a></p>
+<h3 id="CentOS7"><a href="#CentOS7" class="headerlink" title="CentOS7"></a>CentOS7</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timedatectl <span class="built_in">set</span>-timezone Aisa/shanghai</span><br></pre></td></tr></table></figure>
+<p>但是在Docker中会报一个错<code>Failed to create bus connection: No such file or directory</code>。网上查了一下资料，发觉有权限问题，下面提供了解决方案。<br><a href="https://www.cyberciti.biz/faq/centos-linux-6-7-changing-timezone-command-line/" target="_blank" rel="noopener">具体说明</a><br><a href="https://stackoverflow.com/questions/43907925/ubuntu-timedatectl-fails-in-docker-container" target="_blank" rel="noopener">stackoverflow-srlm</a></p>
+<h2 id="修改连接"><a href="#修改连接" class="headerlink" title="修改连接"></a>修改连接</h2><p>可能这个方案，只是适用于CentOS7。因为我是在试了上面方法无效的时候，才想到用这个方案的。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /etc/localtime</span><br></pre></td></tr></table></figure>
+<p>你会看到<code>/etc/localtime</code>指向的是<code>/usr/share/zoneinfo</code>下面的文件。然后下面是具体时区。基于这个思路。我就是通过代码强行的建立一个相关的连接。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm /etc/localtime</span><br><span class="line">ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
+<p>后来发觉这个方法，是<a href="https://www.cyberciti.biz/faq/centos-linux-6-7-changing-timezone-command-line/" target="_blank" rel="noopener">具体说明</a>对centOS6方法。但是实际发现对CentoS7也有效</p>
 
       
     </div>
@@ -515,6 +500,10 @@
           
             <a href="/tags/java/" rel="tag"># java</a>
           
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/docker/" rel="tag"># docker</a>
+          
         </div>
       
 
@@ -526,8 +515,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/05/java8-function-api/" rel="next" title="java8--function api">
-                <i class="fa fa-chevron-left"></i> java8--function api
+              <a href="/2018/07/16/数学-函数/" rel="next" title="数学-函数">
+                <i class="fa fa-chevron-left"></i> 数学-函数
               </a>
             
           </div>
@@ -535,10 +524,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/16/数学-函数/" rel="prev" title="数学-函数">
-                数学-函数 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -704,7 +689,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#总的思维导图"><span class="nav-text">总的思维导图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Stream-API"><span class="nav-text">Stream API</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#流的特点"><span class="nav-text">流的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法"><span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#reduce"><span class="nav-text">reduce</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#map"><span class="nav-text">map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#collect-和-Collectors"><span class="nav-text">collect 和 Collectors</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Collectors"><span class="nav-text">Collectors</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-text">reference</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optional"><span class="nav-text">Optional</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#orElseGet"><span class="nav-text">orElseGet</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reference-1"><span class="nav-text">reference</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java8"><span class="nav-text">java8</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mockito中的获取mock方法的调用参数"><span class="nav-text">Mockito中的获取mock方法的调用参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python多个-patch"><span class="nav-text">python多个@patch</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker的Container和宿主机同步时区"><span class="nav-text">Docker的Container和宿主机同步时区</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置环境变量TZ"><span class="nav-text">设置环境变量TZ</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过Volumne"><span class="nav-text">通过Volumne</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行改"><span class="nav-text">命令行改</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ubuntu"><span class="nav-text">ubuntu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CentOS7"><span class="nav-text">CentOS7</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改连接"><span class="nav-text">修改连接</span></a></li></ol></li></ol></div>
             
 
           </div>

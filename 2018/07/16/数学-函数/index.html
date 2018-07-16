@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="pM_XAEV2nmir_K1lg0_6faxEzP6oJBFlK4cHejszh8k" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+<link href="https://cdn.staticfile.org/font-awesome/4.6.2/css/font-awesome.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="思维导图 函数基本定义一个对象转换成另一个对象的规则。起始对象称为输入。定义域的集合返回独享是输出。 数学学多了，脑子里面都是数字，公式，但是函数，看到这句话，脑子里面还是眼前一亮的感觉。 上域值域是上域的一个子集。值域是实际输出的集合。上域是可能输出的集合。 上域还是第一次听说，就当成是一个概念吧。 唯一的输出一个函数必须给每一个有效的输入指定唯一的输出 区间闭区间：[]开区间：() 垂线检验其">
+<meta name="keywords" content="数学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数学-函数">
+<meta property="og:url" content="https://chandlersong.github.io/2018/07/16/数学-函数/index.html">
+<meta property="og:site_name" content="cs blog">
+<meta property="og:description" content="思维导图 函数基本定义一个对象转换成另一个对象的规则。起始对象称为输入。定义域的集合返回独享是输出。 数学学多了，脑子里面都是数字，公式，但是函数，看到这句话，脑子里面还是眼前一亮的感觉。 上域值域是上域的一个子集。值域是实际输出的集合。上域是可能输出的集合。 上域还是第一次听说，就当成是一个概念吧。 唯一的输出一个函数必须给每一个有效的输入指定唯一的输出 区间闭区间：[]开区间：() 垂线检验其">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://on-img.com/chart_image/5b407a21e4b00b08ad10d6bf.png?_=1530969898516">
+<meta property="og:updated_time" content="2018-07-16T13:24:51.400Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数学-函数">
+<meta name="twitter:description" content="思维导图 函数基本定义一个对象转换成另一个对象的规则。起始对象称为输入。定义域的集合返回独享是输出。 数学学多了，脑子里面都是数字，公式，但是函数，看到这句话，脑子里面还是眼前一亮的感觉。 上域值域是上域的一个子集。值域是实际输出的集合。上域是可能输出的集合。 上域还是第一次听说，就当成是一个概念吧。 唯一的输出一个函数必须给每一个有效的输入指定唯一的输出 区间闭区间：[]开区间：() 垂线检验其">
+<meta name="twitter:image" content="http://on-img.com/chart_image/5b407a21e4b00b08ad10d6bf.png?_=1530969898516">
+
+
+
+
+
+
+  <link rel="canonical" href="https://chandlersong.github.io/2018/07/16/数学-函数/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>数学-函数 | cs blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-9797056-15"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-9797056-15');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">cs blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.github.io/2018/07/16/数学-函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chandler song">
+      <meta itemprop="description" content="share my technique experience">
+      <meta itemprop="image" content="/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cs blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数学-函数
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-16 21:23:31 / 修改时间：21:24:51" itemprop="dateCreated datePublished" datetime="2018-07-16T21:23:31+08:00">2018-07-16</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数学/" itemprop="url" rel="index"><span itemprop="name">数学</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/16/数学-函数/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/16/数学-函数/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="思维导图"><a href="#思维导图" class="headerlink" title="思维导图"></a>思维导图</h1><p><img src="http://on-img.com/chart_image/5b407a21e4b00b08ad10d6bf.png?_=1530969898516" alt="image"></p>
+<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h2 id="基本定义"><a href="#基本定义" class="headerlink" title="基本定义"></a>基本定义</h2><p>一个对象转换成另一个对象的规则。<br>起始对象称为输入。定义域的集合返回独享是输出。</p>
+<p><em>数学学多了，脑子里面都是数字，公式，但是函数，看到这句话，脑子里面还是眼前一亮的感觉。</em></p>
+<h3 id="上域"><a href="#上域" class="headerlink" title="上域"></a>上域</h3><p>值域是上域的一个子集。<br>值域是实际输出的集合。<br>上域是可能输出的集合。</p>
+<p><em>上域还是第一次听说，就当成是一个概念吧。</em></p>
+<h3 id="唯一的输出"><a href="#唯一的输出" class="headerlink" title="唯一的输出"></a>唯一的输出</h3><p>一个函数必须给每一个有效的输入指定唯一的输出</p>
+<h3 id="区间"><a href="#区间" class="headerlink" title="区间"></a>区间</h3><p>闭区间：[]<br>开区间：()</p>
+<h3 id="垂线检验"><a href="#垂线检验" class="headerlink" title="垂线检验"></a>垂线检验</h3><p>其实定义无非是网上抄一遍。没有什么太大的含义。<br>满足垂直校验的，就是函数。水平呢，就是可以求反函数</p>
+<p><em>这里最大的感触，还是在于函数是图像的表达，而不是只有公式的表达。可能是从头到尾都在希望我们抛弃函数，只是公式的定式思维吧。</em></p>
+<h2 id="反函数"><a href="#反函数" class="headerlink" title="反函数"></a>反函数</h2><p>记做。<code>$f^-1$</code></p>
+<p>给定一个函数f,仅有一个x值满足f(x) = y才可能有反函数</p>
+<p>有4个条件</p>
+<ol>
+<li>从一个函数f出发，使得对于f值域中的任意y，都有为一个的x值满足f(x)=y, 也就是说，不同的输入对应不同那个的输出。</li>
+<li><code>$f^-1$</code>的定义域和f的值域相同</li>
+<li><code>$f^-1$</code> 的值域和f的定义域相同</li>
+<li><code>$f^-1(y)$</code>的值就满足f(x) = y的x。</li>
+</ol>
+<h2 id="复合函数"><a href="#复合函数" class="headerlink" title="复合函数"></a>复合函数</h2><p>记做<br><code>$f(x) = h(g(x))$</code> 或者 <code>$ f = h \circ g $</code></p>
+<p>其实就是函数里面套函数。<br>g(x)的自变量是x<br>函数h的自变量，是g(x)。<br>f的自变量是x  </p>
+<h2 id="奇偶性"><a href="#奇偶性" class="headerlink" title="奇偶性"></a>奇偶性</h2><h3 id="偶函数"><a href="#偶函数" class="headerlink" title="偶函数"></a>偶函数</h3><ol>
+<li>f(x) = f(-x)</li>
+<li>y轴对称</li>
+</ol>
+<h3 id="奇函数"><a href="#奇函数" class="headerlink" title="奇函数"></a>奇函数</h3><ol>
+<li>f(x) = - f(x)</li>
+<li>原点对称</li>
+</ol>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ol>
+<li>大部分函数都是飞奇非偶函数。</li>
+</ol>
+<h1 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h1><h2 id="线性函数"><a href="#线性函数" class="headerlink" title="线性函数"></a>线性函数</h2><h3 id="不同的表现形式"><a href="#不同的表现形式" class="headerlink" title="不同的表现形式"></a>不同的表现形式</h3><ol>
+<li><code>$y= mx + b$</code> m是斜率</li>
+<li>点斜式： <code>$y-y_0 = m(x-x_0)$</code> 其中m是斜率<ul>
+<li>通过两点(x_1,y_1)和(x_2,y_2)，那么它的斜率就是<code>$\frac{y_2 - y_1 }{x_2 - x_1}$</code></li>
+</ul>
+</li>
+</ol>
+<h1 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h1><p>三角函数，主要用的弧度，也就是<code>$\pi$</code>系统</p>
+<h3 id="三角函数定义"><a href="#三角函数定义" class="headerlink" title="三角函数定义"></a>三角函数定义</h3><h3 id="数学表示"><a href="#数学表示" class="headerlink" title="数学表示"></a>数学表示</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">\sin&#123;\theta&#125; = \frac&#123;a&#125;&#123;c&#125;</span><br><span class="line"></span><br><span class="line">\cos&#123;\theta&#125; = \frac&#123;b&#125;&#123;c&#125;</span><br><span class="line"></span><br><span class="line">\tan&#123;\theta&#125; = \frac&#123;a&#125;&#123;b&#125;</span><br><span class="line"></span><br><span class="line">\csc(\theta) = \frac&#123;1&#125;&#123;\sin&#123;\theta&#125;&#125;   </span><br><span class="line"></span><br><span class="line">\sec(\theta) = \frac&#123;1&#125;&#123;\cos&#123;\theta&#125;&#125;   </span><br><span class="line"></span><br><span class="line">\cot(\theta) = \frac&#123;1&#125;&#123;\cos&#123;\tan&#125;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>a 对边</li>
+<li>b 邻边</li>
+<li>c 斜边</li>
+<li>csc 余割</li>
+<li>sec 正割</li>
+<li>cot 余切</li>
+</ul>
+<h3 id="坐标表示"><a href="#坐标表示" class="headerlink" title="坐标表示"></a>坐标表示</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\sin&#123;\theta&#125; = \frac&#123;y&#125;&#123;r&#125;</span><br><span class="line"></span><br><span class="line">\cos&#123;\theta&#125; = \frac&#123;x&#125;&#123;r&#125;</span><br><span class="line"></span><br><span class="line">\tan&#123;\theta&#125; = \frac&#123;y&#125;&#123;x&#125;</span><br></pre></td></tr></table></figure>
+<p>r是到原点的距离。<code>$r = \sqrt{x^2+y^2}$</code></p>
+<h3 id="常用三角函数的值"><a href="#常用三角函数的值" class="headerlink" title="常用三角函数的值"></a>常用三角函数的值</h3><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>0</th>
+<th><code>$\frac{\pi}{6}$</code></th>
+<th><code>$\frac{\pi}{4}$</code></th>
+<th><code>$\frac{\pi}{3}$</code></th>
+<th><code>$\frac{\pi}{2}$</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sina</td>
+<td>0</td>
+<td><code>$\frac{1}{2}$</code></td>
+<td><code>$\frac{1}{\sqrt{2}}$</code></td>
+<td><code>$\frac{\sqrt{3}}{2}$</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td>cos</td>
+<td>1</td>
+<td><code>$\frac{\sqrt{3}}{2}$</code></td>
+<td><code>$\frac{1}{\sqrt{2}}$</code></td>
+<td><code>$\frac{1}{2}$</code></td>
+<td>0</td>
+</tr>
+<tr>
+<td>tan</td>
+<td>0</td>
+<td><code>$\frac{1}{\sqrt{3}}$</code></td>
+<td>1</td>
+<td><code>$\sqrt{3}$</code></td>
+<td>not exist</td>
+</tr>
+</tbody>
+</table>
+<h1 id="常用等式"><a href="#常用等式" class="headerlink" title="常用等式"></a>常用等式</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">\tan&#123;(x)&#125; = \frac&#123;\sin&#123;(x)&#125;&#125;&#123;\cos&#123;(x)&#125;&#125;  </span><br><span class="line"></span><br><span class="line">\cot&#123;(x)&#125; = \frac&#123;\cos&#123;(x)&#125;&#125;&#123;\sin&#123;(x)&#125;&#125;  </span><br><span class="line"></span><br><span class="line">\sin^2&#123;(x)&#125; + \cos^2&#123;(x)&#125; =1</span><br><span class="line"></span><br><span class="line">1 + \tan^2&#123;(x)&#125; = \sec^2&#123;(x)&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\cot^2&#123;(x)&#125; + 1 = \csc^2&#123;(x)&#125;</span><br><span class="line"></span><br><span class="line">\sin&#123;(x)&#125; = cos&#123;(\frac&#123;\pi&#125;&#123;2&#125;-x)&#125;</span><br><span class="line"></span><br><span class="line">\tan&#123;(x)&#125; = cot&#123;(\frac&#123;\pi&#125;&#123;2&#125;-x)&#125;</span><br><span class="line"></span><br><span class="line">\sec&#123;(x)&#125; = csc&#123;(\frac&#123;\pi&#125;&#123;2&#125;-x)&#125;</span><br><span class="line"></span><br><span class="line">\sin&#123;(A+B)&#125; = \sin&#123;(A)&#125;\cos&#123;(B)&#125;+\cos&#123;(A)&#125;\sin&#123;(B)&#125;</span><br><span class="line"></span><br><span class="line">\cos&#123;(A+B)&#125; = \cos&#123;(A)&#125;\cos&#123;(B)&#125;+\sin&#123;(A)&#125;\sin&#123;(B)&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\sin&#123;(2x)&#125; = 2\sin&#123;(x)&#125;\cos&#123;(x)&#125;</span><br><span class="line"></span><br><span class="line">\cos&#123;(2x)&#125; = \cos^2(x)- \sin^2(x) = 2\cos^2(x) - 1 = 1- 2\sin^2(x)  </span><br><span class="line"></span><br><span class="line">           = \cos^2(x)- 1 - \cos^2(x) =  1- \sin^2(x)  - \sin^2(x)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>赏</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/reward/weixin.jpg" alt="chandler song 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数学/" rel="tag"># 数学</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/11/java8-stream以及其他/" rel="next" title="java8-stream以及其他">
+                <i class="fa fa-chevron-left"></i> java8-stream以及其他
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/16/拾遗集2018-2/" rel="prev" title="拾遗集2018-2">
+                拾遗集2018-2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/avatar.jpeg"
+                alt="chandler song" />
+            
+              <p class="site-author-name" itemprop="name">chandler song</p>
+              <p class="site-description motion-element" itemprop="description">share my technique experience</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:chandler605@outlook.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#思维导图"><span class="nav-text">思维导图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数"><span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本定义"><span class="nav-text">基本定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#上域"><span class="nav-text">上域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#唯一的输出"><span class="nav-text">唯一的输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区间"><span class="nav-text">区间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#垂线检验"><span class="nav-text">垂线检验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反函数"><span class="nav-text">反函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复合函数"><span class="nav-text">复合函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#奇偶性"><span class="nav-text">奇偶性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#偶函数"><span class="nav-text">偶函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#奇函数"><span class="nav-text">奇函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特点"><span class="nav-text">特点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用函数"><span class="nav-text">常用函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线性函数"><span class="nav-text">线性函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#不同的表现形式"><span class="nav-text">不同的表现形式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三角函数"><span class="nav-text">三角函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三角函数定义"><span class="nav-text">三角函数定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数学表示"><span class="nav-text">数学表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#坐标表示"><span class="nav-text">坐标表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用三角函数的值"><span class="nav-text">常用三角函数的值</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用等式"><span class="nav-text">常用等式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chandler song</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.3.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="https://cdn.staticfile.org/jquery/2.1.3/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://cdn.staticfile.org/velocity/1.2.1/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://cdn.staticfile.org/velocity/1.2.1/velocity.ui.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '4R5ANGVDPXhEGCFlj4Rsj4qs-gzGzoHsz',
+        appKey: 'dLVpOwTwFUr2qmzjGby7wEND',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
