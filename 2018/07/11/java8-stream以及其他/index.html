@@ -16,7 +16,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
 <meta name="theme-color" content="#222">
@@ -187,7 +187,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -198,7 +198,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -428,47 +428,41 @@
       
 
       
-        <p>关于java8 中的stream，Optional以及我对java8画的一张思维导图<br><a id="more"></a></p>
-<h1 id="总的思维导图"><a href="#总的思维导图" class="headerlink" title="总的思维导图"></a>总的思维导图</h1><p><img src="http://on-img.com/chart_image/5b2b374fe4b0d4a19d7f7e6e.png?_=1530969194910" alt="image"></p>
-<h1 id="Stream-API"><a href="#Stream-API" class="headerlink" title="Stream API"></a>Stream API</h1><h2 id="流的特点"><a href="#流的特点" class="headerlink" title="流的特点"></a>流的特点</h2><p>当操作stream的时候，需要考虑每一个步骤的操作对象。</p>
-<ul>
-<li><strong>pipelines</strong> 在官方文档其提出这个概念，相对于循环，我觉得最大的区别就在于此，以前循环，就是在考虑一个循环的过程，而现在考虑的是一个对象如何在<strong>pipelines上面流淌</strong>。</li>
-<li>对象类型：包括输入输出。觉得很多方法，要考虑好pipelines上下问的连接输入输出。</li>
-<li>操作方式：是对本对象操作，还是类型转化，还是统计。</li>
-</ul>
-<p>这里我的概念还是有点模糊，只是淡淡的感觉，不要做几件事情。<br>一来，我觉得stream的核心还是一次只做一件事情。这样语法也简单。方便阅读。<br>二来，当有几件事情的时候，很多方法用起来就很变扭。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>方法分类为 <em>intermediate</em>和<em>terminal</em>两种。前者是过程，后者是终结。<br>方法其实有有很多。但是每个方法都有其特定的事情，在写留的时候，我觉得第一步还是在于分解和规划。分解在于把你的事情分解成一个<em>intermediate</em>或<em>terminal</em>能够处理的事情。而规划，则是这些事情的前后顺序</p>
+        <p>关于java8 中的stream，Optional以及我对java8画的一张思维导图 <a id="more"></a></p>
+<h1 id="总的思维导图">总的思维导图</h1>
+<p><img src="http://on-img.com/chart_image/5b2b374fe4b0d4a19d7f7e6e.png?_=1530969194910" alt="image"> # Stream API ## 流的特点 当操作stream的时候，需要考虑每一个步骤的操作对象。 - <strong>pipelines</strong> 在官方文档其提出这个概念，相对于循环，我觉得最大的区别就在于此，以前循环，就是在考虑一个循环的过程，而现在考虑的是一个对象如何在<strong>pipelines上面流淌</strong>。 - 对象类型：包括输入输出。觉得很多方法，要考虑好pipelines上下问的连接输入输出。 - 操作方式：是对本对象操作，还是类型转化，还是统计。</p>
+<p>这里我的概念还是有点模糊，只是淡淡的感觉，不要做几件事情。 一来，我觉得stream的核心还是一次只做一件事情。这样语法也简单。方便阅读。 二来，当有几件事情的时候，很多方法用起来就很变扭。</p>
+<h2 id="方法">方法</h2>
+<p>方法分类为 <em>intermediate</em>和<em>terminal</em>两种。前者是过程，后者是终结。<br>
+方法其实有有很多。但是每个方法都有其特定的事情，在写留的时候，我觉得第一步还是在于分解和规划。分解在于把你的事情分解成一个<em>intermediate</em>或<em>terminal</em>能够处理的事情。而规划，则是这些事情的前后顺序</p>
 <blockquote>
-<p>Intermediate：<br>map (mapToInt, flatMap 等)、 filter、 distinct、 sorted、 peek、 limit、 skip、 parallel、 sequential、 unordered<br>Terminal：<br>forEach、 forEachOrdered、 toArray、 reduce、 collect、 min、 max、 count、 anyMatch、 allMatch、 noneMatch、 findFirst、 findAny、 iterator</p>
+<p>Intermediate：<br>
+map (mapToInt, flatMap 等)、 filter、 distinct、 sorted、 peek、 limit、 skip、 parallel、 sequential、 unordered<br>
+Terminal：<br>
+forEach、 forEachOrdered、 toArray、 reduce、 collect、 min、 max、 count、 anyMatch、 allMatch、 noneMatch、 findFirst、 findAny、 iterator</p>
 </blockquote>
-<p>这里列举了几个方法。<br>看了一圈，基本来说，大部分看名字都知道怎么用。这里展开就没有太大的意义。</p>
-<h3 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">T <span class="title">reduce</span><span class="params">(T identity, BinaryOperator&lt;T&gt; accumulator)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">Optional&lt;T&gt; <span class="title">reduce</span><span class="params">(BinaryOperator&lt;T&gt; accumulator)</span>  </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">&lt;U&gt; U <span class="title">reduce</span><span class="params">(U identity,</span></span></span><br><span class="line"><span class="function"><span class="params">             BiFunction&lt;U,? <span class="keyword">super</span> T,U&gt; accumulator,</span></span></span><br><span class="line"><span class="function"><span class="params">             BinaryOperator&lt;U&gt; combiner)</span></span></span><br></pre></td></tr></table></figure>
+<p>这里列举了几个方法。 看了一圈，基本来说，大部分看名字都知道怎么用。这里展开就没有太大的意义。</p>
+<h3 id="reduce">reduce</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">T <span class="title">reduce</span><span class="params">(T identity, BinaryOperator&lt;T&gt; accumulator)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">Optional&lt;T&gt; <span class="title">reduce</span><span class="params">(BinaryOperator&lt;T&gt; accumulator)</span>  </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">&lt;U&gt; U <span class="title">reduce</span><span class="params">(U identity,</span></span></span><br><span class="line"><span class="function"><span class="params">             BiFunction&lt;U,? <span class="keyword">super</span> T,U&gt; accumulator,</span></span></span><br><span class="line"><span class="function"><span class="params">             BinaryOperator&lt;U&gt; combiner)</span></span></span><br></pre></td></tr></table></figure>
 <p><code>BinaryOperator&lt;T&gt; accumulator</code> 这个是核心方法。reduce的核心就是在这里。</p>
-<h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><p>就是转换对象。</p>
-<h3 id="collect-和-Collectors"><a href="#collect-和-Collectors" class="headerlink" title="collect 和 Collectors"></a>collect 和 Collectors</h3><h4 id="Collectors"><a href="#Collectors" class="headerlink" title="Collectors"></a>Collectors</h4><p>主要是这四个方法</p>
-<ul>
-<li>creation of a new result container (supplier())  <ul>
-<li>创建新的结果容器。就是返回值的对象。</li>
-</ul>
-</li>
-<li>incorporating a new data element into a result container (accumulator()) <ul>
-<li>把一个新元素放入容器。简单说的，就是如何把结果A，放入返回值，感觉返回值像是当个生成的。</li>
-</ul>
-</li>
-<li>combining two result containers into one (combiner())<ul>
-<li>返回值的组合</li>
-</ul>
-</li>
-<li>performing an optional final transform on the container (finisher())<ul>
-<li>之后的操作</li>
-</ul>
-</li>
-</ul>
+<h3 id="map">map</h3>
+<p>就是转换对象。</p>
+<h3 id="collect-和-collectors">collect 和 Collectors</h3>
+<h4 id="collectors">Collectors</h4>
+<p>主要是这四个方法 - creation of a new result container (supplier())<br>
+- 创建新的结果容器。就是返回值的对象。 - incorporating a new data element into a result container (accumulator()) - 把一个新元素放入容器。简单说的，就是如何把结果A，放入返回值，感觉返回值像是当个生成的。 - combining two result containers into one (combiner()) - 返回值的组合 - performing an optional final transform on the container (finisher()) - 之后的操作</p>
 <p>在这里，collect的本质是一种归集(accumulates)。</p>
-<h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><p><a href="https://www.ibm.com/developerworks/cn/java/j-lo-java8streamapi/index.html" target="_blank" rel="noopener">介绍文档</a><br><a href="https://docs.oracle.com/javase/8/docs/api/index.html?overview-summary.html" target="_blank" rel="noopener">官方文档</a></p>
-<h1 id="Optional"><a href="#Optional" class="headerlink" title="Optional"></a>Optional</h1><h2 id="orElseGet"><a href="#orElseGet" class="headerlink" title="orElseGet"></a>orElseGet</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;Object&gt; test = Optional.empty();</span><br><span class="line"></span><br><span class="line">Object o1 = test.orElseGet(() -&gt; <span class="keyword">new</span> Object());</span><br><span class="line">Object o2 = test.orElseGet(() -&gt; <span class="keyword">new</span> Object());</span><br><span class="line"></span><br><span class="line">logger.info(<span class="string">"o1 and o2 is same:&#123;&#125;"</span>,(o1==o2));</span><br><span class="line">logger.info(<span class="string">"test.get():&#123;&#125;"</span>,test.orElse(<span class="string">"still null"</span>));</span><br><span class="line">Object o3 = test.orElseGet(<span class="keyword">this</span>::createObject);</span><br><span class="line">Object o4 = test.orElseGet(<span class="keyword">this</span>::createObject);</span><br><span class="line">logger.info(<span class="string">"o3 and o4 is same:&#123;&#125;"</span>,(o3==o4));</span><br></pre></td></tr></table></figure>
+<h2 id="reference">reference</h2>
+<p><a href="https://www.ibm.com/developerworks/cn/java/j-lo-java8streamapi/index.html" target="_blank" rel="noopener">介绍文档</a><br>
+<a href="https://docs.oracle.com/javase/8/docs/api/index.html?overview-summary.html" target="_blank" rel="noopener">官方文档</a></p>
+<h1 id="optional">Optional</h1>
+<h2 id="orelseget">orElseGet</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;Object&gt; test = Optional.empty();</span><br><span class="line"></span><br><span class="line">Object o1 = test.orElseGet(() -&gt; <span class="keyword">new</span> Object());</span><br><span class="line">Object o2 = test.orElseGet(() -&gt; <span class="keyword">new</span> Object());</span><br><span class="line"></span><br><span class="line">logger.info(<span class="string">"o1 and o2 is same:&#123;&#125;"</span>,(o1==o2));</span><br><span class="line">logger.info(<span class="string">"test.get():&#123;&#125;"</span>,test.orElse(<span class="string">"still null"</span>));</span><br><span class="line">Object o3 = test.orElseGet(<span class="keyword">this</span>::createObject);</span><br><span class="line">Object o4 = test.orElseGet(<span class="keyword">this</span>::createObject);</span><br><span class="line">logger.info(<span class="string">"o3 and o4 is same:&#123;&#125;"</span>,(o3==o4));</span><br></pre></td></tr></table></figure>
 <p>可以看到，OrElseGet是每次调用的。这里并不是要用懒加载。这个方法都会被调用一次。</p>
-<h1 id="reference-1"><a href="#reference-1" class="headerlink" title="reference"></a>reference</h1><h2 id="java8"><a href="#java8" class="headerlink" title="java8"></a>java8</h2><p><a href="http://www.importnew.com/11908.html#optional" target="_blank" rel="noopener">参考一</a><br><a href="https://www.jianshu.com/p/5b800057f2d8" target="_blank" rel="noopener">参考二</a></p>
+<h1 id="reference-1">reference</h1>
+<h2 id="java8">java8</h2>
+<p><a href="http://www.importnew.com/11908.html#optional" target="_blank" rel="noopener">参考一</a><br>
+<a href="https://www.jianshu.com/p/5b800057f2d8" target="_blank" rel="noopener">参考二</a></p>
 
       
     </div>
@@ -704,7 +698,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#总的思维导图"><span class="nav-text">总的思维导图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Stream-API"><span class="nav-text">Stream API</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#流的特点"><span class="nav-text">流的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法"><span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#reduce"><span class="nav-text">reduce</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#map"><span class="nav-text">map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#collect-和-Collectors"><span class="nav-text">collect 和 Collectors</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Collectors"><span class="nav-text">Collectors</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-text">reference</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optional"><span class="nav-text">Optional</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#orElseGet"><span class="nav-text">orElseGet</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reference-1"><span class="nav-text">reference</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java8"><span class="nav-text">java8</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#总的思维导图"><span class="nav-text">总的思维导图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法"><span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#reduce"><span class="nav-text">reduce</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#map"><span class="nav-text">map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#collect-和-collectors"><span class="nav-text">collect 和 Collectors</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#collectors"><span class="nav-text">Collectors</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-text">reference</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#optional"><span class="nav-text">Optional</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#orelseget"><span class="nav-text">orElseGet</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reference-1"><span class="nav-text">reference</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java8"><span class="nav-text">java8</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -931,7 +925,7 @@
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
 })();
-</script>
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
   

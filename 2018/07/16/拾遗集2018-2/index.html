@@ -16,7 +16,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
 <meta name="theme-color" content="#222">
@@ -112,18 +112,18 @@
 
 
 
-  <meta name="description" content="三个主题  Mockito中的获取mock方法的调用参数 python多个@patch Docker的Container和宿主机同步时区">
+  <meta name="description" content="三个主题  Mockito中的获取mock方法的调用参数 python多个@patch Docker的Container和宿主机同步时区">
 <meta name="keywords" content="java,python,docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="拾遗集2018-2">
 <meta property="og:url" content="https://chandlersong.github.io/2018/07/16/拾遗集2018-2/index.html">
 <meta property="og:site_name" content="cs blog">
-<meta property="og:description" content="三个主题  Mockito中的获取mock方法的调用参数 python多个@patch Docker的Container和宿主机同步时区">
+<meta property="og:description" content="三个主题  Mockito中的获取mock方法的调用参数 python多个@patch Docker的Container和宿主机同步时区">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2018-07-16T13:23:52.947Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="拾遗集2018-2">
-<meta name="twitter:description" content="三个主题  Mockito中的获取mock方法的调用参数 python多个@patch Docker的Container和宿主机同步时区">
+<meta name="twitter:description" content="三个主题  Mockito中的获取mock方法的调用参数 python多个@patch Docker的Container和宿主机同步时区">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -429,27 +429,41 @@
 <li>Docker的Container和宿主机同步时区</li>
 </ul>
 <a id="more"></a>
-<h1 id="Mockito中的获取mock方法的调用参数"><a href="#Mockito中的获取mock方法的调用参数" class="headerlink" title="Mockito中的获取mock方法的调用参数"></a>Mockito中的获取mock方法的调用参数</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ArgumentCaptor&lt;Person&gt; peopleCaptor = ArgumentCaptor.forClass(Person.class);</span><br><span class="line">verify(mock, times(<span class="number">2</span>)).doSomething(peopleCaptor.capture());</span><br><span class="line"></span><br><span class="line">List&lt;Person&gt; capturedPeople = peopleCaptor.getAllValues();</span><br><span class="line">assertEquals(<span class="string">"John"</span>, capturedPeople.get(<span class="number">0</span>).getName());</span><br><span class="line">assertEquals(<span class="string">"Jane"</span>, capturedPeople.get(<span class="number">1</span>).getName());</span><br></pre></td></tr></table></figure>
-<ol>
+<h1 id="mockito中的获取mock方法的调用参数">Mockito中的获取mock方法的调用参数</h1>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ArgumentCaptor&lt;Person&gt; peopleCaptor = ArgumentCaptor.forClass(Person.class);</span><br><span class="line">verify(mock, times(<span class="number">2</span>)).doSomething(peopleCaptor.capture());</span><br><span class="line"></span><br><span class="line">List&lt;Person&gt; capturedPeople = peopleCaptor.getAllValues();</span><br><span class="line">assertEquals(<span class="string">"John"</span>, capturedPeople.get(<span class="number">0</span>).getName());</span><br><span class="line">assertEquals(<span class="string">"Jane"</span>, capturedPeople.get(<span class="number">1</span>).getName());</span><br></pre></td></tr></table></figure>
+<ol style="list-style-type: decimal">
 <li>建立<strong>ArgumentCaptor</strong>对象</li>
 <li>在verify的时候调用，就是例子中的<code>$verify(mock, times(2)).doSomething(peopleCaptor.capture());$</code>，<code>$doSomething$</code>是其中的方法。</li>
 </ol>
-<p><a href="https://stackoverflow.com/questions/5981605/can-mockito-capture-arguments-of-a-method-called-multiple-times" target="_blank" rel="noopener">stackoverflow–proactif</a></p>
-<h1 id="python多个-patch"><a href="#python多个-patch" class="headerlink" title="python多个@patch"></a>python多个@patch</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@patch("urllib.request.urlopen")</span></span><br><span class="line"><span class="meta">@patch("pandas.read_csv")</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_hello_world</span><span class="params">(self, pandas_read_csv,request_urlopen)</span>:</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://stackoverflow.com/questions/5981605/can-mockito-capture-arguments-of-a-method-called-multiple-times" target="_blank" rel="noopener">stackoverflow--proactif</a></p>
+<h1 id="python多个patch">python多个@patch</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@patch("urllib.request.urlopen")</span></span><br><span class="line"><span class="meta">@patch("pandas.read_csv")</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_hello_world</span><span class="params">(self, pandas_read_csv,request_urlopen)</span>:</span></span><br></pre></td></tr></table></figure>
 <p>关键在于，注入到方法的时候，<strong>顺序要倒着</strong>。</p>
-<h1 id="Docker的Container和宿主机同步时区"><a href="#Docker的Container和宿主机同步时区" class="headerlink" title="Docker的Container和宿主机同步时区"></a>Docker的Container和宿主机同步时区</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -t -i -p 8080:8080 -p 8090:8090 -v /etc/localtime:/etc/localtime:ro tomcat:7.0.69-jre8 /bin/bash</span><br></pre></td></tr></table></figure>
-<p>核心是 <strong>-v /etc/localtime:/etc/localtime</strong><br>其实还可以同步/etc/timezone,但是实际操作中，这个要访问权限，貌似不是默认开的</p>
-<p>==用java的话，timezone获得的时区出错==。<a href="https://stackoverflow.com/questions/41770464/openjdk-1-8-0-in-docker-container-has-different-timezone-than-etc-timezone-and" target="_blank" rel="noopener">timezone问题分析</a>  </p>
+<h1 id="docker的container和宿主机同步时区">Docker的Container和宿主机同步时区</h1>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -t -i -p 8080:8080 -p 8090:8090 -v /etc/localtime:/etc/localtime:ro tomcat:7.0.69-jre8 /bin/bash</span><br></pre></td></tr></table></figure>
+<p>核心是 <strong>-v /etc/localtime:/etc/localtime</strong><br>
+其实还可以同步/etc/timezone,但是实际操作中，这个要访问权限，貌似不是默认开的</p>
+<p>==用java的话，timezone获得的时区出错==。<a href="https://stackoverflow.com/questions/41770464/openjdk-1-8-0-in-docker-container-has-different-timezone-than-etc-timezone-and" target="_blank" rel="noopener">timezone问题分析</a></p>
 <p>但是发觉文中的方法太繁琐。最后觉得还是</p>
-<h2 id="设置环境变量TZ"><a href="#设置环境变量TZ" class="headerlink" title="设置环境变量TZ"></a>设置环境变量TZ</h2><p>从结果上来看，这个有点玄学。我用<code>exec /bin/bash</code>强行登陆上去，用date命令发现准确，但是我java程序，则是一直取的逝去不对。我host的CST，但是java取的是UTC。</p>
-<h2 id="通过Volumne"><a href="#通过Volumne" class="headerlink" title="通过Volumne"></a>通过Volumne</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">volumnes：</span></span><br><span class="line"><span class="bullet">   -</span> <span class="string">/etc/localtime:/etc/localtime：ro</span></span><br><span class="line"><span class="bullet">   -</span> <span class="string">/etc/timezone:/etc/timezone：ro</span></span><br></pre></td></tr></table></figure>
-<p>我觉得这个方法，可能对<strong>OS的发行</strong>版比较依赖。因为我的测试环境是CentOS。发觉无效。但是网上说这个方法可行。<br>就个人来说，觉得这个方法比较有美感。</p>
+<h2 id="设置环境变量tz">设置环境变量TZ</h2>
+<p>从结果上来看，这个有点玄学。我用<code>exec /bin/bash</code>强行登陆上去，用date命令发现准确，但是我java程序，则是一直取的逝去不对。我host的CST，但是java取的是UTC。</p>
+<h2 id="通过volumne">通过Volumne</h2>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">volumnes：</span></span><br><span class="line"><span class="bullet">   -</span> <span class="string">/etc/localtime:/etc/localtime：ro</span></span><br><span class="line"><span class="bullet">   -</span> <span class="string">/etc/timezone:/etc/timezone：ro</span></span><br></pre></td></tr></table></figure>
+<p>我觉得这个方法，可能对<strong>OS的发行</strong>版比较依赖。因为我的测试环境是CentOS。发觉无效。但是网上说这个方法可行。<br>
+就个人来说，觉得这个方法比较有美感。</p>
 <p><a href="https://serverfault.com/questions/683605/docker-container-time-timezone-will-not-reflect-changes" target="_blank" rel="noopener">stackoverflow-thhan说可行</a></p>
-<h2 id="命令行改"><a href="#命令行改" class="headerlink" title="命令行改"></a>命令行改</h2><h3 id="ubuntu"><a href="#ubuntu" class="headerlink" title="ubuntu"></a>ubuntu</h3><figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"Asia/Shanghai"</span> &gt; /etc/timezone</span></span><br><span class="line"><span class="bash">RUN dpkg-reconfigure -f noninteractive tzdata</span></span><br></pre></td></tr></table></figure>
-<p>核心代码是这两句，由于没环境，所以也没有试过<br><a href="https://tommy.net.cn/2015/02/05/config-timezone-in-docker/" target="_blank" rel="noopener">具体可以参考Tommy Lau</a></p>
-<h3 id="CentOS7"><a href="#CentOS7" class="headerlink" title="CentOS7"></a>CentOS7</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timedatectl <span class="built_in">set</span>-timezone Aisa/shanghai</span><br></pre></td></tr></table></figure>
-<p>但是在Docker中会报一个错<code>Failed to create bus connection: No such file or directory</code>。网上查了一下资料，发觉有权限问题，下面提供了解决方案。<br><a href="https://www.cyberciti.biz/faq/centos-linux-6-7-changing-timezone-command-line/" target="_blank" rel="noopener">具体说明</a><br><a href="https://stackoverflow.com/questions/43907925/ubuntu-timedatectl-fails-in-docker-container" target="_blank" rel="noopener">stackoverflow-srlm</a></p>
-<h2 id="修改连接"><a href="#修改连接" class="headerlink" title="修改连接"></a>修改连接</h2><p>可能这个方案，只是适用于CentOS7。因为我是在试了上面方法无效的时候，才想到用这个方案的。</p>
+<h2 id="命令行改">命令行改</h2>
+<h3 id="ubuntu">ubuntu</h3>
+<figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"Asia/Shanghai"</span> &gt; /etc/timezone</span></span><br><span class="line"><span class="bash">RUN dpkg-reconfigure -f noninteractive tzdata</span></span><br></pre></td></tr></table></figure>
+<p>核心代码是这两句，由于没环境，所以也没有试过<br>
+<a href="https://tommy.net.cn/2015/02/05/config-timezone-in-docker/" target="_blank" rel="noopener">具体可以参考Tommy Lau</a></p>
+<h3 id="centos7">CentOS7</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timedatectl <span class="built_in">set</span>-timezone Aisa/shanghai</span><br></pre></td></tr></table></figure>
+<p>但是在Docker中会报一个错<code>Failed to create bus connection: No such file or directory</code>。网上查了一下资料，发觉有权限问题，下面提供了解决方案。<br>
+<a href="https://www.cyberciti.biz/faq/centos-linux-6-7-changing-timezone-command-line/" target="_blank" rel="noopener">具体说明</a><br>
+<a href="https://stackoverflow.com/questions/43907925/ubuntu-timedatectl-fails-in-docker-container" target="_blank" rel="noopener">stackoverflow-srlm</a></p>
+<h2 id="修改连接">修改连接</h2>
+<p>可能这个方案，只是适用于CentOS7。因为我是在试了上面方法无效的时候，才想到用这个方案的。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /etc/localtime</span><br></pre></td></tr></table></figure>
 <p>你会看到<code>/etc/localtime</code>指向的是<code>/usr/share/zoneinfo</code>下面的文件。然后下面是具体时区。基于这个思路。我就是通过代码强行的建立一个相关的连接。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm /etc/localtime</span><br><span class="line">ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
@@ -689,7 +703,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mockito中的获取mock方法的调用参数"><span class="nav-text">Mockito中的获取mock方法的调用参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python多个-patch"><span class="nav-text">python多个@patch</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker的Container和宿主机同步时区"><span class="nav-text">Docker的Container和宿主机同步时区</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置环境变量TZ"><span class="nav-text">设置环境变量TZ</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过Volumne"><span class="nav-text">通过Volumne</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行改"><span class="nav-text">命令行改</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ubuntu"><span class="nav-text">ubuntu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CentOS7"><span class="nav-text">CentOS7</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改连接"><span class="nav-text">修改连接</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mockito中的获取mock方法的调用参数"><span class="nav-text">Mockito中的获取mock方法的调用参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python多个patch"><span class="nav-text">python多个@patch</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker的container和宿主机同步时区"><span class="nav-text">Docker的Container和宿主机同步时区</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置环境变量tz"><span class="nav-text">设置环境变量TZ</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过volumne"><span class="nav-text">通过Volumne</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行改"><span class="nav-text">命令行改</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ubuntu"><span class="nav-text">ubuntu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#centos7"><span class="nav-text">CentOS7</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改连接"><span class="nav-text">修改连接</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -916,7 +930,7 @@
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
 })();
-</script>
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
   
