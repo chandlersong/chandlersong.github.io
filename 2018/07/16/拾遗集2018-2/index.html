@@ -120,7 +120,7 @@
 <meta property="og:site_name" content="cs blog">
 <meta property="og:description" content="Mockito中的获取mock方法的调用参数 python多个@patch Docker的Container和宿主机同步时区">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-04T14:25:57.426Z">
+<meta property="og:updated_time" content="2018-08-04T14:25:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="拾遗集2018-2">
 <meta name="twitter:description" content="Mockito中的获取mock方法的调用参数 python多个@patch Docker的Container和宿主机同步时区">
@@ -446,11 +446,11 @@
 <a id="more"></a>
 <h1 id="mockito中的获取mock方法的调用参数">Mockito中的获取mock方法的调用参数</h1>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ArgumentCaptor&lt;Person&gt; peopleCaptor = ArgumentCaptor.forClass(Person.class);</span><br><span class="line">verify(mock, times(<span class="number">2</span>)).doSomething(peopleCaptor.capture());</span><br><span class="line"></span><br><span class="line">List&lt;Person&gt; capturedPeople = peopleCaptor.getAllValues();</span><br><span class="line">assertEquals(<span class="string">"John"</span>, capturedPeople.get(<span class="number">0</span>).getName());</span><br><span class="line">assertEquals(<span class="string">"Jane"</span>, capturedPeople.get(<span class="number">1</span>).getName());</span><br></pre></td></tr></table></figure>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>建立<strong>ArgumentCaptor</strong>对象</li>
 <li>在verify的时候调用，就是例子中的<code>$verify(mock, times(2)).doSomething(peopleCaptor.capture());$</code>，<code>$doSomething$</code>是其中的方法。</li>
 </ol>
-<p><a href="https://stackoverflow.com/questions/5981605/can-mockito-capture-arguments-of-a-method-called-multiple-times" target="_blank" rel="noopener">stackoverflow--proactif</a></p>
+<p><a href="https://stackoverflow.com/questions/5981605/can-mockito-capture-arguments-of-a-method-called-multiple-times" target="_blank" rel="noopener">stackoverflow–proactif</a></p>
 <h1 id="python多个patch">python多个@patch</h1>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@patch("urllib.request.urlopen")</span></span><br><span class="line"><span class="meta">@patch("pandas.read_csv")</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_hello_world</span><span class="params">(self, pandas_read_csv,request_urlopen)</span>:</span></span><br></pre></td></tr></table></figure>
 <p>关键在于，注入到方法的时候，<strong>顺序要倒着</strong>。</p>
@@ -654,7 +654,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -666,6 +666,10 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
+                    
+                      
+                    
+                      
                     
                       
                     
