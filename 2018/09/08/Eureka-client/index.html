@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="pM_XAEV2nmir_K1lg0_6faxEzP6oJBFlK4cHejszh8k" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+<link href="https://cdn.staticfile.org/font-awesome/4.6.2/css/font-awesome.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="主要是Eureka client端的一些配置和使用方法。 主要有以下几个主题 - 配置 - 如何修改Info和meta - status和lifecycle">
+<meta name="keywords" content="Eureka">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Eureka client">
+<meta property="og:url" content="https://chandlersong.github.io/2018/09/08/Eureka-client/index.html">
+<meta property="og:site_name" content="cs blog">
+<meta property="og:description" content="主要是Eureka client端的一些配置和使用方法。 主要有以下几个主题 - 配置 - 如何修改Info和meta - status和lifecycle">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-09-08T11:29:53.413Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Eureka client">
+<meta name="twitter:description" content="主要是Eureka client端的一些配置和使用方法。 主要有以下几个主题 - 配置 - 如何修改Info和meta - status和lifecycle">
+
+
+
+
+
+
+  <link rel="canonical" href="https://chandlersong.github.io/2018/09/08/Eureka-client/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Eureka client | cs blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-9797056-15"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-9797056-15');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">cs blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.github.io/2018/09/08/Eureka-client/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chandler song">
+      <meta itemprop="description" content="share my technique experience">
+      <meta itemprop="image" content="/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cs blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Eureka client
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-09-08 18:22:13 / 修改时间：19:29:53" itemprop="dateCreated datePublished" datetime="2018-09-08T18:22:13+08:00">2018-09-08</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spring-cloud/" itemprop="url" rel="index"><span itemprop="name">spring cloud</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/08/Eureka-client/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/09/08/Eureka-client/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>主要是Eureka client端的一些配置和使用方法。 主要有以下几个主题 - 配置 - 如何修改Info和meta - status和lifecycle <a id="more"></a></p>
+<h1 id="配置">配置</h1>
+<h2 id="spring-boot配置">spring boot配置</h2>
+<p>两个class,常规的用<code>.</code>来导航。是Eureka-类-property的格式</p>
+<p>instance的配置项，对应的是 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">  instance:</span></span><br><span class="line"><span class="attr">    leaseRenewalIntervalInSeconds:</span> <span class="number">10</span></span><br><span class="line"><span class="attr">    metadataMap:</span></span><br><span class="line"><span class="attr">      instanceId:</span> <span class="string">$&#123;vcap.application.instance_id:$&#123;spring.application.name&#125;:$&#123;spring.application.instance_id:$&#123;server.port&#125;&#125;&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>client的配置项，对应的是 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    registryFetchIntervalSeconds:</span> <span class="number">5</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="meta-data-和info">meta data 和info</h1>
+<p>主要是介绍如如何修改instance的metadata的info。两者的区别，我觉得主要还是在于意会，meta偏静态一点，info偏动态一点。 其实两者从能起到来说，基本差不多。只是在使用info可以通过<code>/info</code>来获取。但是meta必须得到<code>Instanceinfo</code>这个对象才能读取。</p>
+<h2 id="meta-data">meta data</h2>
+<h3 id="静态加入">静态加入</h3>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">   instance:</span></span><br><span class="line"><span class="attr">      metadata-map:</span></span><br><span class="line"><span class="attr">          mykey:</span> <span class="string">customizedValue</span></span><br></pre></td></tr></table></figure>
+<p>在节点位置在于<code>metaData</code> <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">metadata: &#123;</span><br><span class="line">management.port: "8762",</span><br><span class="line">mykey: "customizedValue"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="动态加入">动态加入</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"> <span class="keyword">private</span> ApplicationInfoManager aim;</span><br><span class="line"></span><br><span class="line"> <span class="meta">@Override</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(String... args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">     Map&lt;String, String&gt; map = aim.getInfo().getMetadata();</span><br><span class="line">     map.put(<span class="string">"dynamicMeta"</span>, <span class="string">"add_when_initial"</span>);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>关键在于要在初始化的时候更新。</p>
+<h3 id="change-metadta">change metadta</h3>
+<p><code>com.netflix.appinfo.ApplicationInfoManager</code>中的这个方法 <code>registerAppMetadata(Map&lt;String, String&gt;)</code></p>
+<p><a href="https://stackoverflow.com/questions/43204608/dynamically-update-eureka-instance-metadata" target="_blank" rel="noopener">stackoverflow-yongsung.yoon</a></p>
+<h3 id="感想">感想</h3>
+<ol type="1">
+<li><code>ApplicationInfoManager</code>从client端获得自己的info的方式。</li>
+</ol>
+<p>但是注意有延时。需要服务器重新刷新</p>
+<p><a href="https://blog.codecentric.de/en/2018/01/spring-cloud-service-discovery-dynamic-metadata/" target="_blank" rel="noopener">Tobias Trelle</a></p>
+<h2 id="info">info</h2>
+<ol type="1">
+<li><p>有一个Info的page，比如<a href="http://localhost:8762/actuator/info" class="uri" target="_blank" rel="noopener">http://localhost:8762/actuator/info</a>.</p></li>
+<li><p>网上查了一下，是一个叫做actuator的模块。只要是spring boot。主要功能在于监测系统状态。<a href="http://blog.didispace.com/spring-boot-actuator-1/" target="_blank" rel="noopener">程序员DD的教程</a>，对其有了初步的单独介绍。</p></li>
+</ol>
+<h3 id="修改info信息">修改Info信息</h3>
+<p>大致两种方式 配置 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">management:</span></span><br><span class="line"><span class="attr">  endpoints:</span></span><br><span class="line"><span class="attr">    web:</span></span><br><span class="line"><span class="attr">      exposure:</span></span><br><span class="line"><span class="attr">        include:</span> <span class="string">'*'</span></span><br></pre></td></tr></table></figure></p>
+<p>code <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class SampleInfoContributor implements InfoContributor &#123;</span><br><span class="line"></span><br><span class="line">    private  static int called = 0;</span><br><span class="line">    @Override</span><br><span class="line">    public void contribute(Info.Builder builder) &#123;</span><br><span class="line">        called ++;</span><br><span class="line">        builder.withDetail(&quot;dynamic_value&quot;, called);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>主要还是<code>InfoContributor</code>这个接口，且每次/info被调用的时候，<code>contribute</code>这个方法都会被调用。这样就可以更新这个值了。</p>
+<p><a href="https://stackoverflow.com/questions/23863972/how-do-i-add-things-to-the-info-endpoint-in-spring-boot-programmatically" target="_blank" rel="noopener">stackoverflow上面的讨论</a></p>
+<h3 id="spring-actuator">spring actuator</h3>
+<p>info和health页面，都是通过actuator的功能，在使用的配置的时候，注意相关的1.0和2.0的区别。网上很多资料都是1.0的。所以这里列举了2.0简单配置 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">management:</span></span><br><span class="line"><span class="attr">  endpoints:</span></span><br><span class="line"><span class="attr">    web:</span></span><br><span class="line"><span class="attr">      exposure:</span></span><br><span class="line"><span class="attr">        include:</span> <span class="string">'*'</span></span><br></pre></td></tr></table></figure></p>
+<p>上面的配置，就是表示actuator所有的页面都会出来。默认会所有<code>http://localhost:8762/actuator</code>。spring cloud里面默认就开info和health</p>
+<h4 id="一些资料">一些资料</h4>
+<p><a href="https://aboullaite.me/actuator-in-spring-boot-2-0/" target="_blank" rel="noopener">基于spring boot 2.0的说明</a><br>
+<a href="http://blog.didispace.com/spring-boot-actuator-1/" target="_blank" rel="noopener">基于spring boot 1.0的说明</a><br>
+<a href="https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html" target="_blank" rel="noopener">官方教程</a><br>
+<a href="https://blog.frankel.ch/spring-boot-2-actuator-change-analysis/" target="_blank" rel="noopener">两个版本差距</a><br>
+<a href="https://www.baeldung.com/spring-boot-actuators" target="_blank" rel="noopener">比较全的教程</a></p>
+<p>粗略看了一下，2.0和1.0只是配置方式有点不同。然后2.0所有都可以通过web访问。</p>
+<h1 id="status">status</h1>
+<p>Eureka的status的我觉得只是一个逻辑值。而非真实情况。举个例子来说，Server页面，显示Down的状态。有两种情况可能达到。 - client长时间没有到Server端去续租。导致服务器认为client为Down - client端续租，但是告诉Server端，自己到了Down的状态。</p>
+<p>所以对于学习来说，要明白如何处理两种方式。一种是Server端监听。</p>
+<h2 id="client端控制">Client端控制</h2>
+<p>有两种方式，而这些并不是实时的。 方法一，<code>ApplicationInfoManager</code>来修改 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.netflix.appinfo.ApplicationInfoManager;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ApplicationInfoManager aim;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/up"</span>, produces = <span class="string">"application/json"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">up</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        aim.setInstanceStatus(InstanceInfo.InstanceStatus.UP);</span><br><span class="line">        logger.info(<span class="string">"up was called!!!"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"up"</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>方法二。 1. 在spring boot中，用的是<code>EurekaClient</code>来进行注册，Handler继承自<code>HealthCheckHandler</code>接口 2. 通过接口的方法，调用返回值。返回一个状态对象给Server。 3. 其实状态是对Could中的逻辑状态，而不是真实状态。</p>
+<p>具体Code <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.netflix.discovery.EurekaClient;</span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> EurekaClient eurekaClient;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(String... args)</span></span>&#123;</span><br><span class="line">    eurekaClient.registerHealthCheck(healthCheckHandler);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后继承<code>HealthCheckHandler</code></p>
+<h2 id="server端监听事件">Server端监听事件</h2>
+<p><a href="https://juejin.im/post/5aebec42518825671a63a28c" target="_blank" rel="noopener">源代码分析</a><br>
+1. Event列表， <a href="https://www.jianshu.com/p/b46bce4411b0" target="_blank" rel="noopener">reference</a> - EurekaInstanceCanceledEvent 服务下线事件 - EurekaInstanceRegisteredEvent 服务注册事件 - EurekaInstanceRenewedEvent 服务续约事件 - EurekaRegistryAvailableEvent Eureka注册中心启动事件 - EurekaServerStartedEvent Eureka Server启动事件</p>
+<ol start="2" type="1">
+<li><p>在github上有一个issue，简单的说。这个通知无法事实。<a href="https://github.com/Netflix/eureka/issues/820" target="_blank" rel="noopener">issue地址</a></p></li>
+<li><p>即使服务器端发Down的状态也会收到</p></li>
+</ol>
+<h2 id="healthcheck">healthCheck</h2>
+<p><a href="https://dzone.com/articles/the-mystery-of-eureka-health-monitoring" target="_blank" rel="noopener">这篇文章说的很多</a></p>
+<p>1.client端发起，向server端发起restful的request。<code>PUT /eureka/apps/{app id}/{instance id}?status={status}</code></p>
+<ol start="2" type="1">
+<li>下面几个状态
+<ul>
+<li>UP</li>
+<li>DOWN</li>
+<li>STARTING</li>
+<li>OUT_OF_SERVICE</li>
+<li>UNKNOWN</li>
+</ul></li>
+<li><p>Server端并不是通过client端的/health来判断健康状态的。</p></li>
+<li><p>health-check-url一些配置项</p></li>
+<li><p>Server只是记录状态，但是不关心状态。换句话说，只要接受到heartBeat的request。就表示OK.</p></li>
+<li><p>status和overriddenstatus。前者是自己表示的。但是后这是Heartbeat上来的。</p></li>
+</ol>
+<h4 id="reference">reference</h4>
+<p><a href="https://dzone.com/articles/the-mystery-of-eureka-health-monitoring" target="_blank" rel="noopener">比较详细的一些介绍</a><br>
+<a href="https://github.com/jquatier/eureka-js-client/issues/112" target="_blank" rel="noopener">github上的讨论</a><br>
+<a href="https://groups.google.com/forum/#!msg/eureka_netflix/ULvUqYIa_qA/-_AxuBg8NlQJ" target="_blank" rel="noopener">google group上的讨论</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>赏</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/reward/weixin.jpg" alt="chandler song 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Eureka/" rel="tag"># Eureka</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/08/Eureka基础概念/" rel="next" title="Eureka基础概念">
+                <i class="fa fa-chevron-left"></i> Eureka基础概念
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/avatar.jpeg"
+                alt="chandler song" />
+            
+              <p class="site-author-name" itemprop="name">chandler song</p>
+              <p class="site-description motion-element" itemprop="description">share my technique experience</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:chandler605@outlook.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#配置"><span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#spring-boot配置"><span class="nav-text">spring boot配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#meta-data-和info"><span class="nav-text">meta data 和info</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#meta-data"><span class="nav-text">meta data</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#静态加入"><span class="nav-text">静态加入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态加入"><span class="nav-text">动态加入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#change-metadta"><span class="nav-text">change metadta</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#感想"><span class="nav-text">感想</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#info"><span class="nav-text">info</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改info信息"><span class="nav-text">修改Info信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spring-actuator"><span class="nav-text">spring actuator</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一些资料"><span class="nav-text">一些资料</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#status"><span class="nav-text">status</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#client端控制"><span class="nav-text">Client端控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#server端监听事件"><span class="nav-text">Server端监听事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#healthcheck"><span class="nav-text">healthCheck</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#reference"><span class="nav-text">reference</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chandler song</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.3.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="https://cdn.staticfile.org/jquery/2.1.3/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://cdn.staticfile.org/velocity/1.2.1/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://cdn.staticfile.org/velocity/1.2.1/velocity.ui.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '4R5ANGVDPXhEGCFlj4Rsj4qs-gzGzoHsz',
+        appKey: 'dLVpOwTwFUr2qmzjGby7wEND',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

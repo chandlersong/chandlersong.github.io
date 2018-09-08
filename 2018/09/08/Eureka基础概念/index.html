@@ -112,25 +112,25 @@
 
 
 
-  <meta name="description" content="CXF中，path的模糊匹配 java String format DataFrame顺滑的转成int型">
-<meta name="keywords" content="java,python">
+  <meta name="description" content="这篇主要是阅读笔记。做为一些内容的整理。 阅读的内容，主要还是在于 github上的wiki spring cloud的介绍">
+<meta name="keywords" content="Eureka,阅读笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="拾遗集2018-1">
-<meta property="og:url" content="https://chandlersong.github.io/2018/06/15/拾遗集2018-1/index.html">
+<meta property="og:title" content="Eureka基础概念">
+<meta property="og:url" content="https://chandlersong.github.io/2018/09/08/Eureka基础概念/index.html">
 <meta property="og:site_name" content="cs blog">
-<meta property="og:description" content="CXF中，path的模糊匹配 java String format DataFrame顺滑的转成int型">
+<meta property="og:description" content="这篇主要是阅读笔记。做为一些内容的整理。 阅读的内容，主要还是在于 github上的wiki spring cloud的介绍">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-04T14:26:01.000Z">
+<meta property="og:updated_time" content="2018-09-08T10:18:29.273Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="拾遗集2018-1">
-<meta name="twitter:description" content="CXF中，path的模糊匹配 java String format DataFrame顺滑的转成int型">
+<meta name="twitter:title" content="Eureka基础概念">
+<meta name="twitter:description" content="这篇主要是阅读笔记。做为一些内容的整理。 阅读的内容，主要还是在于 github上的wiki spring cloud的介绍">
 
 
 
 
 
 
-  <link rel="canonical" href="https://chandlersong.github.io/2018/06/15/拾遗集2018-1/"/>
+  <link rel="canonical" href="https://chandlersong.github.io/2018/09/08/Eureka基础概念/"/>
 
 
 
@@ -140,7 +140,7 @@
   };
 </script>
 
-  <title>拾遗集2018-1 | cs blog</title>
+  <title>Eureka基础概念 | cs blog</title>
   
 
 
@@ -318,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chandlersong.github.io/2018/06/15/拾遗集2018-1/">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.github.io/2018/09/08/Eureka基础概念/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chandler song">
@@ -335,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">拾遗集2018-1
+          <h1 class="post-title" itemprop="name headline">Eureka基础概念
               
             
           </h1>
@@ -360,25 +360,9 @@
                 
               
 
-              <time title="创建时间：2018-06-15 22:40:55" itemprop="dateCreated datePublished" datetime="2018-06-15T22:40:55+08:00">2018-06-15</time>
+              <time title="创建时间：2018-09-08 18:18:29" itemprop="dateCreated datePublished" datetime="2018-09-08T18:18:29+08:00">2018-09-08</time>
             
 
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-04 22:26:01" itemprop="dateModified" datetime="2018-08-04T22:26:01+08:00">2018-08-04</time>
-              
             
           </span>
 
@@ -394,7 +378,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/拾遗/" itemprop="url" rel="index"><span itemprop="name">拾遗</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spring-cloud/" itemprop="url" rel="index"><span itemprop="name">spring cloud</span></a></span>
 
                 
                 
@@ -409,8 +393,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/06/15/拾遗集2018-1/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/15/拾遗集2018-1/" itemprop="commentCount"></span>
+                <a href="/2018/09/08/Eureka基础概念/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/09/08/Eureka基础概念/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -438,30 +422,61 @@
       
 
       
-        <ul>
-<li>CXF中，path的模糊匹配</li>
-<li>java String format</li>
-<li>DataFrame顺滑的转成int型</li>
-</ul>
+        <p>这篇主要是阅读笔记。做为一些内容的整理。 阅读的内容，主要还是在于<br>
+<a href="https://github.com/Netflix/eureka/wiki" target="_blank" rel="noopener">github上的wiki</a><br>
+<a href="http://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.0.0.RELEASE/single/spring-cloud-netflix.html" target="_blank" rel="noopener">spring cloud的介绍</a></p>
 <a id="more"></a>
-<h1 id="cxf中path的模糊匹配">CXF中，Path的模糊匹配</h1>
-<p>就是要做这样的匹配<br>
-<code>level1/level2/status</code><br>
-<code>level1/status</code><br>
-<code>level1/level2/level3/staus</code><br>
-<span class="citation" data-cites="PathParam的value可以写成匹配到同一个的位置">@PathParam的value可以写成匹配到同一个的位置</span><br>
-<code>@Path(&quot;{level:.+})</code><br>
-<a href="https://stackoverflow.com/questions/45967779/jersey-combine-multiple-path-params-into-one" target="_blank" rel="noopener">stackoverflow-Adrian Baker</a></p>
-<h1 id="java的string-format">Java的String format</h1>
-<p><code>%[index$][标识]*[最小宽度][.精度]转换符</code></p>
-<p>英文版本的在JDK中有，但是看到这个中文版本发觉简单好多。而我一般只用<code>%1$s</code>用作代位符。 % ，占位符的其实字符，若要在占位符内部使用%，则需要写成 %% .<br>
-<code>[index$]</code> ，位置索引从1开始计算，用于指定对索引相应的实参进行格式化并替换掉该占位符。<br>
-<code>[标识]</code> ，用于增强格式化能力，可同时使用多个[标识]，但某些标识是不能同时使用的 <code>[最小宽度]</code> ，用于设置格式化后的字符串最小长度，若使用[最小宽度]而无设置[标识]，那么当字符串长度小于最小宽度时，则以左边补空格的方式凑够最小宽度。 <code>[.精度]</code> ，对于浮点数类型格式化使用，设置保留小数点后多少位。 <code>转换符</code> ，用于指定格式化的样式，和限制对应入参的数据类型</p>
-<p><a href="https://www.cnblogs.com/fsjohnhuang/p/4094777.html" target="_blank" rel="noopener">[肥仔John] in cn blogs</a></p>
-<h1 id="dataframe顺滑的转成int型">DataFrame顺滑的转成int型</h1>
-<p>比如<code>&quot;0&quot;</code>转成<code>0</code>.但是<code>a</code>不会报错。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df1 = df.apply(pd.to_numeric, args=(<span class="string">'coerce'</span>,))</span><br><span class="line"><span class="keyword">or</span></span><br><span class="line">df1 = df.apply(pd.to_numeric, errors=<span class="string">'coerce'</span>)</span><br></pre></td></tr></table></figure>
-<p><a href="https://stackoverflow.com/questions/18434208/pandas-converting-to-numeric-creating-nans-when-necessary" target="_blank" rel="noopener">stackoverflow-Anton Protopopov</a></p>
+<h1 id="eureka基本概念">Eureka基本概念</h1>
+<p>Eureka是一个服务发现服务器。就我个人来说，这个名字起的有点容易误解。在阅读了一些基本的笔记之后，我整理了一下几个功能。其实和发现基本无关。 我理解Eureka功能大致分为三块。</p>
+<ul>
+<li>服务(Client)信息管理。</li>
+<li>服务(Client)健康管理。</li>
+<li>冗余管理</li>
+</ul>
+<p>最简单的一个流程是，一个服务A注册到Server，做为一个client端。用户需要服务A，就访问Serve端。找寻哪些Client端能够提供这个服务A。</p>
+<h1 id="配置信息">配置信息</h1>
+<p>Eureka的配置，基本都是在类中定义的。这里也就基本的罗列一下了 <a href="https://github.com/Netflix/eureka/wiki/Overriding-Default-Configurations" target="_blank" rel="noopener">Overriding Default Configurations</a></p>
+<h2 id="具体各个配置">具体各个配置</h2>
+<ul>
+<li><a href="https://github.com/Netflix/eureka/blob/master/eureka-core/src/main/java/com/netflix/eureka/DefaultEurekaServerConfig.java" target="_blank" rel="noopener">DefaultEurekaServerConfig</a></li>
+<li><a href="https://github.com/Netflix/eureka/blob/master/eureka-client/src/main/java/com/netflix/appinfo/CloudInstanceConfig.java" target="_blank" rel="noopener">CloudInstanceConfig</a></li>
+<li><a href="https://github.com/Netflix/eureka/blob/master/eureka-client/src/main/java/com/netflix/appinfo/MyDataCenterInstanceConfig.java" target="_blank" rel="noopener">MyDataCenterInstanceConfig</a></li>
+<li><a href="https://github.com/Netflix/eureka/blob/master/eureka-client/src/main/java/com/netflix/discovery/DefaultEurekaClientConfig.java" target="_blank" rel="noopener">DefaultEurekaClientConfig</a></li>
+<li><a href="https://github.com/spring-cloud/spring-cloud-netflix/blob/master/spring-cloud-netflix-eureka-client/src/main/java/org/springframework/cloud/netflix/eureka/EurekaInstanceConfigBean.java" target="_blank" rel="noopener">EurekaInstanceConfigBean</a><br>
+</li>
+<li><a href="https://github.com/spring-cloud/spring-cloud-netflix/blob/master/spring-cloud-netflix-eureka-client/src/main/java/org/springframework/cloud/netflix/eureka/EurekaClientConfigBean.java" target="_blank" rel="noopener">EurekaClientConfigBean</a></li>
+</ul>
+<h1 id="server">Server</h1>
+<p>Server在我的理解中，算是一个提供相应功能的Client端。比如，其启动的时候，做的第一件事情，是去其他Server注册信息。</p>
+<h2 id="self-preservation">Self-preservation</h2>
+<p>当一个Server启动或者侦测到，有大量的Client，非正常断开。比如突然断网。按照eureka的协议，client显示的发出取消注册(explicit unregister action)。但是比如突然断网这类事情，则是无法发出的。</p>
+<ol type="1">
+<li>启动的时候，其会去neighboring node获取信息。</li>
+<li>如果成功连接，会有个一个更新阀值(renewal threshold)，默认是（85% within 15min）.服务器会关闭掉过期的instance。</li>
+<li>如果不能连接。Server默认等待5分钟时间。之后，Client才能注册信息。</li>
+</ol>
+<p>有以下两种情况下会退出。</p>
+<ol type="1">
+<li>恢复正常多了，也就是renewal threshold高于正常值。</li>
+<li>默认关闭。以下是两个配置项目。
+<ul>
+<li><code>eureka.renewalPercentThreshold=[0.0, 1.0]</code></li>
+<li><code>eureka.enableSelfPreservation=false</code></li>
+</ul></li>
+</ol>
+<p>这个功能，主要为了防止Client能够获取健康的instance。</p>
+<h1 id="client">client</h1>
+<p>Client端的目的，还是在于提供自身的信息。然后实现自己的HeartBeat。</p>
+<h2 id="状态">状态</h2>
+<ol type="1">
+<li>starting: 启动之前</li>
+<li>out_of_service:暂时离线。</li>
+<li>up：启动</li>
+</ol>
+<h3 id="client永久离线">Client永久离线</h3>
+<p>在Server结束的时候，会给Client会给Server端发送一个信息。 不清楚这个是不是状态。 如果客户端，要永久的离开Server。理论上需要给服务器端发送消息。</p>
+<h2 id="heartbeat">HeartBeat</h2>
+<p>默认是是30s一次。但是这里主要是和AWS做匹配。AWS的防火墙，如果服务停止超过几分钟，就会被阻断。所以说，具体可以根据情况来处理。 如果自己写的话，还是支持各种格式是Json和XML，很大众。</p>
 
       
     </div>
@@ -506,9 +521,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java/" rel="tag"># java</a>
+            <a href="/tags/Eureka/" rel="tag"># Eureka</a>
           
-            <a href="/tags/python/" rel="tag"># python</a>
+            <a href="/tags/阅读笔记/" rel="tag"># 阅读笔记</a>
           
         </div>
       
@@ -521,14 +536,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/07/16/拾遗集2018-2/" rel="next" title="拾遗集2018-2">
+                <i class="fa fa-chevron-left"></i> 拾遗集2018-2
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/05/java8-function-api/" rel="prev" title="java8--function api">
-                java8--function api <i class="fa fa-chevron-right"></i>
+              <a href="/2018/09/08/Eureka-client/" rel="prev" title="Eureka client">
+                Eureka client <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -701,7 +720,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#cxf中path的模糊匹配"><span class="nav-text">CXF中，Path的模糊匹配</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java的string-format"><span class="nav-text">Java的String format</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dataframe顺滑的转成int型"><span class="nav-text">DataFrame顺滑的转成int型</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#eureka基本概念"><span class="nav-text">Eureka基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置信息"><span class="nav-text">配置信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#具体各个配置"><span class="nav-text">具体各个配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#server"><span class="nav-text">Server</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#self-preservation"><span class="nav-text">Self-preservation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#client"><span class="nav-text">client</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#状态"><span class="nav-text">状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#client永久离线"><span class="nav-text">Client永久离线</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#heartbeat"><span class="nav-text">HeartBeat</span></a></li></ol></li></ol></div>
             
 
           </div>
