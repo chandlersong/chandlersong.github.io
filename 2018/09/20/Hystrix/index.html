@@ -112,25 +112,25 @@
 
 
 
-  <meta name="description" content="这篇主要是阅读笔记。做为一些内容的整理。 阅读的内容，主要还是在于 github上的wiki spring cloud的介绍">
-<meta name="keywords" content="Eureka,阅读笔记">
+  <meta name="description" content="主要是Hystrix的笔记">
+<meta name="keywords" content="Hystrix">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Eureka基础概念">
-<meta property="og:url" content="https://chandlersong.github.io/2018/09/08/Eureka基础概念/index.html">
+<meta property="og:title" content="Hystrix">
+<meta property="og:url" content="https://chandlersong.github.io/2018/09/20/Hystrix/index.html">
 <meta property="og:site_name" content="cs blog">
-<meta property="og:description" content="这篇主要是阅读笔记。做为一些内容的整理。 阅读的内容，主要还是在于 github上的wiki spring cloud的介绍">
+<meta property="og:description" content="主要是Hystrix的笔记">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-11T16:06:47.564Z">
+<meta property="og:updated_time" content="2018-09-20T14:45:33.643Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Eureka基础概念">
-<meta name="twitter:description" content="这篇主要是阅读笔记。做为一些内容的整理。 阅读的内容，主要还是在于 github上的wiki spring cloud的介绍">
+<meta name="twitter:title" content="Hystrix">
+<meta name="twitter:description" content="主要是Hystrix的笔记">
 
 
 
 
 
 
-  <link rel="canonical" href="https://chandlersong.github.io/2018/09/08/Eureka基础概念/"/>
+  <link rel="canonical" href="https://chandlersong.github.io/2018/09/20/Hystrix/"/>
 
 
 
@@ -140,7 +140,7 @@
   };
 </script>
 
-  <title>Eureka基础概念 | cs blog</title>
+  <title>Hystrix | cs blog</title>
   
 
 
@@ -318,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chandlersong.github.io/2018/09/08/Eureka基础概念/">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.github.io/2018/09/20/Hystrix/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chandler song">
@@ -335,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Eureka基础概念
+          <h1 class="post-title" itemprop="name headline">Hystrix
               
             
           </h1>
@@ -360,24 +360,12 @@
                 
               
 
-              <time title="创建时间：2018-09-08 18:18:29" itemprop="dateCreated datePublished" datetime="2018-09-08T18:18:29+08:00">2018-09-08</time>
+              <time title="创建时间：2018-09-20 21:37:38 / 修改时间：22:45:33" itemprop="dateCreated datePublished" datetime="2018-09-20T21:37:38+08:00">2018-09-20</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-09-12 00:06:47" itemprop="dateModified" datetime="2018-09-12T00:06:47+08:00">2018-09-12</time>
               
             
           </span>
@@ -409,8 +397,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/09/08/Eureka基础概念/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/09/08/Eureka基础概念/" itemprop="commentCount"></span>
+                <a href="/2018/09/20/Hystrix/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/09/20/Hystrix/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -438,61 +426,67 @@
       
 
       
-        <p>这篇主要是阅读笔记。做为一些内容的整理。 阅读的内容，主要还是在于<br>
-<a href="https://github.com/Netflix/eureka/wiki" target="_blank" rel="noopener">github上的wiki</a><br>
-<a href="http://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.0.0.RELEASE/single/spring-cloud-netflix.html" target="_blank" rel="noopener">spring cloud的介绍</a></p>
+        <p>主要是Hystrix的笔记</p>
 <a id="more"></a>
-<h1 id="eureka基本概念">Eureka基本概念</h1>
-<p>Eureka是一个服务发现服务器。就我个人来说，这个名字起的有点容易误解。在阅读了一些基本的笔记之后，我整理了一下几个功能。其实和发现基本无关。 我理解Eureka功能大致分为三块。</p>
+<h1 id="总体的理解">总体的理解</h1>
+<p>Hystrix核心在于Command。一个Command就是一个可能出问题的调用，然后所有的设定，都是围绕着这个概念展开的。 其实在看了Spring Cloud的helloworld后，其用了javanica的之后，才对Hystrix有了一点感觉。<br>
+Hystrix是基于circuit Breaker的理念，来执行的。但是circuit Breaker是有<strong>状态</strong>这个概念的。但是整个netflix的设计理念就是<strong>stateless</strong>。换句话说circuit breaker的关和闭是瞬时的，而不是一个状态。调用run失败，就fallbackMethod，那么这个流程也就失败了。不会再有任何状态在那里做状态。就<strong>不会</strong>有开和闭的概念。</p>
+<h2 id="参考资料">参考资料</h2>
+<p><a href="https://spring.io/guides/gs/circuit-breaker/" target="_blank" rel="noopener">simplest-guide-with-spring cloud</a> <a href="https://github.com/Netflix/Hystrix/wiki" target="_blank" rel="noopener">office wiki</a> <a href="https://github.com/Netflix/Hystrix/tree/master/hystrix-contrib/hystrix-javanica" target="_blank" rel="noopener">javanica</a></p>
+<h2 id="基础">基础</h2>
 <ul>
-<li>服务(Client)信息管理。</li>
-<li>服务(Client)健康管理。</li>
-<li>冗余管理</li>
+<li>要其一个Eureka的Server，可能是spring cloud默认的例子。</li>
+<li>状态，主要是circuit 基础的状态，感觉在hystrix里面用处不大。
+<ol type="1">
+<li>open: 就是开始工作，阻断请求，返回预的错误值</li>
+<li>close: 停止工作</li>
+<li>half-open: 尝试重新连接</li>
+</ol></li>
 </ul>
-<p>最简单的一个流程是，一个服务A注册到Server，做为一个client端。用户需要服务A，就访问Serve端。找寻哪些Client端能够提供这个服务A。</p>
-<h1 id="配置信息">配置信息</h1>
-<p>Eureka的配置，基本都是在类中定义的。这里也就基本的罗列一下了 <a href="https://github.com/Netflix/eureka/wiki/Overriding-Default-Configurations" target="_blank" rel="noopener">Overriding Default Configurations</a></p>
-<h2 id="具体各个配置">具体各个配置</h2>
-<ul>
-<li><a href="https://github.com/Netflix/eureka/blob/master/eureka-core/src/main/java/com/netflix/eureka/DefaultEurekaServerConfig.java" target="_blank" rel="noopener">DefaultEurekaServerConfig</a></li>
-<li><a href="https://github.com/Netflix/eureka/blob/master/eureka-client/src/main/java/com/netflix/appinfo/CloudInstanceConfig.java" target="_blank" rel="noopener">CloudInstanceConfig</a></li>
-<li><a href="https://github.com/Netflix/eureka/blob/master/eureka-client/src/main/java/com/netflix/appinfo/MyDataCenterInstanceConfig.java" target="_blank" rel="noopener">MyDataCenterInstanceConfig</a></li>
-<li><a href="https://github.com/Netflix/eureka/blob/master/eureka-client/src/main/java/com/netflix/discovery/DefaultEurekaClientConfig.java" target="_blank" rel="noopener">DefaultEurekaClientConfig</a></li>
-<li><a href="https://github.com/spring-cloud/spring-cloud-netflix/blob/master/spring-cloud-netflix-eureka-client/src/main/java/org/springframework/cloud/netflix/eureka/EurekaInstanceConfigBean.java" target="_blank" rel="noopener">EurekaInstanceConfigBean</a><br>
-</li>
-<li><a href="https://github.com/spring-cloud/spring-cloud-netflix/blob/master/spring-cloud-netflix-eureka-client/src/main/java/org/springframework/cloud/netflix/eureka/EurekaClientConfigBean.java" target="_blank" rel="noopener">EurekaClientConfigBean</a></li>
-</ul>
-<h1 id="server">Server</h1>
-<p>Server在我的理解中，算是一个提供相应功能的Client端。比如，其启动的时候，做的第一件事情，是去其他Server注册信息。</p>
-<h2 id="self-preservation">Self-preservation</h2>
-<p>当一个Server启动或者侦测到，有大量的Client，非正常断开。比如突然断网。按照eureka的协议，client显示的发出取消注册(explicit unregister action)。但是比如突然断网这类事情，则是无法发出的。</p>
+<h1 id="基本功能">基本功能</h1>
+<h2 id="command">command</h2>
+<p>就像是最开始说的一样，这是Hytrix里面最核心的一个功能，然后Hytrix给其提供了很多异步的接口，感觉这个在使用的时候，这种方式，对于spring cloud来说，还是很有用的。 异步，基本用的是<strong>Future</strong>接口和<strong>rx.java</strong></p>
+<h2 id="groupname">group/Name</h2>
+<p>主要还是为了区分日志和监控，感觉没有什么特别。</p>
+<h2 id="error-propagation">Error Propagation</h2>
+<p><strong>HystrixBadRequestException</strong> 不会被记录和出发fallback method，你可以在getCause里面接受。</p>
+<h2 id="threadsemaphores-pool">Thread/Semaphores pool</h2>
+<p><a href="http://tietang.wang/2016/02/25/hystrix/Hystrix%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3/" target="_blank" rel="noopener">参数-中文-threadpool</a></p>
+<p>主要还是为了限制并发量高低时候的区别，thread比较重，一个请求一个线程。其实对于多线程不是太熟悉的人来说。两者的区别其实没有那么明显。</p>
+<h2 id="cache">cache</h2>
+<p>Cache感觉上只是一个不太实用的用法。 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (HystrixRequestContext context= HystrixRequestContext.initializeContext())&#123;</span><br><span class="line">          <span class="keyword">return</span> String.valueOf(okServices.tryCache(id).getRandomNumber());</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></p>
+<p>需要启动一个Context，说白了，这个只是在一个request里面，能够保证一个request里面是一致的，并不能保证零时出问题，用这个Cache来解决。</p>
+<h3 id="cacheremove"><span class="citation" data-cites="CacheRemove">@CacheRemove</span></h3>
+<p>主要用于Get-Set-Get模式。用于跟新内存</p>
+<h2 id="request-collapsing">Request Collapsing</h2>
 <ol type="1">
-<li>启动的时候，其会去neighboring node获取信息。</li>
-<li>如果成功连接，会有个一个更新阀值(renewal threshold)，默认是（85% within 15min）.服务器会关闭掉过期的instance。</li>
-<li>如果不能连接。Server默认等待5分钟时间。之后，Client才能注册信息。</li>
+<li><p>就是把几个Command的调用，集合成一一次调用。</p></li>
+<li><p>需要在一个context下面。</p></li>
+<li><p>需要Command端做不同于一般的逻辑。简单的来说，就是批量处理的逻辑。</p></li>
+<li><p>感觉都是异步来做的。</p></li>
+<li><p><a href="https://github.com/Netflix/Hystrix/blob/master/hystrix-examples/src/main/java/com/netflix/hystrix/examples/basic/CommandCollapserGetValueForKey.java" target="_blank" rel="noopener">官方的code</a>一看就懂。</p></li>
+<li><p>一个method，就是一个线程。比如例子里的code，就会被调用两次。</p></li>
 </ol>
-<p>有以下两种情况下会退出。</p>
+<h1 id="request-context-setup">Request Context Setup</h1>
 <ol type="1">
-<li>恢复正常多了，也就是renewal threshold高于正常值。</li>
-<li>默认关闭。以下是两个配置项目。
-<ul>
-<li><code>eureka.renewalPercentThreshold=[0.0, 1.0]</code></li>
-<li><code>eureka.enableSelfPreservation=false</code></li>
-</ul></li>
+<li>建议做法可以看官方文档的how to do</li>
+<li>挺奇怪的，spring cloud并没有默认起一个context。而且感觉除非用到Collopse或者cache，否则用大不到。</li>
 </ol>
-<p>这个功能，主要为了防止Client能够获取健康的instance。</p>
-<h1 id="client">client</h1>
-<p>Client端的目的，还是在于提供自身的信息。然后实现自己的HeartBeat。</p>
-<h2 id="状态">状态</h2>
+<h1 id="common-patterns">Common Patterns</h1>
+<p>具体就不展开了。基本就是官方的文档里面说的很清楚。 唯一让我有点技巧性的就是Command里面可以套command</p>
+<h1 id="监控">监控</h1>
+<p>看了资料。大致了解到监控，其实分类Dashboard和Metrics，前者貌似只是一个临时的工具而已。后者估计需要些code</p>
+<h2 id="dashboard">DashBoard</h2>
 <ol type="1">
-<li>starting: 启动之前</li>
-<li>out_of_service:暂时离线。</li>
-<li>up：启动</li>
+<li><p>pom.xml <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-hystrix-dashboard<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>application <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableHystrixDashboard</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BasicHystrixApplication</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li>
+<li><p>访问 /hystrix，不过要配置</p></li>
+<li><p>DashBoard可以内嵌到自己的服务里面，貌似就是一个js，具体是官方文档看到过，</p></li>
 </ol>
-<h3 id="client永久离线">Client永久离线</h3>
-<p>在Server结束的时候，会给Client会给Server端发送一个信息。 不清楚这个是不是状态。 如果客户端，要永久的离开Server。理论上需要给服务器端发送消息。</p>
-<h2 id="heartbeat">HeartBeat</h2>
-<p>默认是是30s一次。但是这里主要是和AWS做匹配。AWS的防火墙，如果服务停止超过几分钟，就会被阻断。所以说，具体可以根据情况来处理。 如果自己写的话，还是支持各种格式是Json和XML，很大众。</p>
+<h2 id="turbine">turbine</h2>
+<p>就是把各个子系统的Stream汇集起来。 <a href="http://www.ityouknow.com/springcloud/2017/05/18/hystrix-dashboard-turbine.html" target="_blank" rel="noopener">中文资料</a></p>
+<h1 id="metrics-长期监测">Metrics – 长期监测</h1>
+<p>就是要用Metrics,Steam和Dashboard类似于监测问题的。会对性能有点影响。 #refernce <a href="https://github.com/Netflix/Hystrix/issues/909" target="_blank" rel="noopener">gitbub上的讨论</a> <a href="https://github.com/Netflix/Hystrix/wiki/Metrics-and-Monitoring#metrics-publisher" target="_blank" rel="noopener">github-metrices</a></p>
 
       
     </div>
@@ -537,9 +531,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Eureka/" rel="tag"># Eureka</a>
-          
-            <a href="/tags/阅读笔记/" rel="tag"># 阅读笔记</a>
+            <a href="/tags/Hystrix/" rel="tag"># Hystrix</a>
           
         </div>
       
@@ -552,8 +544,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/16/拾遗集2018-2/" rel="next" title="拾遗集2018-2">
-                <i class="fa fa-chevron-left"></i> 拾遗集2018-2
+              <a href="/2018/09/18/Eureka-Server/" rel="next" title="Eureka Server">
+                <i class="fa fa-chevron-left"></i> Eureka Server
               </a>
             
           </div>
@@ -561,10 +553,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/08/Eureka-client/" rel="prev" title="Eureka client">
-                Eureka client <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -742,7 +730,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#eureka基本概念"><span class="nav-text">Eureka基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置信息"><span class="nav-text">配置信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#具体各个配置"><span class="nav-text">具体各个配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#server"><span class="nav-text">Server</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#self-preservation"><span class="nav-text">Self-preservation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#client"><span class="nav-text">client</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#状态"><span class="nav-text">状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#client永久离线"><span class="nav-text">Client永久离线</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#heartbeat"><span class="nav-text">HeartBeat</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#总体的理解"><span class="nav-text">总体的理解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-text">基础</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本功能"><span class="nav-text">基本功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#command"><span class="nav-text">command</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#groupname"><span class="nav-text">group/Name</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#error-propagation"><span class="nav-text">Error Propagation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#threadsemaphores-pool"><span class="nav-text">Thread/Semaphores pool</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cache"><span class="nav-text">cache</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cacheremove"><span class="nav-text">@CacheRemove</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#request-collapsing"><span class="nav-text">Request Collapsing</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#request-context-setup"><span class="nav-text">Request Context Setup</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#common-patterns"><span class="nav-text">Common Patterns</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#监控"><span class="nav-text">监控</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dashboard"><span class="nav-text">DashBoard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#turbine"><span class="nav-text">turbine</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#metrics-长期监测"><span class="nav-text">Metrics – 长期监测</span></a></li></ol></div>
             
 
           </div>
