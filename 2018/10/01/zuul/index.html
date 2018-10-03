@@ -112,25 +112,25 @@
 
 
 
-  <meta name="description" content="Mockito中的获取mock方法的调用参数 python多个@patch Docker的Container和宿主机同步时区">
-<meta name="keywords" content="java,python,docker">
+  <meta name="description" content="关于zuul的笔记">
+<meta name="keywords" content="zuul">
 <meta property="og:type" content="article">
-<meta property="og:title" content="拾遗集2018-2">
-<meta property="og:url" content="https://chandlersong.github.io/2018/07/16/拾遗集2018-2/index.html">
+<meta property="og:title" content="zuul">
+<meta property="og:url" content="https://chandlersong.github.io/2018/10/01/zuul/index.html">
 <meta property="og:site_name" content="cs blog">
-<meta property="og:description" content="Mockito中的获取mock方法的调用参数 python多个@patch Docker的Container和宿主机同步时区">
+<meta property="og:description" content="关于zuul的笔记">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-04T14:25:57.000Z">
+<meta property="og:updated_time" content="2018-10-03T13:42:21.922Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="拾遗集2018-2">
-<meta name="twitter:description" content="Mockito中的获取mock方法的调用参数 python多个@patch Docker的Container和宿主机同步时区">
+<meta name="twitter:title" content="zuul">
+<meta name="twitter:description" content="关于zuul的笔记">
 
 
 
 
 
 
-  <link rel="canonical" href="https://chandlersong.github.io/2018/07/16/拾遗集2018-2/"/>
+  <link rel="canonical" href="https://chandlersong.github.io/2018/10/01/zuul/"/>
 
 
 
@@ -140,7 +140,7 @@
   };
 </script>
 
-  <title>拾遗集2018-2 | cs blog</title>
+  <title>zuul | cs blog</title>
   
 
 
@@ -318,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chandlersong.github.io/2018/07/16/拾遗集2018-2/">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.github.io/2018/10/01/zuul/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chandler song">
@@ -335,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">拾遗集2018-2
+          <h1 class="post-title" itemprop="name headline">zuul
               
             
           </h1>
@@ -360,7 +360,7 @@
                 
               
 
-              <time title="创建时间：2018-07-16 21:23:52" itemprop="dateCreated datePublished" datetime="2018-07-16T21:23:52+08:00">2018-07-16</time>
+              <time title="创建时间：2018-10-01 15:48:18" itemprop="dateCreated datePublished" datetime="2018-10-01T15:48:18+08:00">2018-10-01</time>
             
 
             
@@ -377,7 +377,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-04 22:25:57" itemprop="dateModified" datetime="2018-08-04T22:25:57+08:00">2018-08-04</time>
+                <time title="修改时间：2018-10-03 21:42:21" itemprop="dateModified" datetime="2018-10-03T21:42:21+08:00">2018-10-03</time>
               
             
           </span>
@@ -394,7 +394,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/拾遗/" itemprop="url" rel="index"><span itemprop="name">拾遗</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spring-cloud/" itemprop="url" rel="index"><span itemprop="name">spring cloud</span></a></span>
 
                 
                 
@@ -409,8 +409,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/07/16/拾遗集2018-2/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/16/拾遗集2018-2/" itemprop="commentCount"></span>
+                <a href="/2018/10/01/zuul/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/01/zuul/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -438,51 +438,74 @@
       
 
       
-        <ul>
-<li>Mockito中的获取mock方法的调用参数</li>
-<li>python多个@patch</li>
-<li>Docker的Container和宿主机同步时区</li>
-</ul>
-<a id="more"></a>
-<h1 id="mockito中的获取mock方法的调用参数">Mockito中的获取mock方法的调用参数</h1>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ArgumentCaptor&lt;Person&gt; peopleCaptor = ArgumentCaptor.forClass(Person.class);</span><br><span class="line">verify(mock, times(<span class="number">2</span>)).doSomething(peopleCaptor.capture());</span><br><span class="line"></span><br><span class="line">List&lt;Person&gt; capturedPeople = peopleCaptor.getAllValues();</span><br><span class="line">assertEquals(<span class="string">"John"</span>, capturedPeople.get(<span class="number">0</span>).getName());</span><br><span class="line">assertEquals(<span class="string">"Jane"</span>, capturedPeople.get(<span class="number">1</span>).getName());</span><br></pre></td></tr></table></figure>
+        <p>关于zuul的笔记 <a id="more"></a></p>
+<h1 id="基础杂项">基础杂项</h1>
+<h2 id="maven">maven</h2>
+<p>依赖根据版本不同,貌似很多netflix都是这样 早期</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-zuul<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>2.0</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-zuul<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>在2.0里面，很多的netflix相关的，都加入了netflix的标识。</p>
+<h2 id="杂项">杂项</h2>
 <ol type="1">
-<li>建立<strong>ArgumentCaptor</strong>对象</li>
-<li>在verify的时候调用，就是例子中的<code>$verify(mock, times(2)).doSomething(peopleCaptor.capture());$</code>，<code>$doSomething$</code>是其中的方法。</li>
+<li>如果Eureka的话，其后台用的是Ribbon，启动的时候，会有点慢，不会刷新的很快。</li>
+<li>zuul只能作为一个单独的proxy使用，其内部不能用挂在webservices。可能这是zuul1的问题。因为我看到zuul1是以一个serverlet的形式来做的。</li>
 </ol>
-<p><a href="https://stackoverflow.com/questions/5981605/can-mockito-capture-arguments-of-a-method-called-multiple-times" target="_blank" rel="noopener">stackoverflow–proactif</a></p>
-<h1 id="python多个patch">python多个@patch</h1>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@patch("urllib.request.urlopen")</span></span><br><span class="line"><span class="meta">@patch("pandas.read_csv")</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_hello_world</span><span class="params">(self, pandas_read_csv,request_urlopen)</span>:</span></span><br></pre></td></tr></table></figure>
-<p>关键在于，注入到方法的时候，<strong>顺序要倒着</strong>。</p>
-<h1 id="docker的container和宿主机同步时区">Docker的Container和宿主机同步时区</h1>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -t -i -p 8080:8080 -p 8090:8090 -v /etc/localtime:/etc/localtime:ro tomcat:7.0.69-jre8 /bin/bash</span><br></pre></td></tr></table></figure>
-<p>核心是 <strong>-v /etc/localtime:/etc/localtime</strong><br>
-其实还可以同步/etc/timezone,但是实际操作中，这个要访问权限，貌似不是默认开的</p>
-<p>==用java的话，timezone获得的时区出错==。<a href="https://stackoverflow.com/questions/41770464/openjdk-1-8-0-in-docker-container-has-different-timezone-than-etc-timezone-and" target="_blank" rel="noopener">timezone问题分析</a></p>
-<p>但是发觉文中的方法太繁琐。最后觉得还是</p>
-<h2 id="设置环境变量tz">设置环境变量TZ</h2>
-<p>从结果上来看，这个有点玄学。我用<code>exec /bin/bash</code>强行登陆上去，用date命令发现准确，但是我java程序，则是一直取的逝去不对。我host的CST，但是java取的是UTC。</p>
-<h2 id="通过volumne">通过Volumne</h2>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">volumnes：</span></span><br><span class="line"><span class="bullet">   -</span> <span class="string">/etc/localtime:/etc/localtime：ro</span></span><br><span class="line"><span class="bullet">   -</span> <span class="string">/etc/timezone:/etc/timezone：ro</span></span><br></pre></td></tr></table></figure>
-<p>我觉得这个方法，可能对<strong>OS的发行</strong>版比较依赖。因为我的测试环境是CentOS。发觉无效。但是网上说这个方法可行。<br>
-就个人来说，觉得这个方法比较有美感。</p>
-<p><a href="https://serverfault.com/questions/683605/docker-container-time-timezone-will-not-reflect-changes" target="_blank" rel="noopener">stackoverflow-thhan说可行</a></p>
-<h2 id="命令行改">命令行改</h2>
-<h3 id="ubuntu">ubuntu</h3>
-<figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"Asia/Shanghai"</span> &gt; /etc/timezone</span></span><br><span class="line"><span class="bash">RUN dpkg-reconfigure -f noninteractive tzdata</span></span><br></pre></td></tr></table></figure>
-<p>核心代码是这两句，由于没环境，所以也没有试过<br>
-<a href="https://tommy.net.cn/2015/02/05/config-timezone-in-docker/" target="_blank" rel="noopener">具体可以参考Tommy Lau</a></p>
-<h3 id="centos7">CentOS7</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timedatectl <span class="built_in">set</span>-timezone Aisa/shanghai</span><br></pre></td></tr></table></figure>
-<p>但是在Docker中会报一个错<code>Failed to create bus connection: No such file or directory</code>。网上查了一下资料，发觉有权限问题，下面提供了解决方案。<br>
-<a href="https://www.cyberciti.biz/faq/centos-linux-6-7-changing-timezone-command-line/" target="_blank" rel="noopener">具体说明</a><br>
-<a href="https://stackoverflow.com/questions/43907925/ubuntu-timedatectl-fails-in-docker-container" target="_blank" rel="noopener">stackoverflow-srlm</a></p>
-<h2 id="修改连接">修改连接</h2>
-<p>可能这个方案，只是适用于CentOS7。因为我是在试了上面方法无效的时候，才想到用这个方案的。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /etc/localtime</span><br></pre></td></tr></table></figure>
-<p>你会看到<code>/etc/localtime</code>指向的是<code>/usr/share/zoneinfo</code>下面的文件。然后下面是具体时区。基于这个思路。我就是通过代码强行的建立一个相关的连接。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm /etc/localtime</span><br><span class="line">ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
-<p>后来发觉这个方法，是<a href="https://www.cyberciti.biz/faq/centos-linux-6-7-changing-timezone-command-line/" target="_blank" rel="noopener">具体说明</a>对centOS6方法。但是实际发现对CentoS7也有效</p>
+<h2 id="几个学习资料">几个学习资料</h2>
+<p><a href="https://cloud.spring.io/spring-cloud-netflix/multi/multi__router_and_filter_zuul.html" target="_blank" rel="noopener">spring cloud</a><br>
+<a href="https://github.com/Netflix/zuul/wiki" target="_blank" rel="noopener">wiki</a></p>
+<h1 id="路由配置">路由配置</h1>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">to-service-3:</span></span><br><span class="line"><span class="attr">   path:</span> <span class="string">/demo/*/client3/**</span></span><br><span class="line"><span class="attr">   url:</span> <span class="attr">http://localhost:8083/</span></span><br><span class="line"><span class="attr"> to-service-2:</span></span><br><span class="line"><span class="attr">   path:</span> <span class="string">/demo/abc/**</span></span><br><span class="line"><span class="attr">   url:</span> <span class="attr">http://localhost:8082/</span></span><br><span class="line"><span class="attr"> to-service-1:</span></span><br><span class="line"><span class="attr">   path:</span> <span class="string">/demo/**</span></span><br><span class="line"><span class="attr">   url:</span> <span class="attr">http://localhost:8081/</span></span><br></pre></td></tr></table></figure>
+<ol type="1">
+<li><p>zuul的规则是前面的覆盖后面的。比如上面的例子，如果<code>to-service-2</code>在<code>to-service-1</code>之后，request会发到<code>to-service-1</code></p></li>
+<li><p>如果发了一个request是<code>/demo/X/client3/say</code>，<em>client3</em> 会收到这个request，收到的是<code>/X/client3/say</code></p></li>
+</ol>
+<h2 id="stripprefix">stripPrefix</h2>
+<p>就是会发全路径给转发对象。比方说<em>/demo/say</em></p>
+<ul>
+<li>false: 会发<em>say</em></li>
+<li>true: 会发<em>/demo/say</em></li>
+</ul>
+<h2 id="patternserviceroutemapper">PatternServiceRouteMapper</h2>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">zuul:</span></span><br><span class="line"><span class="attr">  ribbon:</span></span><br><span class="line"><span class="attr">    eager-load:</span></span><br><span class="line"><span class="attr">      enabled:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  routes:</span></span><br><span class="line"><span class="attr">    client1:</span></span><br><span class="line"><span class="attr">      serviceId:</span> <span class="string">ok_client1</span></span><br><span class="line"><span class="attr">    client2:</span></span><br><span class="line"><span class="attr">      serviceId:</span> <span class="string">ok_client2</span></span><br></pre></td></tr></table></figure>
+<ol type="1">
+<li><p>serviceId到path的mapping。我的理解是自动生成path。</p></li>
+<li><p>比方说最后生成的path是<code>\client</code>,你发client，<code>\client\say</code>。服务方会收到的是say</p></li>
+</ol>
+<h3 id="参考资料">参考资料</h3>
+<p><a href="https://stackoverflow.com/questions/41003054/zuul-routes-to-services-with-nested-path" target="_blank" rel="noopener">nested-path</a></p>
+<h2 id="fallbackprovider">FallbackProvider</h2>
+<ol type="1">
+<li><p>只是作用于connection refuse和timeout两种错误。因为底层用的是httpclient而不是RestClient。<a href="https://github.com/spring-cloud/spring-cloud-netflix/issues/2692" target="_blank" rel="noopener">原因讨论</a> 。换句话说，只有client端down掉，才会发生类似的问题。类似于404和500这类错误，需要在client端定义。</p></li>
+<li><p>本质是ribbon的一个hack。所以需要用ribbon的场景才会触发。具体看看代码 <code>AbstractRibbonCommand</code> 和 <code>AbstractRibbonCommandFactory</code> 这两个方法。总体来说zuul，和ribbon以及hystrix整合还是相当紧密的。<a href="http://blog.didispace.com/spring-cloud-zuul-fallback-improve/" target="_blank" rel="noopener">源码研究</a></p></li>
+</ol>
+<h2 id="actuator">Actuator</h2>
+<p><a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-customizing-management-server-port" target="_blank" rel="noopener">解释1</a> <a href="https://github.com/spring-cloud/spring-cloud-netflix/issues/2813" target="_blank" rel="noopener">解释二</a></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">management:</span></span><br><span class="line"><span class="attr">  endpoints:</span></span><br><span class="line"><span class="attr">    web:</span></span><br><span class="line"><span class="attr">      exposure:</span></span><br><span class="line"><span class="attr">        include:</span></span><br><span class="line"><span class="bullet">          -</span> <span class="string">info</span></span><br><span class="line"><span class="bullet">          -</span> <span class="string">routes</span></span><br></pre></td></tr></table></figure>
+<p>显示的最小配置。访问路径是<code>http://localhost:8080/actuator/routes</code></p>
+<p>下面这些其实是Actuator相关的,把Actuator端口换成服务之外的。而且默认要把routes的加上去。或者<code>include: “*”</code>开放全部。这点，我觉得Actuator还是有点不方便的，就是暴露多少，需要手工配置。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">management:</span></span><br><span class="line"><span class="attr">  server:</span></span><br><span class="line"><span class="attr">    port:</span> <span class="number">8888</span></span><br></pre></td></tr></table></figure>
+<h2 id="query-string-encoding">Query String Encoding</h2>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">zuul:</span></span><br><span class="line"><span class="attr">  forceOriginalQueryStringEncoding:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>就是Query的String需不需要Encoding。这个属于基本没什么用，但是碰到问题则是很有用的一点。</p>
+<h2 id="cookies-and-sensitive-headers">Cookies and Sensitive Headers</h2>
+<p><a href="https://cloud.spring.io/spring-cloud-netflix/multi/multi__router_and_filter_zuul.html#_cookies_and_sensitive_headers" target="_blank" rel="noopener">官方文档</a></p>
+<p>其实这个官方文档说的很清楚。我这里就不再重复。 关键还是在于<code>sensitiveHeaders</code>这个值，是黑名单。且其黑名单并不是空。需要手动置空。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">zuul:</span></span><br><span class="line"><span class="attr">  routes:</span></span><br><span class="line"><span class="attr">    users:</span></span><br><span class="line"><span class="attr">      path:</span> <span class="string">/myusers/**</span></span><br><span class="line"><span class="attr">      sensitiveHeaders:</span></span><br><span class="line"><span class="attr">      url:</span> <span class="attr">https://downstream</span></span><br></pre></td></tr></table></figure>
+<h2 id="filter">filter</h2>
+<p>Filter没有多看。基本来说三种Filter</p>
+<ul>
+<li>Pre Filter : 输入</li>
+<li>Route Filter ： route</li>
+<li>Post Filter ： 输出</li>
+</ul>
+<p>其实写个bean之后，注入即可。</p>
+<ol type="1">
+<li><code>filterType()</code>这个方法来区分举个哪个type。然后都是固定值</li>
+<li><code>filterOrder</code>定义order，其实也定义了可引用值</li>
+<li><code>run()</code>在具体逻辑里面</li>
+</ol>
+<p>到底有多少的filter。可以看看具体的文档。然后server和proxy差别还是挺大的。</p>
 
       
     </div>
@@ -527,11 +550,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java/" rel="tag"># java</a>
-          
-            <a href="/tags/python/" rel="tag"># python</a>
-          
-            <a href="/tags/docker/" rel="tag"># docker</a>
+            <a href="/tags/zuul/" rel="tag"># zuul</a>
           
         </div>
       
@@ -544,8 +563,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/16/数学-函数/" rel="next" title="数学-函数">
-                <i class="fa fa-chevron-left"></i> 数学-函数
+              <a href="/2018/09/26/ribbon/" rel="next" title="ribbon">
+                <i class="fa fa-chevron-left"></i> ribbon
               </a>
             
           </div>
@@ -554,8 +573,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/09/08/Eureka基础概念/" rel="prev" title="Eureka基础概念">
-                Eureka基础概念 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/02/拾遗集2018-3/" rel="prev" title="拾遗集2018-3">
+                拾遗集2018-3 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -738,7 +757,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mockito中的获取mock方法的调用参数"><span class="nav-text">Mockito中的获取mock方法的调用参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python多个patch"><span class="nav-text">python多个@patch</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker的container和宿主机同步时区"><span class="nav-text">Docker的Container和宿主机同步时区</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置环境变量tz"><span class="nav-text">设置环境变量TZ</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过volumne"><span class="nav-text">通过Volumne</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行改"><span class="nav-text">命令行改</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ubuntu"><span class="nav-text">ubuntu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#centos7"><span class="nav-text">CentOS7</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改连接"><span class="nav-text">修改连接</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础杂项"><span class="nav-text">基础杂项</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#maven"><span class="nav-text">maven</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#杂项"><span class="nav-text">杂项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几个学习资料"><span class="nav-text">几个学习资料</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#路由配置"><span class="nav-text">路由配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#stripprefix"><span class="nav-text">stripPrefix</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#patternserviceroutemapper"><span class="nav-text">PatternServiceRouteMapper</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fallbackprovider"><span class="nav-text">FallbackProvider</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#actuator"><span class="nav-text">Actuator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#query-string-encoding"><span class="nav-text">Query String Encoding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookies-and-sensitive-headers"><span class="nav-text">Cookies and Sensitive Headers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#filter"><span class="nav-text">filter</span></a></li></ol></li></ol></div>
             
 
           </div>

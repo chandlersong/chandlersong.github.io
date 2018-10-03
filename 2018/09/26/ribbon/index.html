@@ -120,7 +120,7 @@
 <meta property="og:site_name" content="cs blog">
 <meta property="og:description" content="关于ribbon的一些自学知识，内容比较少。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-26T12:56:10.733Z">
+<meta property="og:updated_time" content="2018-10-02T06:12:10.455Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ribbon">
 <meta name="twitter:description" content="关于ribbon的一些自学知识，内容比较少。">
@@ -360,12 +360,24 @@
                 
               
 
-              <time title="创建时间：2018-09-26 20:38:53 / 修改时间：20:56:10" itemprop="dateCreated datePublished" datetime="2018-09-26T20:38:53+08:00">2018-09-26</time>
+              <time title="创建时间：2018-09-26 20:38:53" itemprop="dateCreated datePublished" datetime="2018-09-26T20:38:53+08:00">2018-09-26</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-02 14:12:10" itemprop="dateModified" datetime="2018-10-02T14:12:10+08:00">2018-10-02</time>
               
             
           </span>
@@ -433,11 +445,13 @@
 ribbon感觉是其他的基础组件，比如说Zuul，还有feign。绝对就是因为此，对于其单独的说明就很少。</p>
 <h2 id="基本概念">基本概念</h2>
 <ul>
-<li>client：配置的基本单位。对应的是远程的一个服务。其有两种配置方式 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RibbonClient</span>(name = <span class="string">"okservice"</span>, configuration = SayOKConfiguration.class)</span><br></pre></td></tr></table></figure></li>
+<li>client：配置的基本单位。对应的是远程的一个服务。其有两种配置方式</li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RibbonClient</span>(name = <span class="string">"okservice"</span>, configuration = SayOKConfiguration.class)</span><br></pre></td></tr></table></figure>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">ok-service:</span></span><br><span class="line"><span class="attr">  ribbon:</span></span><br><span class="line"><span class="attr">    MaxAutoRetries:</span> <span class="number">100</span></span><br><span class="line"><span class="attr">    MaxAutoRetriesNextServer:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">    retryableStatusCodes:</span> <span class="number">500</span></span><br><span class="line"><span class="attr">    ReadTimeout:</span> <span class="number">99999</span></span><br><span class="line"><span class="attr">    ServerListRefreshInterval:</span> <span class="number">15000</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>Rule： 就是调用远程的规则。具体有些默认的规则。没有细看。</li>
+<li>retryableStatusCodes: 列举重试的错误代码。http的。这里觉得有点不方便。默认只有timeout才会触发。其他的都要这里来定义</li>
 </ul>
 <h2 id="例子">例子</h2>
 <p>就写了两个简单的例子，一个是基于Eureka，另一个是独立的具体看连接.<a href="https://github.com/chandlersong/springCloudExamples/blob/master/demo/ribbon-demo/src/test/java/me/study/ribbon/demo/SimpleRibbonDemo.java" target="_blank" rel="noopener">demo</a></p>
@@ -507,6 +521,10 @@ ribbon感觉是其他的基础组件，比如说Zuul，还有feign。绝对就�
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/01/zuul/" rel="prev" title="zuul">
+                zuul <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -587,7 +605,7 @@ ribbon感觉是其他的基础组件，比如说Zuul，还有feign。绝对就�
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -641,7 +659,9 @@ ribbon感觉是其他的基础组件，比如说Zuul，还有feign。绝对就�
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
