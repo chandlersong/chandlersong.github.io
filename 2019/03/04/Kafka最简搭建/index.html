@@ -121,7 +121,7 @@
 <meta property="og:description" content="常用信息 默认值  端口：9092  实体对象  关系图   Batch： 只是表示一次写入多少的数据。没有其他特别含义 Offset： 每个Comsumer有着自己的Offset  HelloWorld启动 单独启动 zookeeper  配置文件 conf/zoo.cfg 1234tickTime=2000initLimit=10dataDir=/your/d">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://assets.processon.com/chart_image/5c769115e4b0c4e21667c23f.png?_=1551275619025">
-<meta property="og:updated_time" content="2019-03-04T12:44:44.148Z">
+<meta property="og:updated_time" content="2019-03-04T15:05:23.933Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cs blog">
 <meta name="twitter:description" content="常用信息 默认值  端口：9092  实体对象  关系图   Batch： 只是表示一次写入多少的数据。没有其他特别含义 Offset： 每个Comsumer有着自己的Offset  HelloWorld启动 单独启动 zookeeper  配置文件 conf/zoo.cfg 1234tickTime=2000initLimit=10dataDir=/your/d">
@@ -362,7 +362,7 @@
                 
               
 
-              <time title="创建时间：2019-03-04 20:40:58 / 修改时间：20:44:44" itemprop="dateCreated datePublished" datetime="2019-03-04T20:40:58+08:00">2019-03-04</time>
+              <time title="创建时间：2019-03-04 20:40:58 / 修改时间：23:05:23" itemprop="dateCreated datePublished" datetime="2019-03-04T20:40:58+08:00">2019-03-04</time>
             
 
             
@@ -453,7 +453,16 @@
 <ul>
 <li><code>message.max.bytes</code> parameter set the environment to <code>KAFKA_MESSAGE_MAX_BYTES</code>: 我也不太清楚这种变换到底是kalka，还是docker自己弄得。</li>
 </ul></li>
-<li><a href="https://github.com/chandlersong/ENV/tree/master/kafka" target="_blank" rel="noopener">创建的一个的kafka的环境</a></li>
+<li><a href="https://github.com/chandlersong/ENV/tree/master/kafka" target="_blank" rel="noopener">创建的一个的kafka的环境</a>
+<ul>
+<li><code>server.properties</code> 重要加入以下两句,<a href="https://stackoverflow.com/questions/54443640/kafka-consumer-no-entry-found-for-connection" target="_blank" rel="noopener">No entry found for connection excpetion-stackover</a> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">listeners=PLAINTEXT://kafka:9092</span><br><span class="line">advertised.listeners=PLAINTEXT://kafka:9092</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>刚学，所以对这些具体原因不是太清楚，但是因为环境搭载在docker上，而docker搭载在虚拟机上，我主机去连的时候，就报<code>No entry found for connection</code>和连不上的两个错。搞了很久。最后登上contianer之后，运行了验证就好了。 我还在宿主机的host文件，加入了一下一点 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VM_IP kafka</span><br></pre></td></tr></table></figure></p>
+猜测主要问题可能在以下几点
+<ol type="1">
+<li>leader的选举。</li>
+<li>没有完全起来,可能开始在选举，所以broker起来了。但是不能工作。</li>
+</ol></li>
 </ul>
 
       
