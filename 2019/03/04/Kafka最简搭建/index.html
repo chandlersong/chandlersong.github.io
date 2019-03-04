@@ -112,19 +112,19 @@
 
 
 
-  <meta name="description" content="常用信息 默认值  端口：9092  实体对象  关系图   Batch： 只是表示一次写入多少的数据。没有其他特别含义 Offset： 每个Comsumer有着自己的Offset  HelloWorld启动 单独启动 zookeeper  配置文件 conf/zoo.cfg 1234tickTime=2000initLimit=10dataDir=/your/d">
-<meta name="keywords" content="java">
+  <meta name="description" content="如何搭建一个kafka最简单的环境，并且提供了一个docker-compose的脚本">
+<meta name="keywords" content="MQ,kafka">
 <meta property="og:type" content="article">
-<meta property="og:title" content="cs blog">
-<meta property="og:url" content="https://chandlersong.github.io/2019/03/04/Kafka最简搭建/index.html">
+<meta property="og:title" content="kafka最简搭建">
+<meta property="og:url" content="https://chandlersong.github.io/2019/03/04/kafka最简搭建/index.html">
 <meta property="og:site_name" content="cs blog">
-<meta property="og:description" content="常用信息 默认值  端口：9092  实体对象  关系图   Batch： 只是表示一次写入多少的数据。没有其他特别含义 Offset： 每个Comsumer有着自己的Offset  HelloWorld启动 单独启动 zookeeper  配置文件 conf/zoo.cfg 1234tickTime=2000initLimit=10dataDir=/your/d">
+<meta property="og:description" content="如何搭建一个kafka最简单的环境，并且提供了一个docker-compose的脚本">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://assets.processon.com/chart_image/5c769115e4b0c4e21667c23f.png?_=1551275619025">
-<meta property="og:updated_time" content="2019-03-04T15:05:23.933Z">
+<meta property="og:updated_time" content="2019-03-04T15:09:49.224Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cs blog">
-<meta name="twitter:description" content="常用信息 默认值  端口：9092  实体对象  关系图   Batch： 只是表示一次写入多少的数据。没有其他特别含义 Offset： 每个Comsumer有着自己的Offset  HelloWorld启动 单独启动 zookeeper  配置文件 conf/zoo.cfg 1234tickTime=2000initLimit=10dataDir=/your/d">
+<meta name="twitter:title" content="kafka最简搭建">
+<meta name="twitter:description" content="如何搭建一个kafka最简单的环境，并且提供了一个docker-compose的脚本">
 <meta name="twitter:image" content="http://assets.processon.com/chart_image/5c769115e4b0c4e21667c23f.png?_=1551275619025">
 
 
@@ -132,7 +132,7 @@
 
 
 
-  <link rel="canonical" href="https://chandlersong.github.io/2019/03/04/Kafka最简搭建/"/>
+  <link rel="canonical" href="https://chandlersong.github.io/2019/03/04/kafka最简搭建/"/>
 
 
 
@@ -142,7 +142,7 @@
   };
 </script>
 
-  <title> | cs blog</title>
+  <title>kafka最简搭建 | cs blog</title>
   
 
 
@@ -320,7 +320,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chandlersong.github.io/2019/03/04/Kafka最简搭建/">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.github.io/2019/03/04/kafka最简搭建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chandler song">
@@ -337,7 +337,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">kafka最简搭建
               
             
           </h1>
@@ -362,7 +362,7 @@
                 
               
 
-              <time title="创建时间：2019-03-04 20:40:58 / 修改时间：23:05:23" itemprop="dateCreated datePublished" datetime="2019-03-04T20:40:58+08:00">2019-03-04</time>
+              <time title="创建时间：2019-03-04 23:08:32 / 修改时间：23:09:49" itemprop="dateCreated datePublished" datetime="2019-03-04T23:08:32+08:00">2019-03-04</time>
             
 
             
@@ -373,6 +373,24 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/中间件/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -381,8 +399,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/04/Kafka最简搭建/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/03/04/Kafka最简搭建/" itemprop="commentCount"></span>
+                <a href="/2019/03/04/kafka最简搭建/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/03/04/kafka最简搭建/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -410,7 +428,8 @@
       
 
       
-        <h1 id="常用信息">常用信息</h1>
+        <p>如何搭建一个kafka最简单的环境，并且提供了一个docker-compose的脚本 <a id="more"></a></p>
+<h1 id="常用信息">常用信息</h1>
 <h2 id="默认值">默认值</h2>
 <ul>
 <li>端口：9092</li>
@@ -505,6 +524,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MQ/" rel="tag"># MQ</a>
+          
+            <a href="/tags/kafka/" rel="tag"># kafka</a>
+          
+        </div>
       
 
       
@@ -627,7 +654,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -662,7 +691,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

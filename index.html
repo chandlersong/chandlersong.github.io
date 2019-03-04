@@ -318,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chandlersong.github.io/2019/03/04/Kafka最简搭建/">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.github.io/2019/03/04/kafka最简搭建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chandler song">
@@ -337,8 +337,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/04/Kafka最简搭建/" itemprop="url">
-                  未命名
+                <a class="post-title-link" href="/2019/03/04/kafka最简搭建/" itemprop="url">
+                  kafka最简搭建
                 </a>
               
             
@@ -364,7 +364,7 @@
                 
               
 
-              <time title="创建时间：2019-03-04 20:40:58 / 修改时间：23:05:23" itemprop="dateCreated datePublished" datetime="2019-03-04T20:40:58+08:00">2019-03-04</time>
+              <time title="创建时间：2019-03-04 23:08:32 / 修改时间：23:09:49" itemprop="dateCreated datePublished" datetime="2019-03-04T23:08:32+08:00">2019-03-04</time>
             
 
             
@@ -375,6 +375,24 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/中间件/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -383,8 +401,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/04/Kafka最简搭建/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/03/04/Kafka最简搭建/" itemprop="commentCount"></span>
+                <a href="/2019/03/04/kafka最简搭建/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/03/04/kafka最简搭建/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -413,63 +431,14 @@
 
       
         
-          
-            <h1 id="常用信息">常用信息</h1>
-<h2 id="默认值">默认值</h2>
-<ul>
-<li>端口：9092</li>
-</ul>
-<h2 id="实体对象">实体对象</h2>
-<figure>
-<img src="http://assets.processon.com/chart_image/5c769115e4b0c4e21667c23f.png?_=1551275619025" alt="关系图"><figcaption>关系图</figcaption>
-</figure>
-<ol type="1">
-<li>Batch： 只是表示一次写入多少的数据。没有其他特别含义</li>
-<li>Offset： 每个Comsumer有着自己的Offset</li>
-</ol>
-<h1 id="helloworld启动">HelloWorld启动</h1>
-<h2 id="单独启动">单独启动</h2>
-<h3 id="zookeeper">zookeeper</h3>
-<ul>
-<li><p>配置文件 <code>conf/zoo.cfg</code> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tickTime=2000</span><br><span class="line">initLimit=10</span><br><span class="line">dataDir=/your/data</span><br><span class="line">clientPort=2181</span><br></pre></td></tr></table></figure></p></li>
-<li>command:<code>bin/zkServer.sh start</code></li>
-<li><p>最新版本的kafka的发行包里面，就内置了一个zookeeper。具体是在<code>bin/zookeeper-server-start.sh config/zookeeper.properties</code>命令就可以了。</p></li>
-</ul>
-<h3 id="kalfa">kalfa</h3>
-<ul>
-<li>command: <code>bin/kafka-server-start.sh config/server.properties</code></li>
-<li>server.properties中的<code>zookeeper.connect</code> zookeeper的路径</li>
-<li>书中的例子没有指定配置文件。但是在后面验证的时候，发现了出现了这个错误<code>Error while executing topic command : Replication factor: 1 larger than available brokers: 0.</code>. <a href="https://stackoverflow.com/questions/33098366/error-creating-kafka-topics-replication-factor-larger-than-available-brokers" title="stackoverflow-vaquar khan" target="_blank" rel="noopener">参考了资料</a>。发觉要指定可能版本升级了吧。</li>
-</ul>
-<h2 id="验证">验证</h2>
-<h3 id="producer">producer</h3>
-<p><code>bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test</code> 就是发消息。</p>
-<h3 id="comsumer">comsumer</h3>
-<p><code>bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning</code></p>
-<ul>
-<li>书中的<code>--zookeeper localhost:2181</code> 换成了 <code>--bootstrap-server localhost:9092</code>。版本更新。参数变化。其实也可以看到主体从zookeeper换成了kafka,<a href="https://stackoverflow.com/questions/53428903/zookeeper-is-not-a-recognized-option-when-executing-kafka-console-consumer-sh" title="stackoverflow-孙兴斌" target="_blank" rel="noopener">讨论</a></li>
-</ul>
-<h2 id="docker">Docker</h2>
-<p>研究了一下，发觉好像kafka没有官方的image。都是个人写的。倒是zookeeper有一个官方的。</p>
-<ul>
-<li><a href="https://hub.docker.com/_/zookeeper" target="_blank" rel="noopener">zookeepeer官方的image</a></li>
-<li><a href="https://hub.docker.com/r/wurstmeister/kafka" target="_blank" rel="noopener">wurstmeister制作的image</a>
-<ul>
-<li><code>message.max.bytes</code> parameter set the environment to <code>KAFKA_MESSAGE_MAX_BYTES</code>: 我也不太清楚这种变换到底是kalka，还是docker自己弄得。</li>
-</ul></li>
-<li><a href="https://github.com/chandlersong/ENV/tree/master/kafka" target="_blank" rel="noopener">创建的一个的kafka的环境</a>
-<ul>
-<li><code>server.properties</code> 重要加入以下两句,<a href="https://stackoverflow.com/questions/54443640/kafka-consumer-no-entry-found-for-connection" target="_blank" rel="noopener">No entry found for connection excpetion-stackover</a> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">listeners=PLAINTEXT://kafka:9092</span><br><span class="line">advertised.listeners=PLAINTEXT://kafka:9092</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>刚学，所以对这些具体原因不是太清楚，但是因为环境搭载在docker上，而docker搭载在虚拟机上，我主机去连的时候，就报<code>No entry found for connection</code>和连不上的两个错。搞了很久。最后登上contianer之后，运行了验证就好了。 我还在宿主机的host文件，加入了一下一点 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VM_IP kafka</span><br></pre></td></tr></table></figure></p>
-猜测主要问题可能在以下几点
-<ol type="1">
-<li>leader的选举。</li>
-<li>没有完全起来,可能开始在选举，所以broker起来了。但是不能工作。</li>
-</ol></li>
-</ul>
-
-          
+          <p>如何搭建一个kafka最简单的环境，并且提供了一个docker-compose的脚本
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/04/kafka最简搭建/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2296,7 +2265,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2331,7 +2302,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
