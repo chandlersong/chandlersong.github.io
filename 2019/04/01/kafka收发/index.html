@@ -112,25 +112,25 @@
 
 
 
-  <meta name="description" content="kafka的基础配置。主要是从《kafka权威指南》的笔记">
+  <meta name="description" content="如何搭建一个kafka如何收发消息">
 <meta name="keywords" content="MQ,kafka">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kafka 配置">
-<meta property="og:url" content="https://chandlersong.github.io/2019/03/08/kafka-配置/index.html">
+<meta property="og:title" content="kafka收发">
+<meta property="og:url" content="https://chandlersong.github.io/2019/04/01/kafka收发/index.html">
 <meta property="og:site_name" content="cs blog">
-<meta property="og:description" content="kafka的基础配置。主要是从《kafka权威指南》的笔记">
+<meta property="og:description" content="如何搭建一个kafka如何收发消息">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-08T12:52:26.633Z">
+<meta property="og:updated_time" content="2019-04-01T12:42:32.838Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="kafka 配置">
-<meta name="twitter:description" content="kafka的基础配置。主要是从《kafka权威指南》的笔记">
+<meta name="twitter:title" content="kafka收发">
+<meta name="twitter:description" content="如何搭建一个kafka如何收发消息">
 
 
 
 
 
 
-  <link rel="canonical" href="https://chandlersong.github.io/2019/03/08/kafka-配置/"/>
+  <link rel="canonical" href="https://chandlersong.github.io/2019/04/01/kafka收发/"/>
 
 
 
@@ -140,7 +140,7 @@
   };
 </script>
 
-  <title>kafka 配置 | cs blog</title>
+  <title>kafka收发 | cs blog</title>
   
 
 
@@ -318,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chandlersong.github.io/2019/03/08/kafka-配置/">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.github.io/2019/04/01/kafka收发/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chandler song">
@@ -335,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">kafka 配置
+          <h1 class="post-title" itemprop="name headline">kafka收发
               
             
           </h1>
@@ -360,7 +360,7 @@
                 
               
 
-              <time title="创建时间：2019-03-08 20:51:04 / 修改时间：20:52:26" itemprop="dateCreated datePublished" datetime="2019-03-08T20:51:04+08:00">2019-03-08</time>
+              <time title="创建时间：2019-04-01 20:40:46 / 修改时间：20:42:32" itemprop="dateCreated datePublished" datetime="2019-04-01T20:40:46+08:00">2019-04-01</time>
             
 
             
@@ -397,8 +397,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/08/kafka-配置/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/03/08/kafka-配置/" itemprop="commentCount"></span>
+                <a href="/2019/04/01/kafka收发/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/04/01/kafka收发/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -426,70 +426,144 @@
       
 
       
-        <p>kafka的基础配置。主要是从《kafka权威指南》的笔记 <a id="more"></a></p>
-<h1 id="思维导图">思维导图</h1>
-<p><a href="http://naotu.baidu.com/file/25a14ed1f3050e7f3fcc42a70c410275?token=c74473d15f793ec3" target="_blank" rel="noopener">思维导图</a></p>
-<h1 id="常规配置">常规配置</h1>
+        <p>如何搭建一个kafka如何收发消息 <a id="more"></a> # Kafka收发 <a href="http://naotu.baidu.com/file/8a9d22f1fff2bd764c4eca406a5d4856?token=a52048a2811c7a4d" target="_blank" rel="noopener">思维导图</a></p>
+<h2 id="producer">producer</h2>
 <ol type="1">
-<li>broker.id: 集群唯一</li>
-<li>port： 端口</li>
-<li>zookeeper.connect: zookeeper地址</li>
+<li>只保证一个分区里面是有序的。但是是以服务器收到为标准。而不是客户端发送为标准。如果需要，则要配置<code>max.in.flight.requests.per.connection</code></li>
 </ol>
-<ul>
-<li>格式是 hostname:port/path</li>
-<li>多组用分号隔开</li>
-</ul>
-<ol start="4" type="1">
-<li>log.dirs: 消息的磁盘位置。后面可以看到，消息基本都是以log。</li>
-</ol>
-<ul>
-<li>多组可以用逗号隔开。</li>
-</ul>
-<ol start="5" type="1">
-<li>num.recovery.thread.per.data.dir:可以理解为启动的那一次的并发线程数。可以大一点，因为防止重启。左后用的数据个数，是这个数值乘以目录树。以下为几个时间点。
-<ul>
-<li>正常启动， 用于打开每个分区的日志片段</li>
-<li>奔溃重启后，检查和截短每个分区</li>
-<li>关闭时候，关闭日志片段。</li>
-</ul></li>
-<li>auto.create.topic.enable:自动创建主题。可能有以下几个时间点。
-<ul>
-<li>当一个生产者开始写时候。</li>
-<li>当一个消费者开始读取时候</li>
-<li>客户端向主题发送元数据请求时。</li>
-</ul></li>
-</ol>
-<h1 id="主题默认配置">主题默认配置</h1>
+<h3 id="参数">参数</h3>
+<!--Note-->
+<h4 id="必选属性">必选属性</h4>
 <ol type="1">
-<li>num.partitions: 新主题包含多少分区。
-<ul>
-<li>分区可以张家，不能减少</li>
-</ul></li>
-<li><p>log.retention.ms/log.retention.hours/log.retention.minutes: 主题保留的时间。如果有多个被设置。那么具体数值最小的参数。</p></li>
-<li><p>log.retention.bytes: 分区保存的最大字节数。主题就是所有分区的和。</p></li>
-<li>log.segment.bytes: 这里是日志片段。不是太清楚，感觉像是borker上物理的文件大小。
-<ul>
-<li>如果消息到borker上，就被写入segment</li>
-<li>segment满了，就停止写入。等待过期之后释放。</li>
-</ul></li>
-<li><p>log。segment.ms: 多久被关闭。</p></li>
-<li><p>message.max。bytes：消息的大小限制</p></li>
+<li>bootstrap.servers</li>
+<li>key.serializer</li>
+<li>value.serializer</li>
 </ol>
-<h2 id="总结">总结</h2>
-<ul>
-<li>segment关闭，只是不再写入？</li>
-<li>当有几个配置。比如<code>log。segment.ms</code>和<code>log.segment.byte</code>同时配置，则是看先触发哪一个。</li>
-</ul>
-<h1 id="硬件">硬件</h1>
+<h4 id="常用">常用</h4>
 <ol type="1">
-<li>磁盘影响生产者，内存影响消费者</li>
-<li>AWS。建议用M4和r3。
+<li>acks: 制定了必须多少分区副本收到消息，生产者才会认为消息是成功的。</li>
+<li>buffer.memory: 缓冲区大小</li>
+<li>compression.type: 压缩方式</li>
+<li>retries：重试次数。每次间隔为100ms。
 <ul>
-<li>M4允许较长的保留数据</li>
-<li>R3有较高的吞吐量</li>
-<li>对于AWS不是太熟，貌似现在这些都升级了。</li>
+<li>retry.backoff.ms: 重试中间的间隔。</li>
 </ul></li>
-<li>java GC: 其实具体配置可能比较考验水平。但是作者说，kafka内存使用率非常高。容易产生对象，需要早点启动。</li>
+<li>批次:其实我对于批次的理解还是不太深入。
+<ol type="1">
+<li>batch.size: 批次的大小
+<ul>
+<li>书上说，不会有延时，只是和内存大小有关。</li>
+<li>太频繁不太好。</li>
+</ul></li>
+<li>linger.ms: 生产者在发送批次钱，等待更多消息加入批次的时间。</li>
+</ol></li>
+<li><p>client.id： 消息来源</p></li>
+<li><p>max.in.flight.requests.per.connection: 生产者在收到服务器之前可以发送多少消息。设为1，就表示肯定是顺序。比如如果设为2. A，B，C三个消息。那么C会等到A，B回执的时候再发。但是B不会。当A失败的时候，B就会到A之前。</p></li>
+<li>timeout:
+<ul>
+<li>timeout.ms: broker等待副本相应的时间。</li>
+<li>request.timeout.ms: 等待服务器相应的时间</li>
+<li>metadata.fetch.timeout.ms： 获取源数据的相应时间。</li>
+</ul></li>
+<li><p>max.block.ms: 使用partiionFor()方法获取元数据时生产者的阻塞时间。</p></li>
+<li><p>max.request.size: request的大小</p></li>
+<li><p>receive.buffer。bytes和 send.buffer.bytes:Tcp socket缓冲区的大小。 <!--/Note--></p></li>
+</ol>
+<h3 id="发送方式">发送方式</h3>
+<ol type="1">
+<li>fire-and-forget</li>
+<li>同步发送</li>
+<li>异步发送</li>
+</ol>
+<p>其实第一第二种感觉差别不大。就是检查不检查消息返回对象的区别。</p>
+<h1 id="spring-boot">spring boot</h1>
+<ol type="1">
+<li><p>书上说是返回的偏移量。但是我自己用spring boot的template。发觉没有。可能是spring boot的封装中去掉了吧。</p></li>
+<li>发送错误有两种。
+<ul>
+<li>可重试：例如无主，或者网络。我用spring模拟了可重试的，会反复重试，<strong>retries来配制</strong>，</li>
+<li>不可重试：例如太大。</li>
+</ul></li>
+<li><p>spring boot的异步就是在返回值里面加入CallBack。然后发觉这个Callback好像是创建了一个守护线程。因为我在test里面停掉之后，发觉他还是在运行。</p></li>
+</ol>
+<h2 id="serializer">Serializer</h2>
+<!--Note-->
+<h3 id="推荐的是">推荐的是</h3>
+<ol type="1">
+<li>Avro：推荐用这个。</li>
+<li>Thrift</li>
+<li>protobuf</li>
+</ol>
+<h3 id="spring-boot-1">spring boot</h3>
+<ul>
+<li>感觉spring的集成推荐用json配置</li>
+<li>配置看了一下，基本算是比较常规的配置。不过key，value是分开的。</li>
+</ul>
+<!--/Note-->
+<h2 id="partition">Partition</h2>
+<p>在发送的时候，发送的关键还是在于 key。key用来决定最后会进入那个partition。默认用来<strong>额轮询（Round Robin）</strong>来进行分区。可以进行自定义。</p>
+<p>key的作用 1. 消息的附加消息 2. 消息的主题。</p>
+<p>? 这里的key不是唯一标识。而是决定小心的唯一标识 ？ 看了一下文档，里面有一些topic</p>
+<h2 id="consumer">Consumer</h2>
+<ol type="1">
+<li>kafka中的consumer都从属于群组。每个群有一个群主</li>
+<li>一个topic有几个partition。一个群组中的consumer会按照规则分配支配某个partition。对这个partiton在这个群组中有所有权。</li>
+<li>消费的健康状态是消费者端来维护的。具体来说，像群组协调器的broker（不同群组不同的）发送心跳。</li>
+<li>consumer通过向群组协调器发送一个joinGroup请求开始，而群主，他通过<code>partitionAssignor</code>这个接口来分配。</li>
+</ol>
+<h1 id="再均衡">再均衡</h1>
+<p>分区的所有权，从一个消费者转移到另一个消费者。</p>
+<ol type="1">
+<li>在均衡的时候，消费者是无法读取消息的。</li>
+<li>消费者一段时间内不发送心跳。群组就认定它死亡，发生触发一次再均衡。通过<code>max.poll.interval.ms</code>来配置。</li>
+</ol>
+<h1 id="轮询">轮询</h1>
+<p>轮询是consumer api的核心。本质在那里更新offset。</p>
+<ol type="1">
+<li>poll()方法会返回一些源信息。</li>
+</ol>
+<h1 id="在均衡监听器">在均衡监听器</h1>
+<ol type="1">
+<li>ConsumerRebalanceListner</li>
+</ol>
+<h1 id="特定偏移量开始">特定偏移量开始</h1>
+<p>Comsumer接口中的 1. seekToBeginning 2. seekToEnd</p>
+<h1 id="退出">退出</h1>
+<p>Comsumer的warkup。唯一一个可以从其他线程调用的方法</p>
+<h1 id="序列化和反序列化">序列化和反序列化</h1>
+<p>和producer相同</p>
+<h1 id="手动制定分区">手动制定分区</h1>
+<p>通过<code>comsumer.partitonFor(&quot;topic&quot;)</code>来获取分区。然后<code>assign</code>来好的分区。但是这样就不会获得分区信息，再均衡等<strong>不会</strong>发生收到通知。</p>
+<h3 id="配置">配置</h3>
+<!--Note-->
+<h4 id="fetch">fetch</h4>
+<ol type="1">
+<li>fetch.min.bytes</li>
+<li>fetch.max.wait.ms</li>
+<li>max.partition.fetch.bytes:每个分区里返回给消费者的最大字节数。必须大于broker能够接受的最大字节数(max.message.size).否则会无法获取消息。</li>
+</ol>
+<h4 id="心跳">心跳</h4>
+<ol type="1">
+<li>session.timeout.ms: 默认为3s。而且<code>heartbeat.interval.ms</code>必须必<code>session.timeout.ms</code>小。一般为3分之一。</li>
+</ol>
+<h4 id="其他">其他</h4>
+<ol type="1">
+<li>auto.offset.reset： latest or earliest</li>
+<li>enabled.auto.commit: 自动提交。如果为true。和<code>auto.commit.interval.ms</code>控制提交频率。</li>
+<li>partition.assignment.strategy: 分配策略。两个默认的<code>Range</code>和<code>RoundRobin</code></li>
+<li>clinet.id</li>
+<li>max.poll.records: 控制单词调用返回的记录量</li>
+<li>receive.buffer.bytes和send.buffer.bytes: 缓冲区大小</li>
+</ol>
+<!--/Note-->
+<h3 id="提交和偏移量">提交和偏移量</h3>
+<ol type="1">
+<li>提交偏移量，其实是往<code>_consumer_offset</code>的特殊主题发送消息。</li>
+<li>提交有自动提交和手动提交。
+<ul>
+<li>自动提交：通过配置</li>
+<li>手动分为同步和异步。</li>
+</ul></li>
 </ol>
 
       
@@ -550,8 +624,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/04/kafka搭建最简环境/" rel="next" title="kafka搭建最简环境">
-                <i class="fa fa-chevron-left"></i> kafka搭建最简环境
+              <a href="/2019/03/08/kafka-配置/" rel="next" title="kafka 配置">
+                <i class="fa fa-chevron-left"></i> kafka 配置
               </a>
             
           </div>
@@ -559,10 +633,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/01/kafka收发/" rel="prev" title="kafka收发">
-                kafka收发 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -752,7 +822,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#思维导图"><span class="nav-text">思维导图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常规配置"><span class="nav-text">常规配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#主题默认配置"><span class="nav-text">主题默认配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#硬件"><span class="nav-text">硬件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#producer"><span class="nav-text">producer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数"><span class="nav-text">参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#必选属性"><span class="nav-text">必选属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用"><span class="nav-text">常用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发送方式"><span class="nav-text">发送方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#spring-boot"><span class="nav-text">spring boot</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#serializer"><span class="nav-text">Serializer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#推荐的是"><span class="nav-text">推荐的是</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spring-boot-1"><span class="nav-text">spring boot</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#partition"><span class="nav-text">Partition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#consumer"><span class="nav-text">Consumer</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#再均衡"><span class="nav-text">再均衡</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#轮询"><span class="nav-text">轮询</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在均衡监听器"><span class="nav-text">在均衡监听器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#特定偏移量开始"><span class="nav-text">特定偏移量开始</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#退出"><span class="nav-text">退出</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#序列化和反序列化"><span class="nav-text">序列化和反序列化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#手动制定分区"><span class="nav-text">手动制定分区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#fetch"><span class="nav-text">fetch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#心跳"><span class="nav-text">心跳</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他"><span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提交和偏移量"><span class="nav-text">提交和偏移量</span></a></li></ol></li></ol></div>
             
 
           </div>
