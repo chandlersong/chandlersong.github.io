@@ -112,25 +112,25 @@
 
 
 
-  <meta name="description" content="Mockito中的获取mock方法的调用参数 python多个@patch Docker的Container和宿主机同步时区">
-<meta name="keywords" content="java,python,docker">
+  <meta name="description" content="《kafka权威指南》第五章笔记">
+<meta name="keywords" content="MQ,kafka">
 <meta property="og:type" content="article">
-<meta property="og:title" content="拾遗集2018-2">
-<meta property="og:url" content="https://chandlersong.github.io/2018/07/16/拾遗集2018-2/index.html">
+<meta property="og:title" content="kafka broker细节">
+<meta property="og:url" content="https://chandlersong.github.io/2019/04/13/kafka-broker细节/index.html">
 <meta property="og:site_name" content="cs blog">
-<meta property="og:description" content="Mockito中的获取mock方法的调用参数 python多个@patch Docker的Container和宿主机同步时区">
+<meta property="og:description" content="《kafka权威指南》第五章笔记">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-04T14:25:57.000Z">
+<meta property="og:updated_time" content="2019-04-13T06:24:15.629Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="拾遗集2018-2">
-<meta name="twitter:description" content="Mockito中的获取mock方法的调用参数 python多个@patch Docker的Container和宿主机同步时区">
+<meta name="twitter:title" content="kafka broker细节">
+<meta name="twitter:description" content="《kafka权威指南》第五章笔记">
 
 
 
 
 
 
-  <link rel="canonical" href="https://chandlersong.github.io/2018/07/16/拾遗集2018-2/"/>
+  <link rel="canonical" href="https://chandlersong.github.io/2019/04/13/kafka-broker细节/"/>
 
 
 
@@ -140,7 +140,7 @@
   };
 </script>
 
-  <title>拾遗集2018-2 | cs blog</title>
+  <title>kafka broker细节 | cs blog</title>
   
 
 
@@ -318,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chandlersong.github.io/2018/07/16/拾遗集2018-2/">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.github.io/2019/04/13/kafka-broker细节/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chandler song">
@@ -335,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">拾遗集2018-2
+          <h1 class="post-title" itemprop="name headline">kafka broker细节
               
             
           </h1>
@@ -360,24 +360,12 @@
                 
               
 
-              <time title="创建时间：2018-07-16 21:23:52" itemprop="dateCreated datePublished" datetime="2018-07-16T21:23:52+08:00">2018-07-16</time>
+              <time title="创建时间：2019-04-13 14:23:22 / 修改时间：14:24:15" itemprop="dateCreated datePublished" datetime="2019-04-13T14:23:22+08:00">2019-04-13</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-04 22:25:57" itemprop="dateModified" datetime="2018-08-04T22:25:57+08:00">2018-08-04</time>
               
             
           </span>
@@ -394,7 +382,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/拾遗/" itemprop="url" rel="index"><span itemprop="name">拾遗</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/中间件/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a></span>
 
                 
                 
@@ -409,8 +397,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/07/16/拾遗集2018-2/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/16/拾遗集2018-2/" itemprop="commentCount"></span>
+                <a href="/2019/04/13/kafka-broker细节/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/04/13/kafka-broker细节/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -438,51 +426,106 @@
       
 
       
-        <ul>
-<li>Mockito中的获取mock方法的调用参数</li>
-<li>python多个@patch</li>
-<li>Docker的Container和宿主机同步时区</li>
+        <p>《kafka权威指南》第五章笔记 <a id="more"></a></p>
+<h1 id="broker">Broker</h1>
+<ul>
+<li>一个集群中，Controller(broker首领)只能有一个。</li>
+<li>建议用group来区分机架</li>
 </ul>
-<a id="more"></a>
-<h1 id="mockito中的获取mock方法的调用参数">Mockito中的获取mock方法的调用参数</h1>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ArgumentCaptor&lt;Person&gt; peopleCaptor = ArgumentCaptor.forClass(Person.class);</span><br><span class="line">verify(mock, times(<span class="number">2</span>)).doSomething(peopleCaptor.capture());</span><br><span class="line"></span><br><span class="line">List&lt;Person&gt; capturedPeople = peopleCaptor.getAllValues();</span><br><span class="line">assertEquals(<span class="string">"John"</span>, capturedPeople.get(<span class="number">0</span>).getName());</span><br><span class="line">assertEquals(<span class="string">"Jane"</span>, capturedPeople.get(<span class="number">1</span>).getName());</span><br></pre></td></tr></table></figure>
-<ol type="1">
-<li>建立<strong>ArgumentCaptor</strong>对象</li>
-<li>在verify的时候调用，就是例子中的<code>$verify(mock, times(2)).doSomething(peopleCaptor.capture());$</code>，<code>$doSomething$</code>是其中的方法。</li>
-</ol>
-<p><a href="https://stackoverflow.com/questions/5981605/can-mockito-capture-arguments-of-a-method-called-multiple-times" target="_blank" rel="noopener">stackoverflow–proactif</a></p>
-<h1 id="python多个patch">python多个@patch</h1>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@patch("urllib.request.urlopen")</span></span><br><span class="line"><span class="meta">@patch("pandas.read_csv")</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_hello_world</span><span class="params">(self, pandas_read_csv,request_urlopen)</span>:</span></span><br></pre></td></tr></table></figure>
-<p>关键在于，注入到方法的时候，<strong>顺序要倒着</strong>。</p>
-<h1 id="docker的container和宿主机同步时区">Docker的Container和宿主机同步时区</h1>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -t -i -p 8080:8080 -p 8090:8090 -v /etc/localtime:/etc/localtime:ro tomcat:7.0.69-jre8 /bin/bash</span><br></pre></td></tr></table></figure>
-<p>核心是 <strong>-v /etc/localtime:/etc/localtime</strong><br>
-其实还可以同步/etc/timezone,但是实际操作中，这个要访问权限，貌似不是默认开的</p>
-<p>==用java的话，timezone获得的时区出错==。<a href="https://stackoverflow.com/questions/41770464/openjdk-1-8-0-in-docker-container-has-different-timezone-than-etc-timezone-and" target="_blank" rel="noopener">timezone问题分析</a></p>
-<p>但是发觉文中的方法太繁琐。最后觉得还是</p>
-<h2 id="设置环境变量tz">设置环境变量TZ</h2>
-<p>从结果上来看，这个有点玄学。我用<code>exec /bin/bash</code>强行登陆上去，用date命令发现准确，但是我java程序，则是一直取的逝去不对。我host的CST，但是java取的是UTC。</p>
-<h2 id="通过volumne">通过Volumne</h2>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">volumnes：</span></span><br><span class="line"><span class="bullet">   -</span> <span class="string">/etc/localtime:/etc/localtime：ro</span></span><br><span class="line"><span class="bullet">   -</span> <span class="string">/etc/timezone:/etc/timezone：ro</span></span><br></pre></td></tr></table></figure>
-<p>我觉得这个方法，可能对<strong>OS的发行</strong>版比较依赖。因为我的测试环境是CentOS。发觉无效。但是网上说这个方法可行。<br>
-就个人来说，觉得这个方法比较有美感。</p>
-<p><a href="https://serverfault.com/questions/683605/docker-container-time-timezone-will-not-reflect-changes" target="_blank" rel="noopener">stackoverflow-thhan说可行</a></p>
-<h2 id="命令行改">命令行改</h2>
-<h3 id="ubuntu">ubuntu</h3>
-<figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"Asia/Shanghai"</span> &gt; /etc/timezone</span></span><br><span class="line"><span class="bash">RUN dpkg-reconfigure -f noninteractive tzdata</span></span><br></pre></td></tr></table></figure>
-<p>核心代码是这两句，由于没环境，所以也没有试过<br>
-<a href="https://tommy.net.cn/2015/02/05/config-timezone-in-docker/" target="_blank" rel="noopener">具体可以参考Tommy Lau</a></p>
-<h3 id="centos7">CentOS7</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timedatectl <span class="built_in">set</span>-timezone Aisa/shanghai</span><br></pre></td></tr></table></figure>
-<p>但是在Docker中会报一个错<code>Failed to create bus connection: No such file or directory</code>。网上查了一下资料，发觉有权限问题，下面提供了解决方案。<br>
-<a href="https://www.cyberciti.biz/faq/centos-linux-6-7-changing-timezone-command-line/" target="_blank" rel="noopener">具体说明</a><br>
-<a href="https://stackoverflow.com/questions/43907925/ubuntu-timedatectl-fails-in-docker-container" target="_blank" rel="noopener">stackoverflow-srlm</a></p>
-<h2 id="修改连接">修改连接</h2>
-<p>可能这个方案，只是适用于CentOS7。因为我是在试了上面方法无效的时候，才想到用这个方案的。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /etc/localtime</span><br></pre></td></tr></table></figure>
-<p>你会看到<code>/etc/localtime</code>指向的是<code>/usr/share/zoneinfo</code>下面的文件。然后下面是具体时区。基于这个思路。我就是通过代码强行的建立一个相关的连接。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm /etc/localtime</span><br><span class="line">ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
-<p>后来发觉这个方法，是<a href="https://www.cyberciti.biz/faq/centos-linux-6-7-changing-timezone-command-line/" target="_blank" rel="noopener">具体说明</a>对centOS6方法。但是实际发现对CentoS7也有效</p>
+<h2 id="id">id</h2>
+<ul>
+<li>注册方式为<strong>临时节点</strong>。</li>
+<li>路径为<code>/brokers/ids</code><br>
+</li>
+<li>同一时间，只能有一个id被注册，但是如果这个id下线，相同id的broker启动，会马上<strong>顶替</strong>旧的broker(拥有相同的分区和主题)</li>
+</ul>
+<h1 id="控制器controller">控制器(Controller)</h1>
+<p>Controller是一个分则分区选举的broker,在路径<code>/controller</code>里面注临时节点表示自己是。<br>
+其他broker会watch这个节点。这样就可以在节点消失后，自动去获得。<br>
+通过<strong>broker id</strong>来检查这个broker是否包含现有分区的副本。</p>
+<h1 id="复制">复制</h1>
+<ul>
+<li>一个topic下面可以有多个分区。每个分区可能在不同的broker上有备份
+<ul>
+<li>只有一个分区是主分区。其他分区都是这些分区的备份 leader和Replica</li>
+<li>controller会在broker中，均匀分配leader partiion。</li>
+</ul></li>
+</ul>
+<h1 id="这里的同步机制">这里的同步机制</h1>
+<p>replica给leader发送请求，而leader通过replica发送的请求来确定是否同步。因为请求时有序的。 举个最简单的例子来说：<br>
+replica-A 发送两个请求A,和B。leader返回两个response。只有在replica-A<strong>接受</strong>A和B之后，<strong>才</strong>会发C。如果leader收不到request C。就表示replica肯定是不同步的了。</p>
+<ul>
+<li>replica.lag.time.max.ms: 上文的周期</li>
+<li>acks：consomer的配置。表示多少个副本收到消息后，才算成功。这是一个performance和intergrate的平衡。</li>
+</ul>
+<h2 id="leader">leader</h2>
+<ul>
+<li>搞清楚哪一个replica和自己是同步的。</li>
+</ul>
+<h2 id="replica">replica</h2>
+<ul>
+<li>replica<strong>不处理</strong>客户端请求，只是用来备份</li>
+</ul>
+<h2 id="请求">请求</h2>
+<p>请求时基于TCP的。且请求头包含的信息是 - Request type - Request version - Correlation ID： 一个具有唯一性的数字，用于标识请求的消息 - Client ID：客户端ID</p>
+<p>书中的图5-1为请求的内部流程，大概就是两个队列，<strong>请求队列和响应队列</strong></p>
+<h3 id="元数据请求">元数据请求：</h3>
+<p>客户端来获取关于topic和partition的信息 配置项 - metadata.max.age.ms来设置这些信息的刷新频率。</p>
+<h3 id="生产请求">生产请求</h3>
+<ul>
+<li>acks： 写入时，同步到几个分区。
+<ul>
+<li>all：全部</li>
+<li>0： 管发不管埋</li>
+</ul></li>
+</ul>
+<p>Linux系统上，消息会被写到文件系统的缓存里。并不保证它们合适刷新到磁盘上。通过复制功能来保证消息的持久性。</p>
+<h3 id="获取请求">获取请求：</h3>
+<ul>
+<li>零复制。直接从文件(linux文件系统缓冲)发送给网络。不会进缓存</li>
+<li>大部分客户端只能读取已经被写入所有同步副本的消息
+<ul>
+<li>如果请求，返回为空，而不是错误</li>
+</ul></li>
+<li>broker之间消息复制变慢，那么消费者的消费时间也就会变长。</li>
+</ul>
+<h3 id="其他请求">其他请求</h3>
+<ul>
+<li>ApiVersionRequest: 查询新的 因为偏移量现在也是一个topic。所以增加了以下几种request</li>
+<li>OffsetCommitRequest</li>
+<li>offsetFetchRequest</li>
+<li>ListOffsetRequest 选举相关</li>
+<li>LeaderAndIsr：contorl发给新首领</li>
+</ul>
+<h2 id="物理存储">物理存储</h2>
+<ul>
+<li>partition是最基本的存储单元。其受到物理磁盘限制
+<ul>
+<li>分区分为干segment(片段),不过这个是物理的。当前写入数据的叫做活跃片段，永远不会被删除</li>
+</ul></li>
+<li>log.dirs来确定存在哪里。</li>
+<li>消息和offset都保存在文件里。还有源信息，比如大小，校验，版本，压缩算法，时间戳(0.10.0版本引入)</li>
+</ul>
+<h3 id="index">index</h3>
+<ul>
+<li>每个parttition维护一个索引</li>
+<li>Kafka不维护index。如果损坏，会重新读取索引</li>
+</ul>
+<h3 id="清理">清理</h3>
+<p>简单的说，就是清除相同的key值的数据，保存最新的版本</p>
+<ul>
+<li><code>log.cleaner.enabled</code>来启用</li>
+<li>污浊： 没有被clean过得</li>
+<li>干净部分： 被清理过的 流程：</li>
+<li>创建一个map，并且把污浊的部分的消息键的散列值和消息的偏移量</li>
+<li>创建替换段</li>
+<li>扫描干净的部分。
+<ul>
+<li>map中不存在，表示没有新消息，则是会复制到替换segment上</li>
+<li>不存在，这届忽略</li>
+</ul></li>
+</ul>
+<p>删除，就是发一个墓碑消息(保留值为null)</p>
 
       
     </div>
@@ -527,11 +570,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java/" rel="tag"># java</a>
+            <a href="/tags/MQ/" rel="tag"># MQ</a>
           
-            <a href="/tags/python/" rel="tag"># python</a>
-          
-            <a href="/tags/docker/" rel="tag"># docker</a>
+            <a href="/tags/kafka/" rel="tag"># kafka</a>
           
         </div>
       
@@ -544,8 +585,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/16/数学-函数/" rel="next" title="数学-函数">
-                <i class="fa fa-chevron-left"></i> 数学-函数
+              <a href="/2019/04/01/kafka收发/" rel="next" title="kafka收发">
+                <i class="fa fa-chevron-left"></i> kafka收发
               </a>
             
           </div>
@@ -553,10 +594,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/08/Eureka基础概念/" rel="prev" title="Eureka基础概念">
-                Eureka基础概念 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -746,7 +783,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mockito中的获取mock方法的调用参数"><span class="nav-text">Mockito中的获取mock方法的调用参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python多个patch"><span class="nav-text">python多个@patch</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker的container和宿主机同步时区"><span class="nav-text">Docker的Container和宿主机同步时区</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置环境变量tz"><span class="nav-text">设置环境变量TZ</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过volumne"><span class="nav-text">通过Volumne</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行改"><span class="nav-text">命令行改</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ubuntu"><span class="nav-text">ubuntu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#centos7"><span class="nav-text">CentOS7</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改连接"><span class="nav-text">修改连接</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#broker"><span class="nav-text">Broker</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#id"><span class="nav-text">id</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制器controller"><span class="nav-text">控制器(Controller)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复制"><span class="nav-text">复制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#这里的同步机制"><span class="nav-text">这里的同步机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#leader"><span class="nav-text">leader</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#replica"><span class="nav-text">replica</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#请求"><span class="nav-text">请求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#元数据请求"><span class="nav-text">元数据请求：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生产请求"><span class="nav-text">生产请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取请求"><span class="nav-text">获取请求：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他请求"><span class="nav-text">其他请求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#物理存储"><span class="nav-text">物理存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#index"><span class="nav-text">index</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#清理"><span class="nav-text">清理</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
