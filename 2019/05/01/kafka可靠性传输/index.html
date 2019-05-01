@@ -112,24 +112,25 @@
 
 
 
-  <meta name="description" content="share my technique experience">
-<meta name="keywords" content="java">
-<meta property="og:type" content="website">
-<meta property="og:title" content="cs blog">
-<meta property="og:url" content="https://chandlersong.me/categories/中间件/index.html">
+  <meta name="description" content="主要是从《kafka权威指南》的第六章笔记整理">
+<meta name="keywords" content="MQ,kafka">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kafka可靠性传输">
+<meta property="og:url" content="https://chandlersong.me/2019/05/01/kafka可靠性传输/index.html">
 <meta property="og:site_name" content="cs blog">
-<meta property="og:description" content="share my technique experience">
+<meta property="og:description" content="主要是从《kafka权威指南》的第六章笔记整理">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-01T12:28:09.345Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cs blog">
-<meta name="twitter:description" content="share my technique experience">
+<meta name="twitter:title" content="kafka可靠性传输">
+<meta name="twitter:description" content="主要是从《kafka权威指南》的第六章笔记整理">
 
 
 
 
 
 
-  <link rel="canonical" href="https://chandlersong.me/categories/中间件/"/>
+  <link rel="canonical" href="https://chandlersong.me/2019/05/01/kafka可靠性传输/"/>
 
 
 
@@ -139,7 +140,7 @@
   };
 </script>
 
-  <title>分类: 中间件 | cs blog</title>
+  <title>kafka可靠性传输 | cs blog</title>
   
 
 
@@ -195,7 +196,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -256,7 +257,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
   </li>
@@ -297,197 +298,312 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>中间件<small>分类</small>
-        </h1>
-      </div>
-
-      
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2019/05/01/kafka可靠性传输/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chandler song">
+      <meta itemprop="description" content="share my technique experience">
+      <meta itemprop="image" content="/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cs blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/05/01/kafka可靠性传输/" itemprop="url">
-              
-                <span itemprop="name">kafka可靠性传输</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">kafka可靠性传输
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-05-01T20:26:14+08:00"
-              content="2019-05-01" >
-          05-01
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-01 20:26:14 / 修改时间：20:28:09" itemprop="dateCreated datePublished" datetime="2019-05-01T20:26:14+08:00">2019-05-01</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/中间件/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/01/kafka可靠性传输/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/05/01/kafka可靠性传输/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/13/kafka-broker细节/" itemprop="url">
-              
-                <span itemprop="name">kafka broker细节</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-04-13T14:23:22+08:00"
-              content="2019-04-13" >
-          04-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/01/kafka收发/" itemprop="url">
-              
-                <span itemprop="name">kafka收发</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-04-01T20:40:46+08:00"
-              content="2019-04-01" >
-          04-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/08/kafka-配置/" itemprop="url">
-              
-                <span itemprop="name">kafka 配置</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-08T20:51:04+08:00"
-              content="2019-03-08" >
-          03-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/04/kafka搭建最简环境/" itemprop="url">
-              
-                <span itemprop="name">kafka搭建最简环境</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-04T23:17:58+08:00"
-              content="2019-03-04" >
-          03-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <p>主要是从《kafka权威指南》的第六章笔记整理 <a id="more"></a></p>
+<h1 id="可靠性保证">可靠性保证</h1>
+<p>ACID： 原子性，一致性，隔离性和持久性</p>
+<p>kafka做了保证 - 保证分区消息是顺序的。 - 所有消息都写入所有副本(不一定写入磁盘)，才被认为“以<strong>提交</strong>” - 只要一个副本是活跃的，那么<strong>提交</strong>的消息不会丢失 - 消费者只能读<strong>提交</strong>的消息</p>
+<p>这里的关键在于已经<strong>提交</strong>。</p>
+<p>replica需要满足哪些提条件才会被认为同步 - 与zookeeper之间保持一个活跃的会话。配置周期内向zk发送心跳 - 过去10s(可配置)s从首领那里获取过消息 - 过去10s内从首领那里获得<strong>最新消息</strong>。最好零延迟。</p>
+<p>因为消息只能在被<strong>提交</strong>之后，才被消费者消费 - 一个滞后的replica会使得生产者和消费者变慢 - 更少的replica表示更快</p>
+<p>所以安全性和数据的完整是一个平衡点。</p>
+<h1 id="broker配置">broker配置</h1>
+<ul>
+<li>复制系数: 建议为3。高保证可以5，比如银行业
+<ul>
+<li>topic： replication.factor</li>
+<li>broker: default.replication.factor</li>
+<li>broker.rack: 机架。可以理解为分区，鸡蛋不要放在一个篮子里面</li>
+</ul></li>
+<li>不完全的首领选举：一个没有同步的副本能否被当成leader
+<ul>
+<li>配置项为<code>unclean.leader.election</code>,只能在broker级别。</li>
+<li>如果允许，那么<strong>unclean的副本</strong>就会被推举为leader，消息可能会丢失</li>
+<li>如果不允许，那么如果不存在unclean的副本，那么服务就不可用。</li>
+</ul></li>
+<li>最少同步副本
+<ul>
+<li><code>min.insync.replicas</code>: broker级别</li>
+<li>如果总数为2，配置数2，那么当一个分区离线时候，那么整个topic就变成只读，除非恢复。总数为3，就不会有类似问题</li>
+<li>分区不足的时候，会抛出<strong>NotEnoughReplicasEception</strong> 错误</li>
+</ul></li>
+</ul>
+<h1 id="producer可靠">producer可靠</h1>
+<p>简单的来说，只能通过<code>acks</code>这个配置项来配置。<br>
+生产者可以获得的错误，可重复和不可重复。其实在消费者端来进行判断。<br>
+<code>0.10.0</code>无法保证每个消息“只被保存一次”</p>
+<h1 id="comsumer的可靠性">Comsumer的可靠性</h1>
+<ul>
+<li>重要配置
+<ul>
+<li>group.id</li>
+<li>auto。offset.reset: earliest和latest</li>
+<li>enable.auto.commit和auto.commit.interval.ms</li>
+</ul></li>
+</ul>
+<h2 id="显示提交偏移量">显示提交偏移量</h2>
+<ul>
+<li>总在处理完事件后再提交偏移量</li>
+<li>提交频度是性能和重复消息数量之间的权衡</li>
+<li>确保对提交的便宜量心里有数</li>
+<li>再均衡</li>
+<li>消费者可能需要重试
+<ul>
+<li>消费者的<code>pause()</code>来确保轮询,但是不会接收数据</li>
+<li><code>resume()</code>重新开始消费</li>
+</ul></li>
+<li>消费者可能需要维护状态。</li>
+<li>长时间处理：不发轮询，会让broker以为你<strong>以死</strong>，可以用上面的pause</li>
+<li>仅一次传递。
+<ul>
+<li>seek()方法来确定offset</li>
+</ul></li>
+</ul>
+<h1 id="验证系统的可靠性">验证系统的可靠性</h1>
+<ul>
+<li><p>配置验证 提供了两个工具<code>org.apache.kafka.tools</code>包下面的<code>Verifiable Producer</code>和<code>VerificableConsumer</code>来做</p></li>
+<li>应用程序验证</li>
+<li>生产环境验证
+<ul>
+<li>通过JMX</li>
+<li>Producer
+<ul>
+<li>error-rate</li>
+<li>retry-rate</li>
+</ul></li>
+<li>consumer
+<ul>
+<li>consumer-lag: consumer的处理速度和最近提交到分区便宜量的差距</li>
+</ul></li>
+<li></li>
+</ul></li>
+</ul>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>赏</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/reward/weixin.jpg" alt="chandler song 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MQ/" rel="tag"># MQ</a>
+          
+            <a href="/tags/kafka/" rel="tag"># kafka</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/13/kafka-broker细节/" rel="next" title="kafka broker细节">
+                <i class="fa fa-chevron-left"></i> kafka broker细节
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -508,8 +624,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -627,6 +752,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#可靠性保证"><span class="nav-text">可靠性保证</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#broker配置"><span class="nav-text">broker配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#producer可靠"><span class="nav-text">producer可靠</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#comsumer的可靠性"><span class="nav-text">Comsumer的可靠性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#显示提交偏移量"><span class="nav-text">显示提交偏移量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#验证系统的可靠性"><span class="nav-text">验证系统的可靠性</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -761,6 +902,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
 
   
 
