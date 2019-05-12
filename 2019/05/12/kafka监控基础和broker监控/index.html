@@ -112,25 +112,25 @@
 
 
 
-  <meta name="description" content="主要是Server端的一些配置。">
-<meta name="keywords" content="Eureka,阅读笔记">
+  <meta name="description" content="kafka的基础配置。主要是从《kafka权威指南》的第十章前半部分笔记">
+<meta name="keywords" content="MQ,kafka">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Eureka Server">
-<meta property="og:url" content="https://chandlersong.me/2018/09/18/Eureka-Server/index.html">
+<meta property="og:title" content="kafka监控基础和broker监控">
+<meta property="og:url" content="https://chandlersong.me/2019/05/12/kafka监控基础和broker监控/index.html">
 <meta property="og:site_name" content="cs blog">
-<meta property="og:description" content="主要是Server端的一些配置。">
+<meta property="og:description" content="kafka的基础配置。主要是从《kafka权威指南》的第十章前半部分笔记">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-18T13:41:27.006Z">
+<meta property="og:updated_time" content="2019-05-12T14:05:19.302Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Eureka Server">
-<meta name="twitter:description" content="主要是Server端的一些配置。">
+<meta name="twitter:title" content="kafka监控基础和broker监控">
+<meta name="twitter:description" content="kafka的基础配置。主要是从《kafka权威指南》的第十章前半部分笔记">
 
 
 
 
 
 
-  <link rel="canonical" href="https://chandlersong.me/2018/09/18/Eureka-Server/"/>
+  <link rel="canonical" href="https://chandlersong.me/2019/05/12/kafka监控基础和broker监控/"/>
 
 
 
@@ -140,7 +140,7 @@
   };
 </script>
 
-  <title>Eureka Server | cs blog</title>
+  <title>kafka监控基础和broker监控 | cs blog</title>
   
 
 
@@ -318,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2018/09/18/Eureka-Server/">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2019/05/12/kafka监控基础和broker监控/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chandler song">
@@ -335,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Eureka Server
+          <h1 class="post-title" itemprop="name headline">kafka监控基础和broker监控
               
             
           </h1>
@@ -360,7 +360,7 @@
                 
               
 
-              <time title="创建时间：2018-09-18 21:41:26 / 修改时间：21:41:27" itemprop="dateCreated datePublished" datetime="2018-09-18T21:41:26+08:00">2018-09-18</time>
+              <time title="创建时间：2019-05-12 22:04:23 / 修改时间：22:05:19" itemprop="dateCreated datePublished" datetime="2019-05-12T22:04:23+08:00">2019-05-12</time>
             
 
             
@@ -382,7 +382,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spring-cloud/" itemprop="url" rel="index"><span itemprop="name">spring cloud</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/中间件/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a></span>
 
                 
                 
@@ -397,8 +397,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/09/18/Eureka-Server/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/09/18/Eureka-Server/" itemprop="commentCount"></span>
+                <a href="/2019/05/12/kafka监控基础和broker监控/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/05/12/kafka监控基础和broker监控/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -426,31 +426,318 @@
       
 
       
-        <p>主要是Server端的一些配置。</p>
-<a id="more"></a>
-<h1 id="总体">总体</h1>
-<p>Eureka Server内部内置了一个Client，通过这个Client端向着其他Server去注册。所以Client端能用的，这里基本都能用。</p>
-<h2 id="最小配置">最小配置</h2>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 18761</span><br><span class="line">logging:</span><br><span class="line">  .config: classpath:logback.xml</span><br><span class="line"></span><br><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    hostname: zone1</span><br><span class="line">  metadata-map:</span><br><span class="line">      mykey: customizedValue</span><br><span class="line">      zone: zone1</span><br><span class="line">  client:</span><br><span class="line">    serviceUrl:</span><br><span class="line">      defaultZone: http://zone2:18762/eureka/</span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: multi-eureka-server</span><br><span class="line">  jmx:</span><br><span class="line">    default-domain: simplest-eureka-server_1</span><br></pre></td></tr></table></figure>
-<p>这里唯一有点注意的就是zone怎么配。在官方文档里，对于zone几乎没有描述。查了一些文档之后，其实zone是分区的概念。可以用，也可以不用。</p>
-<p>注意点，也许在写例子的时候配了localhost会出一点问题。不清楚是显示问题，会不会有业务逻辑基于这些。</p>
-<ol type="1">
-<li>如果配了Localhost。<code>General Info-available-replicas</code>一只为空，而是在<code>unavailable-replicas</code>里面。但是注册的信息会相互沟通</li>
-</ol>
-<p>具体看<a href="https://stackoverflow.com/questions/40984999/eureka-replicas-unavailable" target="_blank" rel="noopener">stackoverflow-jebeaudet</a></p>
-<ol start="2" type="1">
-<li>要配hostname <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    hostname: zone1</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="多服务器配置">多服务器配置</h2>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    hostname: zone3</span><br><span class="line">  client:</span><br><span class="line">    serviceUrl:</span><br><span class="line">      defaultZone: http://zone1:18761/eureka/,http://zone2:18762/eureka/</span><br></pre></td></tr></table></figure>
-<ol type="1">
-<li><p>配置多个服务器，不能用yml的数组表示，必须要用逗号。感觉，配置就是把相应的Class映射到对应的yml里面。</p></li>
-<li>注册是单向的。 举个例子来说，如果A和B相互注册，C如果向A注册。那么会有以下几点。
+        <p>kafka的基础配置。主要是从《kafka权威指南》的第十章前半部分笔记 <a id="more"></a></p>
+<h1 id="监控指标基础">监控指标基础</h1>
 <ul>
-<li>注册到C的服务，会同步到A，但是注册到A的不会，同步到C，由此可一直，其实同步，是一个<strong>推得过程</strong></li>
-<li>A和B会相互为Replica。但是C不是A的replica</li>
+<li>所有指标，都可以通过JMX来监控。
+<ul>
+<li>在ZK的<code>/brokers/ids/&lt;ID&gt;</code>找到
+<ul>
+<li><code>hostname</code></li>
+<li><code>jmx_port</code></li>
+</ul></li>
+<li>插件
+<ul>
+<li>Nagios XIcheck_jmx</li>
+<li>jmxtrans</li>
+</ul></li>
+</ul></li>
+<li>简单的健康检测方式
+<ul>
+<li>来不进程来报告broker的运行状态（健康检测）</li>
+<li>在broker停止发送度量指标时，发出告警（stale度量指标）</li>
+</ul></li>
+</ul>
+<h1 id="具体指标">具体指标</h1>
+<ul>
+<li>看了10.2节开头，就是不要依赖单点故障。用kafka来做监控，那么kafka出问题怎么办？文章中介绍了优雅的办法，就是不停的备份。粗暴的办法，就是断流报警。不过粗暴的办法，简单，但是故障的时候监测故障的东西都坏了，这个就很麻烦。</li>
+</ul>
+<h2 id="非同步分区">非同步分区</h2>
+<p>文中说这个很重要。</p>
+<table>
+<thead>
+<tr class="header">
+<th>度量指标名称</th>
+<th>Under-replicated partitions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>JMX MBean</td>
+<td>kafka.server:type=ReplicationManager,name=UnderReplicate</td>
+</tr>
+<tr class="even">
+<td>值区间</td>
+<td>非负数</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>保持不变，就说明集群中的某个broker已经离线了
+<ul>
+<li>非同步分区数量等于离线broker的分区数量</li>
+<li>建议<strong>重新选举分区首领</strong></li>
+</ul></li>
+<li>分区是波动的，或者稳定，但是没有broker离线
+<ul>
+<li>性能问题</li>
+</ul></li>
+</ul>
+<h3 id="集群级别的问题">集群级别的问题</h3>
+<ol type="1">
+<li>不均衡负载
+<ul>
+<li>指标
+<ul>
+<li>分区首领数量</li>
+<li>首领分区数量</li>
+<li>主题流入/流出字节速率</li>
+<li>主题流入/流出消息速率</li>
+</ul></li>
+</ul></li>
+<li>资源过度的消耗。
+<ul>
+<li>指标
+<ul>
+<li>CPU使用</li>
+<li>网络输入吞吐量</li>
+<li>网络输出吞吐量</li>
+<li>自盘平均等待时间</li>
+<li>磁盘使用百分比</li>
+</ul></li>
 </ul></li>
 </ol>
+<h3 id="主机级别问题">主机级别问题</h3>
+<ol type="1">
+<li>硬件问题
+<ul>
+<li>磁盘读写很重要：produce的性能和他有关</li>
+</ul></li>
+<li>进程冲突</li>
+<li>本地配置不一致</li>
+</ol>
+<h2 id="broker度量的指标">broker度量的指标</h2>
+<h3 id="活跃控制器数量">活跃控制器数量</h3>
+<p>是否是当前控制器.1表示是。0不是 度量指标名称 | Active controller count —|— JMX MBean | kafka.controller:type=KafkaController,name=ActiveControllerCount 值区间 | 0或者1</p>
+<h3 id="请求处理器空闲率">请求处理器空闲率</h3>
+<p>Kafka用两个线程池来处理请求，网络处理和请求处理。后者的负载 度量指标名称 | Request handler average idle percentage —|— JMX MBean | kafka. server: type= KafkaRequestHandlerPool, name= RequestHandlerAvgIdlePercent 值区间 | 0到1的浮点数</p>
+<ul>
+<li>注意是<strong>空闲率</strong>，越低负载越高</li>
+</ul>
+<h3 id="主题流入字节数">主题流入字节数</h3>
+<ul>
+<li>单位是b/s 度量指标名称 | Bytes in per second —|— JMX MBean | kafka. server: type= BrokerTopicMetrics, name= BytesInPerSec 值区间 | double</li>
+</ul>
+<p>7个属性 - EventType：度量单位。“字节” - RateUnit： 速率时间段。这里是“秒” - OneMinuteRate - FiveMinuteRate - FifteenMinuteRate - MeanRate: 开机到现在</p>
+<h3 id="主题流出字节">主题流出字节</h3>
+<table>
+<thead>
+<tr class="header">
+<th>度量指标名称</th>
+<th>Bytes out per second</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>JMX MBean</td>
+<td>kafka. server: type= BrokerTopicMetrics, name= BytesOutPerSec</td>
+</tr>
+<tr class="even">
+<td>值区间</td>
+<td>double</td>
+</tr>
+</tbody>
+</table>
+<p>数值应该是副本流量。比如设置了2，没有消费者，两者应该是一样的。有消费者，就是两倍</p>
+<h3 id="主题流入消息">主题流入消息</h3>
+<table>
+<thead>
+<tr class="header">
+<th>度量指标名称</th>
+<th>Message in per second</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>JMX MBean</td>
+<td>kafka. server: type= BrokerTopicMetrics, name= MessagesInPerSec</td>
+</tr>
+<tr class="even">
+<td>值区间</td>
+<td>double</td>
+</tr>
+</tbody>
+</table>
+<h3 id="分区数量">分区数量</h3>
+<table>
+<thead>
+<tr class="header">
+<th>度量指标名称</th>
+<th>Partition count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>JMX MBean</td>
+<td>kafka. server: type= ReplicaManager, name= PartitionCount</td>
+</tr>
+<tr class="even">
+<td>值区间</td>
+<td>非负整数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="首领数量">首领数量</h3>
+<table>
+<thead>
+<tr class="header">
+<th>度量指标名称</th>
+<th>Leader count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>JMX MBean</td>
+<td>kafka. server: type= ReplicaManager, name= LeaderCount</td>
+</tr>
+<tr class="even">
+<td>值区间</td>
+<td>非负整数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="离线分区">离线分区</h3>
+<table>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>度量指标名称</th>
+<th>offline partitions count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>JMX MBean</td>
+<td>kafka. controller: type= KafkaController, name= OfflinePartiionsCount</td>
+</tr>
+<tr class="even">
+<td>值区间</td>
+<td>非负整数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="杂项">杂项</h3>
+<p>还有其他很多其他杂项。具体可以看书中的10-11</p>
+<h2 id="主题和分区度量指标">主题和分区度量指标</h2>
+<h3 id="主题指标">主题指标</h3>
+<table>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>名字</th>
+<th>JMX MBean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bytes in rate</td>
+<td>kafka. server: type= BrokerTopicMetrics, name= BytesInPerSec,</td>
+</tr>
+<tr class="even">
+<td>Bytes out rate</td>
+<td>kafka. server: type= BrokerTopicMetrics, name= BytesOutPerSec,</td>
+</tr>
+<tr class="odd">
+<td>Failed fetch rate</td>
+<td>kafka. server: type= BrokerTopicMetrics, name= FailedFetchRequestsPerSec,</td>
+</tr>
+<tr class="even">
+<td>Failed produce rate</td>
+<td>kafka. server: type= BrokerTopicMetrics, name= FailedProduceRequestsPerSec,</td>
+</tr>
+<tr class="odd">
+<td>Messages in rate</td>
+<td>kafka. server: type= BrokerTopicMetrics, name= MessagesInPerSec,</td>
+</tr>
+<tr class="even">
+<td>Fetch request rate</td>
+<td>kafka. server: type= BrokerTopicMetrics, name= TotalFetchRequestsPerSec,</td>
+</tr>
+<tr class="odd">
+<td>Produce request rate</td>
+<td>kafka. server: type= BrokerTopicMetrics, name= TotalProduceRequestsPerSec,</td>
+</tr>
+</tbody>
+</table>
+<h3 id="分区实例的度量指标">分区实例的度量指标</h3>
+<table>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>名字</th>
+<th>JMX MBean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Partition Size</td>
+<td>kafka. log: type= Log, name= Size, topic= TOPICNAME,</td>
+</tr>
+<tr class="even">
+<td>Log segment count</td>
+<td>kafka. log: type= Log, name= NumLogSegments, topic= TOPICNAME, partition= 0</td>
+</tr>
+<tr class="odd">
+<td>Log end offset</td>
+<td>kafka. log: type= Log, name= LogEndOffset, topic= TOPICNAME, partition= 0</td>
+</tr>
+<tr class="even">
+<td>Log start offset</td>
+<td>kafka. log: type= Log, name= LogStartOffset, topic= TOPICNAME, partition= 0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="java虚拟机监控">JAVA虚拟机监控</h2>
+<h3 id="垃圾回收">垃圾回收</h3>
+<table>
+<thead>
+<tr class="header">
+<th>名字</th>
+<th>JMX MBean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Full GC cycles</td>
+<td>java.lang:type=GarbageCooector,name=G1 Old Generation</td>
+</tr>
+<tr class="even">
+<td>Yong GC cycles</td>
+<td>java.lang:type=GarbageCooector,name=G1 Young Generation</td>
+</tr>
+</tbody>
+</table>
+<h2 id="总要的日志">总要的日志</h2>
+<ul>
+<li><code>kafka.controller</code>-INFO级别</li>
+<li><code>kafka.server.ClientQuotaManager</code> -INFO</li>
+<li><code>kafka.request.logger</code> -DEBUG,Trace</li>
+<li>DEBUG
+<ul>
+<li><code>kafka.log.LogCleaner</code></li>
+<li><code>kafka.log.Cleaner</code></li>
+<li><code>kafka.log.LogCleanerManager</code></li>
+</ul></li>
+</ul>
 
       
     </div>
@@ -495,9 +782,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Eureka/" rel="tag"># Eureka</a>
+            <a href="/tags/MQ/" rel="tag"># MQ</a>
           
-            <a href="/tags/阅读笔记/" rel="tag"># 阅读笔记</a>
+            <a href="/tags/kafka/" rel="tag"># kafka</a>
           
         </div>
       
@@ -510,8 +797,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/08/Docker总结/" rel="next" title="Docker总结">
-                <i class="fa fa-chevron-left"></i> Docker总结
+              <a href="/2019/05/02/kafka管理/" rel="next" title="kafka管理">
+                <i class="fa fa-chevron-left"></i> kafka管理
               </a>
             
           </div>
@@ -519,10 +806,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/20/Hystrix/" rel="prev" title="Hystrix">
-                Hystrix <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -712,7 +995,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#总体"><span class="nav-text">总体</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#最小配置"><span class="nav-text">最小配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多服务器配置"><span class="nav-text">多服务器配置</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#监控指标基础"><span class="nav-text">监控指标基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#具体指标"><span class="nav-text">具体指标</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#非同步分区"><span class="nav-text">非同步分区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#集群级别的问题"><span class="nav-text">集群级别的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主机级别问题"><span class="nav-text">主机级别问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#broker度量的指标"><span class="nav-text">broker度量的指标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#活跃控制器数量"><span class="nav-text">活跃控制器数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求处理器空闲率"><span class="nav-text">请求处理器空闲率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主题流入字节数"><span class="nav-text">主题流入字节数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主题流出字节"><span class="nav-text">主题流出字节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主题流入消息"><span class="nav-text">主题流入消息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区数量"><span class="nav-text">分区数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#首领数量"><span class="nav-text">首领数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#离线分区"><span class="nav-text">离线分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#杂项"><span class="nav-text">杂项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主题和分区度量指标"><span class="nav-text">主题和分区度量指标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主题指标"><span class="nav-text">主题指标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区实例的度量指标"><span class="nav-text">分区实例的度量指标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java虚拟机监控"><span class="nav-text">JAVA虚拟机监控</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#垃圾回收"><span class="nav-text">垃圾回收</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总要的日志"><span class="nav-text">总要的日志</span></a></li></ol></li></ol></div>
             
 
           </div>
