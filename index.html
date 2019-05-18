@@ -318,6 +318,340 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2019/05/18/kafka客户端监管/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chandler song">
+      <meta itemprop="description" content="share my technique experience">
+      <meta itemprop="image" content="/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cs blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/18/kafka客户端监管/" itemprop="url">
+                  kafka客户端监管
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-18 13:44:02 / 修改时间：13:44:27" itemprop="dateCreated datePublished" datetime="2019-05-18T13:44:02+08:00">2019-05-18</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/中间件/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/18/kafka客户端监管/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/05/18/kafka客户端监管/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="produceor">Produceor</h1>
+<table>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>名称</th>
+<th>JMX MBean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Overall producer</td>
+<td>kafka.producer:type=producer-metrics,client-id=CLIENTID</td>
+</tr>
+<tr class="even">
+<td>Per-broker</td>
+<td>kafka.producer:type=producer-node-metrics,client-id=CLIENTID,node-id=node-BROKERID</td>
+</tr>
+<tr class="odd">
+<td>Per-topic</td>
+<td>kafka.producer:type=producer-topic-metrics,client-id=CLIENTID,node-id=TOPICNAME</td>
+</tr>
+</tbody>
+</table>
+<h2 id="overall">overall</h2>
+<ol type="1">
+<li>平均数以<code>-avg</code>结尾，<code>-max</code>以最大值结尾</li>
+<li><code>record-error-rate</code>
+<ul>
+<li>有必要设置警报</li>
+<li>0表示正常，大于0表示正在丢弃message。</li>
+<li>可以跟踪另一个<code>record-retry-rate</code>,表示重试次数</li>
+</ul></li>
+<li><code>request-latency-avg</code>,表示生产者到broker的平均时间
+<ul>
+<li>应该关心的是阈值。</li>
+</ul></li>
+<li><code>outgoing-byte-rate</code>：每分钟消息的字节数</li>
+<li><code>record-send-rate</code>：每秒钟消息的数量</li>
+<li><code>record-rate</code>: 每秒钟broker的请求数</li>
+<li><code>request-size-avg</code>: 生产者发送请求的平均字节数</li>
+<li><code>batch-size-avg</code>: 单个消息批次的平均字节数</li>
+<li><code>record-size-avg</code>： 单个消息的平均字节数</li>
+<li><code>records-per-request-avg</code>：生产者当个请求所包含的消息平均数</li>
+<li><code>record-queue-time-avg</code>: 消息发送给Kafka之前的平均毫秒数。</li>
+<li>发送下一次消息，根据的指标
+<ul>
+<li><code>max.partition.bytes</code>：生产者有足够的消息填充批次</li>
+<li><code>linger.ms</code>: 等待上次的时间</li>
+</ul></li>
+</ol>
+<h2 id="per-broker和-per-topic">Per-broker和 Per-topic</h2>
+<ul>
+<li><code>request-latency-avg</code></li>
+<li><code>outgoing-byte-rate</code></li>
+<li><code>request-latency-avg</code></li>
+<li><code>record-send-rate</code></li>
+<li><code>record-error-rate</code></li>
+<li><code>byte-rate</code></li>
+</ul>
+<h1 id="comsumer">Comsumer</h1>
+<table>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>名称</th>
+<th>JMX MBean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Overall consumer</td>
+<td>kafka.consumer:type=consumer-metrics,client-id=CLIENTID</td>
+</tr>
+<tr class="even">
+<td>Fetch manager</td>
+<td>kafka.consumer:type=consumer-fetch-manager-metrics,client-id=CLIENTID,clint-id=CLIENTID</td>
+</tr>
+<tr class="odd">
+<td>Per-topic</td>
+<td>kafka.consumer:type=consumer-fetch-manager-metrics,client-id=CLIENTID,topic=TOPICNAME</td>
+</tr>
+<tr class="even">
+<td>Per-broker</td>
+<td>kafka.consumer:type=consumer-node-metrics,client-id=CLIENTID,node-id=BROKERID</td>
+</tr>
+<tr class="odd">
+<td>Coordinator</td>
+<td>kafka.consumer:type=consumer-coordinator-metrics,client-id=CLIENTID</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fetch-manager">fetch manager</h2>
+<ol type="1">
+<li>有用的指标最多</li>
+<li><code>fetch-fatency-avg</code>: 发送请求的平均时间,用下面两个参数控制
+<ul>
+<li><code>fetch.min.bytes</code></li>
+<li><code>fetch.max.wait.ms</code></li>
+</ul></li>
+<li>流量
+<ul>
+<li><code>bytes-consumed-rate</code></li>
+<li><code>records-consumed-rate</code></li>
+</ul></li>
+<li>度量指标
+<ul>
+<li><code>fetch-rate</code>: 消费者每秒发出请求的数量</li>
+<li><code>fetch-size-avg</code>: 平均字节数</li>
+<li><code>records-per-request-avg</code>: 每个请求的平均消息数</li>
+</ul></li>
+</ol>
+<h2 id="per-broker-和-per-topic">Per-broker 和 Per-topic</h2>
+<ol type="1">
+<li>建议用他们来诊断问题，但是不建议经常监控</li>
+<li>重要指标
+<ul>
+<li><code>bytes-consumed-rate</code></li>
+<li><code>records-consumed-rate</code></li>
+<li><code>fetch-size-avg</code></li>
+</ul></li>
+</ol>
+<h2 id="coordinator">Coordinator</h2>
+<ol type="1">
+<li>主要是同步相关的</li>
+<li>同步相关
+<ul>
+<li><code>sync-time-avg</code>: 同步活动所使用的平均毫秒数</li>
+<li><code>sync-rate</code>: 每秒同步发生的次数</li>
+</ul></li>
+<li><code>commit-latency-avg</code>: 提交偏移量需要的时间</li>
+<li><code>assigned-partitions</code>: 分配给消费者客户端的分区数量。</li>
+</ol>
+<h1 id="配额">配额</h1>
+<p>kafka可以对客户端进行限流，防止客户端拖垮整个集群。 - broker级别，但是客户端可以对其覆盖 - 超过配额，暂缓向客户端返回相应，知道客户端降到配额以下 - 需要<strong>监控</strong>。因为没有特别的监控代码</p>
+<table>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>名称</th>
+<th>JMX MBean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>consumer</td>
+<td>kafka.consumer:type=consumer-fetch-manager-metrics,client-id=CLIENTID的属性fetch-throttle-time-avg</td>
+</tr>
+<tr class="even">
+<td>producer</td>
+<td>kafka.producer:type=producer-metrics,client-id=produce-throttle-time-avg</td>
+</tr>
+</tbody>
+</table>
+<h1 id="延时监控">延时监控</h1>
+<ul>
+<li>Burrow工具。linkedIn开发，感觉像是官方工具</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2019/05/12/kafka监控基础和broker监控/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1851,178 +2185,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2018/10/02/拾遗集2018-3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chandler song">
-      <meta itemprop="description" content="share my technique experience">
-      <meta itemprop="image" content="/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="cs blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/02/拾遗集2018-3/" itemprop="url">
-                  拾遗集2018-3
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-10-02 06:39:41" itemprop="dateCreated datePublished" datetime="2018-10-02T06:39:41+08:00">2018-10-02</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/拾遗/" itemprop="url" rel="index"><span itemprop="name">拾遗</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/02/拾遗集2018-3/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/02/拾遗集2018-3/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <ul>
-<li>多个spring cloud程序在一个JVM中</li>
-<li>RestTemplate的一些设置</li>
-<li>找到相应的spring boot配置</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/10/02/拾遗集2018-3/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2074,7 +2236,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

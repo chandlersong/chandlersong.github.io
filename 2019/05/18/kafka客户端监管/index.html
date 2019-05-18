@@ -112,27 +112,25 @@
 
 
 
-  <meta name="description" content="如何搭建一个kafka最简单的环境，并且提供了一个docker-compose的脚本">
+  <meta name="description" content="Produceor        名称 JMX MBean     Overall producer kafka.producer:type=producer-metrics,client-id=CLIENTID   Per-broker kafka.producer:type=producer-node-metrics,client-id=CLIENTID,">
 <meta name="keywords" content="MQ,kafka">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kafka搭建最简环境">
-<meta property="og:url" content="https://chandlersong.me/2019/03/04/kafka搭建最简环境/index.html">
+<meta property="og:title" content="kafka客户端监管">
+<meta property="og:url" content="https://chandlersong.me/2019/05/18/kafka客户端监管/index.html">
 <meta property="og:site_name" content="cs blog">
-<meta property="og:description" content="如何搭建一个kafka最简单的环境，并且提供了一个docker-compose的脚本">
+<meta property="og:description" content="Produceor        名称 JMX MBean     Overall producer kafka.producer:type=producer-metrics,client-id=CLIENTID   Per-broker kafka.producer:type=producer-node-metrics,client-id=CLIENTID,">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://assets.processon.com/chart_image/5c769115e4b0c4e21667c23f.png?_=1551275619025">
-<meta property="og:updated_time" content="2019-03-04T15:18:58.820Z">
+<meta property="og:updated_time" content="2019-05-18T05:44:27.395Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="kafka搭建最简环境">
-<meta name="twitter:description" content="如何搭建一个kafka最简单的环境，并且提供了一个docker-compose的脚本">
-<meta name="twitter:image" content="http://assets.processon.com/chart_image/5c769115e4b0c4e21667c23f.png?_=1551275619025">
+<meta name="twitter:title" content="kafka客户端监管">
+<meta name="twitter:description" content="Produceor        名称 JMX MBean     Overall producer kafka.producer:type=producer-metrics,client-id=CLIENTID   Per-broker kafka.producer:type=producer-node-metrics,client-id=CLIENTID,">
 
 
 
 
 
 
-  <link rel="canonical" href="https://chandlersong.me/2019/03/04/kafka搭建最简环境/"/>
+  <link rel="canonical" href="https://chandlersong.me/2019/05/18/kafka客户端监管/"/>
 
 
 
@@ -142,7 +140,7 @@
   };
 </script>
 
-  <title>kafka搭建最简环境 | cs blog</title>
+  <title>kafka客户端监管 | cs blog</title>
   
 
 
@@ -320,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2019/03/04/kafka搭建最简环境/">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2019/05/18/kafka客户端监管/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chandler song">
@@ -337,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">kafka搭建最简环境
+          <h1 class="post-title" itemprop="name headline">kafka客户端监管
               
             
           </h1>
@@ -362,7 +360,7 @@
                 
               
 
-              <time title="创建时间：2019-03-04 23:17:58 / 修改时间：23:18:58" itemprop="dateCreated datePublished" datetime="2019-03-04T23:17:58+08:00">2019-03-04</time>
+              <time title="创建时间：2019-05-18 13:44:02 / 修改时间：13:44:27" itemprop="dateCreated datePublished" datetime="2019-05-18T13:44:02+08:00">2019-05-18</time>
             
 
             
@@ -399,8 +397,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/04/kafka搭建最简环境/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/03/04/kafka搭建最简环境/" itemprop="commentCount"></span>
+                <a href="/2019/05/18/kafka客户端监管/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/05/18/kafka客户端监管/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -428,60 +426,172 @@
       
 
       
-        <p>如何搭建一个kafka最简单的环境，并且提供了一个docker-compose的脚本 <a id="more"></a></p>
-<h1 id="常用信息">常用信息</h1>
-<h2 id="默认值">默认值</h2>
-<ul>
-<li>端口：9092</li>
-</ul>
-<h2 id="实体对象">实体对象</h2>
-<figure>
-<img src="http://assets.processon.com/chart_image/5c769115e4b0c4e21667c23f.png?_=1551275619025" alt="关系图"><figcaption>关系图</figcaption>
-</figure>
+        <h1 id="produceor">Produceor</h1>
+<table>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>名称</th>
+<th>JMX MBean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Overall producer</td>
+<td>kafka.producer:type=producer-metrics,client-id=CLIENTID</td>
+</tr>
+<tr class="even">
+<td>Per-broker</td>
+<td>kafka.producer:type=producer-node-metrics,client-id=CLIENTID,node-id=node-BROKERID</td>
+</tr>
+<tr class="odd">
+<td>Per-topic</td>
+<td>kafka.producer:type=producer-topic-metrics,client-id=CLIENTID,node-id=TOPICNAME</td>
+</tr>
+</tbody>
+</table>
+<h2 id="overall">overall</h2>
 <ol type="1">
-<li>Batch： 只是表示一次写入多少的数据。没有其他特别含义</li>
-<li>Offset： 每个Comsumer有着自己的Offset</li>
-</ol>
-<h1 id="helloworld启动">HelloWorld启动</h1>
-<h2 id="单独启动">单独启动</h2>
-<h3 id="zookeeper">zookeeper</h3>
+<li>平均数以<code>-avg</code>结尾，<code>-max</code>以最大值结尾</li>
+<li><code>record-error-rate</code>
 <ul>
-<li><p>配置文件 <code>conf/zoo.cfg</code> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tickTime=2000</span><br><span class="line">initLimit=10</span><br><span class="line">dataDir=/your/data</span><br><span class="line">clientPort=2181</span><br></pre></td></tr></table></figure></p></li>
-<li>command:<code>bin/zkServer.sh start</code></li>
-<li><p>最新版本的kafka的发行包里面，就内置了一个zookeeper。具体是在<code>bin/zookeeper-server-start.sh config/zookeeper.properties</code>命令就可以了。</p></li>
-</ul>
-<h3 id="kalfa">kalfa</h3>
-<ul>
-<li>command: <code>bin/kafka-server-start.sh config/server.properties</code></li>
-<li>server.properties中的<code>zookeeper.connect</code> zookeeper的路径</li>
-<li>书中的例子没有指定配置文件。但是在后面验证的时候，发现了出现了这个错误<code>Error while executing topic command : Replication factor: 1 larger than available brokers: 0.</code>. <a href="https://stackoverflow.com/questions/33098366/error-creating-kafka-topics-replication-factor-larger-than-available-brokers" title="stackoverflow-vaquar khan" target="_blank" rel="noopener">参考了资料</a>。发觉要指定可能版本升级了吧。</li>
-</ul>
-<h2 id="验证">验证</h2>
-<h3 id="producer">producer</h3>
-<p><code>bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test</code> 就是发消息。</p>
-<h3 id="comsumer">comsumer</h3>
-<p><code>bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning</code></p>
-<ul>
-<li>书中的<code>--zookeeper localhost:2181</code> 换成了 <code>--bootstrap-server localhost:9092</code>。版本更新。参数变化。其实也可以看到主体从zookeeper换成了kafka,<a href="https://stackoverflow.com/questions/53428903/zookeeper-is-not-a-recognized-option-when-executing-kafka-console-consumer-sh" title="stackoverflow-孙兴斌" target="_blank" rel="noopener">讨论</a></li>
-</ul>
-<h2 id="docker">Docker</h2>
-<p>研究了一下，发觉好像kafka没有官方的image。都是个人写的。倒是zookeeper有一个官方的。</p>
-<ul>
-<li><a href="https://hub.docker.com/_/zookeeper" target="_blank" rel="noopener">zookeepeer官方的image</a></li>
-<li><a href="https://hub.docker.com/r/wurstmeister/kafka" target="_blank" rel="noopener">wurstmeister制作的image</a>
-<ul>
-<li><code>message.max.bytes</code> parameter set the environment to <code>KAFKA_MESSAGE_MAX_BYTES</code>: 我也不太清楚这种变换到底是kalka，还是docker自己弄得。</li>
+<li>有必要设置警报</li>
+<li>0表示正常，大于0表示正在丢弃message。</li>
+<li>可以跟踪另一个<code>record-retry-rate</code>,表示重试次数</li>
 </ul></li>
-<li><a href="https://github.com/chandlersong/ENV/tree/master/kafka" target="_blank" rel="noopener">创建的一个的kafka的环境</a>
+<li><code>request-latency-avg</code>,表示生产者到broker的平均时间
 <ul>
-<li><code>server.properties</code> 重要加入以下两句,<a href="https://stackoverflow.com/questions/54443640/kafka-consumer-no-entry-found-for-connection" target="_blank" rel="noopener">No entry found for connection excpetion-stackover</a> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">listeners=PLAINTEXT://kafka:9092</span><br><span class="line">advertised.listeners=PLAINTEXT://kafka:9092</span><br></pre></td></tr></table></figure></li>
+<li>应该关心的是阈值。</li>
+</ul></li>
+<li><code>outgoing-byte-rate</code>：每分钟消息的字节数</li>
+<li><code>record-send-rate</code>：每秒钟消息的数量</li>
+<li><code>record-rate</code>: 每秒钟broker的请求数</li>
+<li><code>request-size-avg</code>: 生产者发送请求的平均字节数</li>
+<li><code>batch-size-avg</code>: 单个消息批次的平均字节数</li>
+<li><code>record-size-avg</code>： 单个消息的平均字节数</li>
+<li><code>records-per-request-avg</code>：生产者当个请求所包含的消息平均数</li>
+<li><code>record-queue-time-avg</code>: 消息发送给Kafka之前的平均毫秒数。</li>
+<li>发送下一次消息，根据的指标
+<ul>
+<li><code>max.partition.bytes</code>：生产者有足够的消息填充批次</li>
+<li><code>linger.ms</code>: 等待上次的时间</li>
+</ul></li>
+</ol>
+<h2 id="per-broker和-per-topic">Per-broker和 Per-topic</h2>
+<ul>
+<li><code>request-latency-avg</code></li>
+<li><code>outgoing-byte-rate</code></li>
+<li><code>request-latency-avg</code></li>
+<li><code>record-send-rate</code></li>
+<li><code>record-error-rate</code></li>
+<li><code>byte-rate</code></li>
 </ul>
-<p>刚学，所以对这些具体原因不是太清楚，但是因为环境搭载在docker上，而docker搭载在虚拟机上，我主机去连的时候，就报<code>No entry found for connection</code>和连不上的两个错。搞了很久。最后登上contianer之后，运行了验证就好了。 我还在宿主机的host文件，加入了一下一点 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VM_IP kafka</span><br></pre></td></tr></table></figure></p>
-猜测主要问题可能在以下几点
+<h1 id="comsumer">Comsumer</h1>
+<table>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>名称</th>
+<th>JMX MBean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Overall consumer</td>
+<td>kafka.consumer:type=consumer-metrics,client-id=CLIENTID</td>
+</tr>
+<tr class="even">
+<td>Fetch manager</td>
+<td>kafka.consumer:type=consumer-fetch-manager-metrics,client-id=CLIENTID,clint-id=CLIENTID</td>
+</tr>
+<tr class="odd">
+<td>Per-topic</td>
+<td>kafka.consumer:type=consumer-fetch-manager-metrics,client-id=CLIENTID,topic=TOPICNAME</td>
+</tr>
+<tr class="even">
+<td>Per-broker</td>
+<td>kafka.consumer:type=consumer-node-metrics,client-id=CLIENTID,node-id=BROKERID</td>
+</tr>
+<tr class="odd">
+<td>Coordinator</td>
+<td>kafka.consumer:type=consumer-coordinator-metrics,client-id=CLIENTID</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fetch-manager">fetch manager</h2>
 <ol type="1">
-<li>leader的选举。</li>
-<li>没有完全起来,可能开始在选举，所以broker起来了。但是不能工作。</li>
-</ol></li>
+<li>有用的指标最多</li>
+<li><code>fetch-fatency-avg</code>: 发送请求的平均时间,用下面两个参数控制
+<ul>
+<li><code>fetch.min.bytes</code></li>
+<li><code>fetch.max.wait.ms</code></li>
+</ul></li>
+<li>流量
+<ul>
+<li><code>bytes-consumed-rate</code></li>
+<li><code>records-consumed-rate</code></li>
+</ul></li>
+<li>度量指标
+<ul>
+<li><code>fetch-rate</code>: 消费者每秒发出请求的数量</li>
+<li><code>fetch-size-avg</code>: 平均字节数</li>
+<li><code>records-per-request-avg</code>: 每个请求的平均消息数</li>
+</ul></li>
+</ol>
+<h2 id="per-broker-和-per-topic">Per-broker 和 Per-topic</h2>
+<ol type="1">
+<li>建议用他们来诊断问题，但是不建议经常监控</li>
+<li>重要指标
+<ul>
+<li><code>bytes-consumed-rate</code></li>
+<li><code>records-consumed-rate</code></li>
+<li><code>fetch-size-avg</code></li>
+</ul></li>
+</ol>
+<h2 id="coordinator">Coordinator</h2>
+<ol type="1">
+<li>主要是同步相关的</li>
+<li>同步相关
+<ul>
+<li><code>sync-time-avg</code>: 同步活动所使用的平均毫秒数</li>
+<li><code>sync-rate</code>: 每秒同步发生的次数</li>
+</ul></li>
+<li><code>commit-latency-avg</code>: 提交偏移量需要的时间</li>
+<li><code>assigned-partitions</code>: 分配给消费者客户端的分区数量。</li>
+</ol>
+<h1 id="配额">配额</h1>
+<p>kafka可以对客户端进行限流，防止客户端拖垮整个集群。 - broker级别，但是客户端可以对其覆盖 - 超过配额，暂缓向客户端返回相应，知道客户端降到配额以下 - 需要<strong>监控</strong>。因为没有特别的监控代码</p>
+<table>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>名称</th>
+<th>JMX MBean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>consumer</td>
+<td>kafka.consumer:type=consumer-fetch-manager-metrics,client-id=CLIENTID的属性fetch-throttle-time-avg</td>
+</tr>
+<tr class="even">
+<td>producer</td>
+<td>kafka.producer:type=producer-metrics,client-id=produce-throttle-time-avg</td>
+</tr>
+</tbody>
+</table>
+<h1 id="延时监控">延时监控</h1>
+<ul>
+<li>Burrow工具。linkedIn开发，感觉像是官方工具</li>
 </ul>
 
       
@@ -542,8 +652,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/12/config/" rel="next" title="config">
-                <i class="fa fa-chevron-left"></i> config
+              <a href="/2019/05/12/kafka监控基础和broker监控/" rel="next" title="kafka监控基础和broker监控">
+                <i class="fa fa-chevron-left"></i> kafka监控基础和broker监控
               </a>
             
           </div>
@@ -551,10 +661,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/08/kafka-配置/" rel="prev" title="kafka 配置">
-                kafka 配置 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -744,7 +850,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用信息"><span class="nav-text">常用信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#默认值"><span class="nav-text">默认值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实体对象"><span class="nav-text">实体对象</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#helloworld启动"><span class="nav-text">HelloWorld启动</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单独启动"><span class="nav-text">单独启动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#zookeeper"><span class="nav-text">zookeeper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kalfa"><span class="nav-text">kalfa</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证"><span class="nav-text">验证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#producer"><span class="nav-text">producer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#comsumer"><span class="nav-text">comsumer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker"><span class="nav-text">Docker</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#produceor"><span class="nav-text">Produceor</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#overall"><span class="nav-text">overall</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#per-broker和-per-topic"><span class="nav-text">Per-broker和 Per-topic</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#comsumer"><span class="nav-text">Comsumer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#fetch-manager"><span class="nav-text">fetch manager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#per-broker-和-per-topic"><span class="nav-text">Per-broker 和 Per-topic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#coordinator"><span class="nav-text">Coordinator</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配额"><span class="nav-text">配额</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#延时监控"><span class="nav-text">延时监控</span></a></li></ol></div>
             
 
           </div>
