@@ -112,15 +112,18 @@
 
 
 
-  <meta name="keywords" content="java">
+  <meta name="description" content="jenkins 自学爬坑">
+<meta name="keywords" content="jenkins">
 <meta property="og:type" content="article">
-<meta property="og:title" content="jenkins pipeline爬坑">
+<meta property="og:title" content="jenkins pipeline自学">
 <meta property="og:url" content="https://chandlersong.me/2019/06/03/jenkins-pipeline自学/index.html">
 <meta property="og:site_name" content="cs blog">
+<meta property="og:description" content="jenkins 自学爬坑">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-03T13:49:06.033Z">
+<meta property="og:updated_time" content="2019-06-04T13:34:02.068Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jenkins pipeline爬坑">
+<meta name="twitter:title" content="jenkins pipeline自学">
+<meta name="twitter:description" content="jenkins 自学爬坑">
 
 
 
@@ -137,7 +140,7 @@
   };
 </script>
 
-  <title>jenkins pipeline爬坑 | cs blog</title>
+  <title>jenkins pipeline自学 | cs blog</title>
   
 
 
@@ -332,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">jenkins pipeline爬坑
+          <h1 class="post-title" itemprop="name headline">jenkins pipeline自学
               
             
           </h1>
@@ -357,16 +360,46 @@
                 
               
 
-              <time title="创建时间：2019-06-03 21:48:32 / 修改时间：21:49:06" itemprop="dateCreated datePublished" datetime="2019-06-03T21:48:32+08:00">2019-06-03</time>
+              <time title="创建时间：2019-06-03 21:48:32" itemprop="dateCreated datePublished" datetime="2019-06-03T21:48:32+08:00">2019-06-03</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-04 21:34:02" itemprop="dateModified" datetime="2019-06-04T21:34:02+08:00">2019-06-04</time>
               
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Devops/" itemprop="url" rel="index"><span itemprop="name">Devops</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -405,7 +438,43 @@
       
 
       
-        
+        <p>jenkins 自学爬坑 <a id="more"></a></p>
+<h1 id="all">All</h1>
+<ul>
+<li><p>脚本语言，比较方便的来处理一些部署之类的工作 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name myjenkins -d -p 8080:8080 -p 50000:50000 -v /home/chandler/jenkins:/var/jenkins_home -v docker run --name myjenkins -d -p 8080:8080 -p 50000:50000 --group-add ping -v /home/chandler/jenkins:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -v /home/chandler/maven_repo:/opt/maven_repo jenkinsci/blueocean</span><br></pre></td></tr></table></figure></p></li>
+<li>如果jenkins泡在container里面。跑的contaner的宿主机是jenkins的宿主，不是jenkins</li>
+<li>agent-dockerfile 参数
+<ul>
+<li>[additionalBuildArgs, args, containerPerStageRoot, customWorkspace, dir, filename, label, registryCredentialsId, registryUrl, reuseNode]<br>
+</li>
+<li>参数如果选错，那么在就会把可选参数全部爆出来，这样比较高效</li>
+<li><a href="https://jenkins.io/doc/book/pipeline/syntax/" target="_blank" rel="noopener">详细官方文档</a>: 这个看起来有点不是很直观</li>
+</ul></li>
+</ul>
+<h1 id="爬坑">爬坑</h1>
+<ul>
+<li><a href="https://issues.jenkins-ci.org/browse/JENKINS-46799" target="_blank" rel="noopener">Got permission denied while trying to connect to the Docker daemon socket</a> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -u root -ti jenkins_blueocean bash</span><br><span class="line">chown :jenkins /var/run/docker.sock</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>网上找了很多的方式，基本都是给权限。但是发觉那个默认的<code>jenkinsci/blueocean</code>居然没有命令<code>usermod</code>这个命令。 <a href="https://stackoverflow.com/questions/44850565/docker-not-found-when-building-docker-image-using-docker-jenkins-container-pipel" target="_blank" rel="noopener">其他方案</a> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it -u root my-jenkins /bin/bash</span><br><span class="line"><span class="comment"># usermod -aG docker jenkins</span></span><br></pre></td></tr></table></figure></p>
+<p>发觉还可以用<code>--group-add</code>。在容器启动的时候加入用户组。每个可能不一样。可以去容器自己看。而且容器里的组和宿主机上面的组不一样。就像是我的例子中，宿主机的group是docker，而容器里面是ping</p>
+<ul>
+<li>环境变量不能作用于<code>agent</code>
+<ul>
+<li><a href="https://stackoverflow.com/questions/44052302/how-to-use-an-environment-variable-in-the-agent-section-of-a-jenkins-declarative" target="_blank" rel="noopener">stackoverflow上讨论</a>：提到了其实script有两种语法<code>declarative</code>和<code>script</code>。jira上的是script语法</li>
+<li><a href="https://issues.jenkins-ci.org/browse/JENKINS-42369" target="_blank" rel="noopener">官方jenkins上面提供了一个解决方法</a>:</li>
+</ul></li>
+<li>volumn的<strong>permissions denied</strong>：我的需求是想要做一个volume。然后把build好的文件全都放进去。但是发觉最后操作的时候发觉有点在copy的时候，一直permissions denied，看了一下，目录的是<strong>root</strong>的
+<ul>
+<li><code>-v rumor_mill_distro:/opt/rumor_mill</code>:这个是参数</li>
+<li>解决方案，就是强制给这个<strong>文件夹777</strong>权限。有点暴力了。</li>
+<li><a href="https://blog.csdn.net/solaraceboy/article/details/80615087" target="_blank" rel="noopener">类似的问题分析，是SELINUX相关</a>：和我不同的地方在于，我的jenkins和build的都是contianer。而我的宿主机本身就是ubuntu</li>
+<li><a href="https://stackoverflow.com/questions/44065827/jenkins-wrong-volume-permissions" target="_blank" rel="noopener">stackoverflow上面讨论</a>：基本思路就是启动的时候指定用户。但是我发觉这个不解决本质问题，因为我的问题是，相关目录都是root</li>
+<li><a href="https://stackoverflow.com/questions/24288616/permission-denied-on-accessing-host-directory-in-docker" target="_blank" rel="noopener">另一个思路，没试验成功</a>:<code>--privileged</code>:例子中是<code>--privileged=true</code>,有点不一样</li>
+</ul></li>
+<li>如果以docker启动，他都会把volume通过把workspace给mount到新的contianer上。</li>
+</ul>
+<h1 id="reference">reference</h1>
+<p><a href="https://jenkins.io/doc/tutorials/build-a-java-app-with-maven/" target="_blank" rel="noopener">Build a Java app with Maven</a></p>
 
       
     </div>
@@ -447,6 +516,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jenkins/" rel="tag"># jenkins</a>
+          
+        </div>
       
 
       
@@ -517,8 +592,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -564,7 +648,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -605,7 +691,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">14</span>
+                      
+                    
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -640,6 +728,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#all"><span class="nav-text">All</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#爬坑"><span class="nav-text">爬坑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reference"><span class="nav-text">reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
