@@ -112,25 +112,25 @@
 
 
 
-  <meta name="description" content="《kafka权威指南》第五章笔记">
-<meta name="keywords" content="MQ,kafka">
+  <meta name="description" content="《zookeeper_distributed_process_coordination》 第二到第四章笔记">
+<meta name="keywords" content="zookeeper">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kafka broker细节">
-<meta property="og:url" content="https://chandlersong.me/2019/04/13/kafka-broker细节/index.html">
+<meta property="og:title" content="zookeeper基本概念">
+<meta property="og:url" content="https://chandlersong.me/2019/06/20/zookeeper基本概念/index.html">
 <meta property="og:site_name" content="cs blog">
-<meta property="og:description" content="《kafka权威指南》第五章笔记">
+<meta property="og:description" content="《zookeeper_distributed_process_coordination》 第二到第四章笔记">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-13T06:24:15.629Z">
+<meta property="og:updated_time" content="2019-06-20T13:20:49.915Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="kafka broker细节">
-<meta name="twitter:description" content="《kafka权威指南》第五章笔记">
+<meta name="twitter:title" content="zookeeper基本概念">
+<meta name="twitter:description" content="《zookeeper_distributed_process_coordination》 第二到第四章笔记">
 
 
 
 
 
 
-  <link rel="canonical" href="https://chandlersong.me/2019/04/13/kafka-broker细节/"/>
+  <link rel="canonical" href="https://chandlersong.me/2019/06/20/zookeeper基本概念/"/>
 
 
 
@@ -140,7 +140,7 @@
   };
 </script>
 
-  <title>kafka broker细节 | cs blog</title>
+  <title>zookeeper基本概念 | cs blog</title>
   
 
 
@@ -318,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2019/04/13/kafka-broker细节/">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2019/06/20/zookeeper基本概念/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chandler song">
@@ -335,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">kafka broker细节
+          <h1 class="post-title" itemprop="name headline">zookeeper基本概念
               
             
           </h1>
@@ -360,7 +360,7 @@
                 
               
 
-              <time title="创建时间：2019-04-13 14:23:22 / 修改时间：14:24:15" itemprop="dateCreated datePublished" datetime="2019-04-13T14:23:22+08:00">2019-04-13</time>
+              <time title="创建时间：2019-06-20 21:19:58 / 修改时间：21:20:49" itemprop="dateCreated datePublished" datetime="2019-06-20T21:19:58+08:00">2019-06-20</time>
             
 
             
@@ -397,8 +397,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/04/13/kafka-broker细节/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/04/13/kafka-broker细节/" itemprop="commentCount"></span>
+                <a href="/2019/06/20/zookeeper基本概念/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/06/20/zookeeper基本概念/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -426,106 +426,91 @@
       
 
       
-        <p>《kafka权威指南》第五章笔记 <a id="more"></a></p>
-<h1 id="broker">Broker</h1>
+        <p>《zookeeper_distributed_process_coordination》 第二到第四章笔记 <a id="more"></a></p>
+<h1 id="笔记重点">笔记重点</h1>
 <ul>
-<li>一个集群中，Controller(broker首领)只能有一个。</li>
-<li>建议用group来区分机架</li>
-</ul>
-<h2 id="id">id</h2>
+<li>zookeeper通过暴露一些列类似于文件系统的api来帮助进行分布式的计算</li>
+<li>常用命令
 <ul>
-<li>注册方式为<strong>临时节点</strong>。</li>
-<li>路径为<code>/brokers/ids</code><br>
-</li>
-<li>同一时间，只能有一个id被注册，但是如果这个id下线，相同id的broker启动，会马上<strong>顶替</strong>旧的broker(拥有相同的分区和主题)</li>
-</ul>
-<h1 id="控制器controller">控制器(Controller)</h1>
-<p>Controller是一个分则分区选举的broker,在路径<code>/controller</code>里面注临时节点表示自己是。<br>
-其他broker会watch这个节点。这样就可以在节点消失后，自动去获得。<br>
-通过<strong>broker id</strong>来检查这个broker是否包含现有分区的副本。</p>
-<h1 id="复制">复制</h1>
-<ul>
-<li>一个topic下面可以有多个分区。每个分区可能在不同的broker上有备份
-<ul>
-<li>只有一个分区是主分区。其他分区都是这些分区的备份 leader和Replica</li>
-<li>controller会在broker中，均匀分配leader partiion。</li>
+<li>create /path data</li>
+<li>delete /path</li>
+<li>exists /path</li>
+<li>setData /path data</li>
+<li>getData /path</li>
+<li>getChildren /path</li>
+<li>quit： 退出命令行</li>
 </ul></li>
 </ul>
-<h1 id="这里的同步机制">这里的同步机制</h1>
-<p>replica给leader发送请求，而leader通过replica发送的请求来确定是否同步。因为请求时有序的。 举个最简单的例子来说：<br>
-replica-A 发送两个请求A,和B。leader返回两个response。只有在replica-A<strong>接受</strong>A和B之后，<strong>才</strong>会发C。如果leader收不到request C。就表示replica肯定是不同步的了。</p>
+<h1 id="znode">znode</h1>
 <ul>
-<li>replica.lag.time.max.ms: 上文的周期</li>
-<li>acks：consomer的配置。表示多少个副本收到消息后，才算成功。这是一个performance和intergrate的平衡。</li>
-</ul>
-<h2 id="leader">leader</h2>
+<li>可以保存数据。如果保存数据，全都是字节。需要自己去<strong>序列化/反序列化</strong></li>
+<li>分类
 <ul>
-<li>搞清楚哪一个replica和自己是同步的。</li>
-</ul>
-<h2 id="replica">replica</h2>
-<ul>
-<li>replica<strong>不处理</strong>客户端请求，只是用来备份</li>
-</ul>
-<h2 id="请求">请求</h2>
-<p>请求时基于TCP的。且请求头包含的信息是 - Request type - Request version - Correlation ID： 一个具有唯一性的数字，用于标识请求的消息 - Client ID：客户端ID</p>
-<p>书中的图5-1为请求的内部流程，大概就是两个队列，<strong>请求队列和响应队列</strong></p>
-<h3 id="元数据请求">元数据请求：</h3>
-<p>客户端来获取关于topic和partition的信息 配置项 - metadata.max.age.ms来设置这些信息的刷新频率。</p>
-<h3 id="生产请求">生产请求</h3>
-<ul>
-<li>acks： 写入时，同步到几个分区。
-<ul>
-<li>all：全部</li>
-<li>0： 管发不管埋</li>
+<li>persistent</li>
+<li>ephemeral: <code>create -e /master &quot;data&quot;</code></li>
+<li>Sequential:<code>create -s /tasks/task- &quot;data&quot;</code>,will be <code>/tasks/task-000000000</code></li>
 </ul></li>
 </ul>
-<p>Linux系统上，消息会被写到文件系统的缓存里。并不保证它们合适刷新到磁盘上。通过复制功能来保证消息的持久性。</p>
-<h3 id="获取请求">获取请求：</h3>
+<h2 id="ephemeral-node">ephemeral Node</h2>
+<p>两种情况会被删除 1. session丢失 2. creator删除</p>
+<p>注意点 1. 不能有children</p>
+<h2 id="versin">versin</h2>
+<p>每个Znode都有一个versin number。而这个verison number每次会根据数据变化自动增加。</p>
+<h2 id="watch-and-notifications">Watch and Notifications</h2>
+<ol type="1">
+<li>A watch is one-shot operation
 <ul>
-<li>零复制。直接从文件(linux文件系统缓冲)发送给网络。不会进缓存</li>
-<li>大部分客户端只能读取已经被写入所有同步副本的消息
-<ul>
-<li>如果请求，返回为空，而不是错误</li>
+<li>注册一个watch，在收到了notification之后，watch就会失效，需要重新注册。</li>
+<li>zookeeper保证，notifcation会在其他change作用于watch的node前，送达到client端。但是<strong>不保证</strong>重新注册，在其他的变化之前。觉得不太适合高并发的场景</li>
 </ul></li>
-<li>broker之间消息复制变慢，那么消费者的消费时间也就会变长。</li>
-</ul>
-<h3 id="其他请求">其他请求</h3>
+<li>notification的种类
 <ul>
-<li>ApiVersionRequest: 查询新的 因为偏移量现在也是一个topic。所以增加了以下几种request</li>
-<li>OffsetCommitRequest</li>
-<li>offsetFetchRequest</li>
-<li>ListOffsetRequest 选举相关</li>
-<li>LeaderAndIsr：contorl发给新首领</li>
-</ul>
-<h2 id="物理存储">物理存储</h2>
-<ul>
-<li>partition是最基本的存储单元。其受到物理磁盘限制
-<ul>
-<li>分区分为干segment(片段),不过这个是物理的。当前写入数据的叫做活跃片段，永远不会被删除</li>
+<li>data change: <code>stat /master true</code></li>
+<li>children change</li>
+<li>znode being created or deleted</li>
 </ul></li>
-<li>log.dirs来确定存在哪里。</li>
-<li>消息和offset都保存在文件里。还有源信息，比如大小，校验，版本，压缩算法，时间戳(0.10.0版本引入)</li>
-</ul>
-<h3 id="index">index</h3>
+<li>收到<code>Disconnected Event</code>并不是表示session已经死了。因为可能是网络的问题。这些zk的连接包自己会帮你处理。</li>
+<li>转换zk server的时候，貌似服务器会帮助你去检查相应的服务器。</li>
+<li>对于一个A，B两个变化很快。注册了watch。只会收到A的notification。重新watch的时候，可能会丢掉B的变化
 <ul>
-<li>每个parttition维护一个索引</li>
-<li>Kafka不维护index。如果损坏，会重新读取索引</li>
-</ul>
-<h3 id="清理">清理</h3>
-<p>简单的说，就是清除相同的key值的数据，保存最新的版本</p>
+<li>这个是哦户，就要自己去检查了。</li>
+</ul></li>
+<li>watch其实挺消耗内存的，如果注册多个，则是因为通知，拖慢整个服务器进程。
 <ul>
-<li><code>log.cleaner.enabled</code>来启用</li>
-<li>污浊： 没有被clean过得</li>
-<li>干净部分： 被清理过的 流程：</li>
-<li>创建一个map，并且把污浊的部分的消息键的散列值和消息的偏移量</li>
-<li>创建替换段</li>
-<li>扫描干净的部分。
+<li>可以通过注册sequence node，谁注册的最小，谁就是master</li>
+</ul></li>
+</ol>
+<h1 id="zookeeper-architecture">zookeeper Architecture</h1>
+<p>两种模式.standalone和quorum</p>
+<h2 id="quorums">quorums</h2>
+<p>其实书中说了问题，本质就是zookeeper采用的paxo算法来保证一致性。</p>
+<h2 id="session">session</h2>
+<p>客户端必须先建立session，才能执行命令。<br>
+在session中，命令都是有序的，都是FIFO 连接可以用<code>zkCli -server ip:port</code></p>
+<p>lifecycle - CONNECTING - CONNECTED - CLOSED - NOT_CONNECTED: 第一个状态</p>
+<p>在session中，比较要留意的是timeout。如果在一个timeout的周期内，server没有收到信息，则是会断开session。<br>
+默认的情况下面。<br>
+client如果1/3的周期内，没有收到发一个心跳<br>
+如果2/3的周期内，没有收到消息，则会开始查找新的server</p>
+<p>还有一点要注意的是，在zookeeper内部，所有的东西都是有序的。包括连接。</p>
+<p>连接的时候，只要连接一个就好了。</p>
+<p>注意点 - session会在zookeeper之间服务器自动转换。即如果和A断开，会自动连到B。并保持连接。 - 用不着自己管理和zk的连接。</p>
+<h1 id="杂项">杂项</h1>
 <ul>
-<li>map中不存在，表示没有新消息，则是会复制到替换segment上</li>
-<li>不存在，这届忽略</li>
+<li>ACL好像叫权限控制</li>
+<li>Multiop：简单的来说就是一个transition</li>
+<li>Order
+<ul>
+<li>Order of writes：每个server执行写操作不是同步。但是次序是想通的</li>
+<li>Order of Reads: 重要的数据，最好不要依赖读，而是要依赖于watch</li>
+<li>Order of Notifications: 原文有点饶，我的理解是所有东西都是接收的到时order的。</li>
 </ul></li>
 </ul>
-<p>删除，就是发一个墓碑消息(保留值为null)</p>
+<h1 id="爬坑">爬坑</h1>
+<h2 id="client-id和client-port语法变化">client id和client port语法变化</h2>
+<p>发觉从3.5开始的改动 标准： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server.&lt;positive id&gt; = &lt;address1&gt;:&lt;port1&gt;:&lt;port2&gt;[:role];[&lt;client port address&gt;:]&lt;client port&gt;**</span><br></pre></td></tr></table></figure></p>
+<p>例子 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">server.5 = 125.23.63.23:1234:1235;1236</span><br><span class="line">server.5 = 125.23.63.23:1234:1235:participant;1236</span><br><span class="line">server.5 = 125.23.63.23:1234:1235:observer;1236</span><br><span class="line">server.5 = 125.23.63.23:1234:1235;125.23.63.24:1236</span><br><span class="line">server.5 = 125.23.63.23:1234:1235:participant;125.23.63.23:1236</span><br></pre></td></tr></table></figure></p>
+<p>因为我搭建环境的时候，docker image不是3.5了。按照官方的例子不断报错。然后强制升到3.5.1之后就好了</p>
 
       
     </div>
@@ -570,9 +555,7 @@ replica-A 发送两个请求A,和B。leader返回两个response。只有在repli
       
         <div class="post-tags">
           
-            <a href="/tags/MQ/" rel="tag"># MQ</a>
-          
-            <a href="/tags/kafka/" rel="tag"># kafka</a>
+            <a href="/tags/zookeeper/" rel="tag"># zookeeper</a>
           
         </div>
       
@@ -585,8 +568,8 @@ replica-A 发送两个请求A,和B。leader返回两个response。只有在repli
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/01/kafka收发/" rel="next" title="kafka收发">
-                <i class="fa fa-chevron-left"></i> kafka收发
+              <a href="/2019/06/08/jenkins-自学爬坑-二/" rel="next" title="jenkins 自学爬坑(二) ">
+                <i class="fa fa-chevron-left"></i> jenkins 自学爬坑(二) 
               </a>
             
           </div>
@@ -594,10 +577,6 @@ replica-A 发送两个请求A,和B。leader返回两个response。只有在repli
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/01/kafka可靠性传输/" rel="prev" title="kafka可靠性传输">
-                kafka可靠性传输 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -797,7 +776,7 @@ replica-A 发送两个请求A,和B。leader返回两个response。只有在repli
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#broker"><span class="nav-text">Broker</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#id"><span class="nav-text">id</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制器controller"><span class="nav-text">控制器(Controller)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复制"><span class="nav-text">复制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#这里的同步机制"><span class="nav-text">这里的同步机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#leader"><span class="nav-text">leader</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#replica"><span class="nav-text">replica</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#请求"><span class="nav-text">请求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#元数据请求"><span class="nav-text">元数据请求：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生产请求"><span class="nav-text">生产请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取请求"><span class="nav-text">获取请求：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他请求"><span class="nav-text">其他请求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#物理存储"><span class="nav-text">物理存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#index"><span class="nav-text">index</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#清理"><span class="nav-text">清理</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#笔记重点"><span class="nav-text">笔记重点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#znode"><span class="nav-text">znode</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ephemeral-node"><span class="nav-text">ephemeral Node</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#versin"><span class="nav-text">versin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#watch-and-notifications"><span class="nav-text">Watch and Notifications</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#zookeeper-architecture"><span class="nav-text">zookeeper Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#quorums"><span class="nav-text">quorums</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#session"><span class="nav-text">session</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#杂项"><span class="nav-text">杂项</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#爬坑"><span class="nav-text">爬坑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#client-id和client-port语法变化"><span class="nav-text">client id和client port语法变化</span></a></li></ol></li></ol></div>
             
 
           </div>
