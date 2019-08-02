@@ -112,25 +112,25 @@
 
 
 
-  <meta name="description" content="主要是从《kafka权威指南》的第六章笔记整理">
-<meta name="keywords" content="MQ,kafka">
+  <meta name="description" content="spring cloud stream kafka中的一些经验总结">
+<meta name="keywords" content="kafka,spring clould stream,爬坑">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kafka可靠性传输">
-<meta property="og:url" content="https://chandlersong.me/2019/05/01/kafka可靠性传输/index.html">
+<meta property="og:title" content="spring cloud stream 爬坑(一)">
+<meta property="og:url" content="https://chandlersong.me/2019/08/02/spring-cloud-stream-爬坑-一/index.html">
 <meta property="og:site_name" content="cs blog">
-<meta property="og:description" content="主要是从《kafka权威指南》的第六章笔记整理">
+<meta property="og:description" content="spring cloud stream kafka中的一些经验总结">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-01T12:28:09.345Z">
+<meta property="og:updated_time" content="2019-08-02T13:22:15.065Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="kafka可靠性传输">
-<meta name="twitter:description" content="主要是从《kafka权威指南》的第六章笔记整理">
+<meta name="twitter:title" content="spring cloud stream 爬坑(一)">
+<meta name="twitter:description" content="spring cloud stream kafka中的一些经验总结">
 
 
 
 
 
 
-  <link rel="canonical" href="https://chandlersong.me/2019/05/01/kafka可靠性传输/"/>
+  <link rel="canonical" href="https://chandlersong.me/2019/08/02/spring-cloud-stream-爬坑-一/"/>
 
 
 
@@ -140,7 +140,7 @@
   };
 </script>
 
-  <title>kafka可靠性传输 | cs blog</title>
+  <title>spring cloud stream 爬坑(一) | cs blog</title>
   
 
 
@@ -318,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2019/05/01/kafka可靠性传输/">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2019/08/02/spring-cloud-stream-爬坑-一/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chandler song">
@@ -335,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">kafka可靠性传输
+          <h1 class="post-title" itemprop="name headline">spring cloud stream 爬坑(一)
               
             
           </h1>
@@ -360,13 +360,9 @@
                 
               
 
-              <time title="创建时间：2019-05-01 20:26:14 / 修改时间：20:28:09" itemprop="dateCreated datePublished" datetime="2019-05-01T20:26:14+08:00">2019-05-01</time>
+              <time title="创建时间：2019-08-02 21:22:15" itemprop="dateCreated datePublished" datetime="2019-08-02T21:22:15+08:00">2019-08-02</time>
             
 
-            
-              
-
-              
             
           </span>
 
@@ -382,7 +378,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/中间件/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spring-cloud/" itemprop="url" rel="index"><span itemprop="name">spring cloud</span></a></span>
 
                 
                 
@@ -397,8 +393,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/01/kafka可靠性传输/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/05/01/kafka可靠性传输/" itemprop="commentCount"></span>
+                <a href="/2019/08/02/spring-cloud-stream-爬坑-一/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/08/02/spring-cloud-stream-爬坑-一/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -426,83 +422,57 @@
       
 
       
-        <p>主要是从《kafka权威指南》的第六章笔记整理 <a id="more"></a></p>
-<h1 id="可靠性保证">可靠性保证</h1>
-<p>ACID： 原子性，一致性，隔离性和持久性</p>
-<p>kafka做了保证 - 保证分区消息是顺序的。 - 所有消息都写入所有副本(不一定写入磁盘)，才被认为“以<strong>提交</strong>” - 只要一个副本是活跃的，那么<strong>提交</strong>的消息不会丢失 - 消费者只能读<strong>提交</strong>的消息</p>
-<p>这里的关键在于已经<strong>提交</strong>。</p>
-<p>replica需要满足哪些提条件才会被认为同步 - 与zookeeper之间保持一个活跃的会话。配置周期内向zk发送心跳 - 过去10s(可配置)s从首领那里获取过消息 - 过去10s内从首领那里获得<strong>最新消息</strong>。最好零延迟。</p>
-<p>因为消息只能在被<strong>提交</strong>之后，才被消费者消费 - 一个滞后的replica会使得生产者和消费者变慢 - 更少的replica表示更快</p>
-<p>所以安全性和数据的完整是一个平衡点。</p>
-<h1 id="broker配置">broker配置</h1>
+        <p>spring cloud stream kafka中的一些经验总结 <a id="more"></a></p>
+<h2 id="基本概念">基本概念</h2>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  cloud:</span></span><br><span class="line"><span class="attr">    stream:</span></span><br><span class="line"><span class="attr">      kafka:</span></span><br><span class="line"><span class="attr">        binder:</span></span><br><span class="line"><span class="attr">          brokers:</span> <span class="attr">cloudTest:19092</span></span><br><span class="line"><span class="attr">          zk-nodes:</span> <span class="attr">cloudTest:22182</span></span><br><span class="line"><span class="attr">          auto-create-topics:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">      bindings:</span></span><br><span class="line"><span class="attr">        output:</span></span><br><span class="line"><span class="attr">          destination:</span> <span class="string">simpleTest</span></span><br><span class="line"><span class="attr">          content-type:</span> <span class="string">text/plain</span></span><br><span class="line"><span class="attr">          producer:</span></span><br><span class="line"><span class="attr">            partitionCount:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>做类比的话<code>binder</code>就类似于connection，而<code>bindings</code>就是topic，其中<code>destination</code>就是消息队列中的。 spring会对很多东西做出自己的封装。有些不错。有些就做些类比就好了。</p>
+<p>关于具体channel的配置有两类。比如channel input 一类是通用配置。路径是<code>spring.cloud.bindings.input</code> 一类是kafka专用配置。路径是<code>spring.cloud.kafka.bindings.input</code>,然后官方指导上面的文章上面default不太对。我试下来是下面的路径</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  cloud:</span></span><br><span class="line"><span class="attr">    stream:</span></span><br><span class="line"><span class="attr">      kafka:</span></span><br><span class="line"><span class="attr">        default:</span></span><br><span class="line"><span class="attr">          consumer:</span></span><br><span class="line"><span class="attr">            autoCommitOffset:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>或者说官方的意思，可能说想、是同级别下面的defualt的意思吧。</p>
+<h3 id="messageconverter">MessageConverter</h3>
+<p>MessageConverter最大的一个坑就是网络上很多google到的教程。往往已经过时，比如开始的时候是在配置项里面<em>baeldung</em>里面很多配置，现在已经过时。现在只要配置一个bean。注入就好。<br>
+其他的看看文档就好。</p>
 <ul>
-<li>复制系数: 建议为3。高保证可以5，比如银行业
-<ul>
-<li>topic： replication.factor</li>
-<li>broker: default.replication.factor</li>
-<li>broker.rack: 机架。可以理解为分区，鸡蛋不要放在一个篮子里面</li>
-</ul></li>
-<li>不完全的首领选举：一个没有同步的副本能否被当成leader
-<ul>
-<li>配置项为<code>unclean.leader.election</code>,只能在broker级别。</li>
-<li>如果允许，那么<strong>unclean的副本</strong>就会被推举为leader，消息可能会丢失</li>
-<li>如果不允许，那么如果不存在unclean的副本，那么服务就不可用。</li>
-</ul></li>
-<li>最少同步副本
-<ul>
-<li><code>min.insync.replicas</code>: broker级别</li>
-<li>如果总数为2，配置数2，那么当一个分区离线时候，那么整个topic就变成只读，除非恢复。总数为3，就不会有类似问题</li>
-<li>分区不足的时候，会抛出<strong>NotEnoughReplicasEception</strong> 错误</li>
-</ul></li>
+<li>看了一下代码，MessageConverter是通过<code>content-type</code>这个配置项来捞的。</li>
 </ul>
-<h1 id="producer可靠">producer可靠</h1>
-<p>简单的来说，只能通过<code>acks</code>这个配置项来配置。<br>
-生产者可以获得的错误，可重复和不可重复。其实在消费者端来进行判断。<br>
-<code>0.10.0</code>无法保证每个消息“只被保存一次”</p>
-<h1 id="comsumer的可靠性">Comsumer的可靠性</h1>
+<h3 id="avro">Avro</h3>
+<p>关于Avro，就是需要一个<code>schema-registy</code>服务器。简单的来书，就是共享schema的地方。其实这个话题，是Avro的话题。<br>
+回到spring的话，spring自己做了一个schma的服务器。那么你用两种选择</p>
 <ul>
-<li>重要配置
-<ul>
-<li>group.id</li>
-<li>auto。offset.reset: earliest和latest</li>
-<li>enable.auto.commit和auto.commit.interval.ms</li>
-</ul></li>
+<li>用spring的。然后配置<code>@EnableSchemaRegistryServer</code>新建一个boot的application，然后在client端配置<code>@EnableSchemaRegistryClient</code>就好</li>
+<li>用Confluent的话，像下面配置就好。然后记住默认的content type是<code>application/*+avro</code></li>
 </ul>
-<h2 id="显示提交偏移量">显示提交偏移量</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> SchemaRegistryClient <span class="title">schemaRegistryClient</span><span class="params">(@Value(<span class="string">"$&#123;spring.cloud.stream.schemaRegistryClient.endpoint&#125;"</span>)</span> String endpoint)</span>&#123;</span><br><span class="line">  ConfluentSchemaRegistryClient client = <span class="keyword">new</span> ConfluentSchemaRegistryClient();</span><br><span class="line">  client.setEndpoint(endpoint);</span><br><span class="line">  <span class="keyword">return</span> client;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果开发目的呢。我建议还是用Confluent，然后弄个docker container就好。就是方便而已。</p>
+<h2 id="offset">offset</h2>
 <ul>
-<li>总在处理完事件后再提交偏移量</li>
-<li>提交频度是性能和重复消息数量之间的权衡</li>
-<li>确保对提交的便宜量心里有数</li>
-<li>再均衡</li>
-<li>消费者可能需要重试
-<ul>
-<li>消费者的<code>pause()</code>来确保轮询,但是不会接收数据</li>
-<li><code>resume()</code>重新开始消费</li>
-</ul></li>
-<li>消费者可能需要维护状态。</li>
-<li>长时间处理：不发轮询，会让broker以为你<strong>以死</strong>，可以用上面的pause</li>
-<li>仅一次传递。
-<ul>
-<li>seek()方法来确定offset</li>
-</ul></li>
+<li>获取offset: <code>Long offset = message.getHeaders().get(KafkaHeaders.OFFSET, Long.class);</code></li>
 </ul>
-<h1 id="验证系统的可靠性">验证系统的可靠性</h1>
+<p>手动提交的配置</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  cloud:</span></span><br><span class="line"><span class="attr">    stream:</span></span><br><span class="line"><span class="attr">      kafka:</span></span><br><span class="line"><span class="attr">        bindings:</span></span><br><span class="line"><span class="attr">          input:</span></span><br><span class="line"><span class="attr">            consumer:</span></span><br><span class="line"><span class="attr">              autoCommitOffset:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">      bindings:</span></span><br><span class="line"><span class="attr">        input:</span></span><br><span class="line"><span class="attr">          destination:</span> <span class="string">textPlain</span></span><br><span class="line"><span class="attr">          group:</span> <span class="string">s1</span></span><br></pre></td></tr></table></figure>
+<p>关于手动提交的<br>
+一开始的时候，按照官方的手动提交的例子，我发觉一直获得的Acknowledge一直为Null。然后细看了配置，才发现原来源于kafka的配置，要写在kafka下面。我觉得这个设计还是挺操蛋的。<br>
+然后关于meesage的meta data。其实都藏在header里面，可以通过<code>KafkaHeaders</code>来取。 不过关于这点，我觉得还有一个问题，就是commit offset。其实也可以通过那个从header里面来获得<code>customer</code>对象来获得，我发觉commit相关的api都在。估计一个是spring的封装。一个是原生吧</p>
+<h3 id="resume">resume</h3>
+<p>基本没什么特别</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RebalancedListener</span> <span class="keyword">implements</span> <span class="title">KafkaBindingRebalanceListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPartitionsAssigned</span><span class="params">(String bindingName,</span></span></span><br><span class="line"><span class="function"><span class="params">                                     Consumer&lt;?, ?&gt; consumer,</span></span></span><br><span class="line"><span class="function"><span class="params">                                     Collection&lt;TopicPartition&gt; partitions,</span></span></span><br><span class="line"><span class="function"><span class="params">                                     <span class="keyword">boolean</span> initial)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        partitions.forEach(</span><br><span class="line">                p -&gt; consumer.seek(p, offset)</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="streamlistener"><span class="citation" data-cites="StreamListener">@StreamListener</span></h2>
+<h3 id="condition">condition</h3>
+<p>尽管来说支持spel表达式。如果读取payload的话，payload是之前的。所以最好加在heeders里面。</p>
+<h2 id="有用的代码入入口">有用的代码入入口</h2>
 <ul>
-<li><p>配置验证 提供了两个工具<code>org.apache.kafka.tools</code>包下面的<code>Verifiable Producer</code>和<code>VerificableConsumer</code>来做</p></li>
-<li>应用程序验证</li>
-<li>生产环境验证
+<li><code>NetworkClient-initiateConnect</code>: 用来看kafka到底是怎么连接到那里。
 <ul>
-<li>通过JMX</li>
-<li>Producer
-<ul>
-<li>error-rate</li>
-<li>retry-rate</li>
+<li>由于kafka的机制问题。经常会有很多的地址。有时候一个配置错误，不知道哪里错了。就可以看这里。有一次，我把127和172搞错了。花了一个下午</li>
 </ul></li>
-<li>consumer
+<li><code>SmartMessageMethodArgumentResolver-convertPayload</code>： message to pojo的入口
 <ul>
-<li>consumer-lag: consumer的处理速度和最近提交到分区便宜量的差距</li>
+<li>可以看看你配置的MessageConverter到底有没有作用</li>
+<li>可以看看到底message的二进制字节码</li>
 </ul></li>
-<li></li>
+<li><code>OutboundContentTypeConvertingInterceptor-doPreSend</code>: pojo to message的入口
+<ul>
+<li>和上面一个正好相对</li>
 </ul></li>
 </ul>
 
@@ -549,9 +519,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/MQ/" rel="tag"># MQ</a>
-          
             <a href="/tags/kafka/" rel="tag"># kafka</a>
+          
+            <a href="/tags/spring-clould-stream/" rel="tag"># spring clould stream</a>
+          
+            <a href="/tags/爬坑/" rel="tag"># 爬坑</a>
           
         </div>
       
@@ -564,8 +536,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/13/kafka-broker细节/" rel="next" title="kafka broker细节">
-                <i class="fa fa-chevron-left"></i> kafka broker细节
+              <a href="/2019/07/29/kafka爬坑-docker中部署/" rel="next" title="kafka爬坑-docker中部署">
+                <i class="fa fa-chevron-left"></i> kafka爬坑-docker中部署
               </a>
             
           </div>
@@ -573,10 +545,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/02/kafka管理/" rel="prev" title="kafka管理">
-                kafka管理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -786,7 +754,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#可靠性保证"><span class="nav-text">可靠性保证</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#broker配置"><span class="nav-text">broker配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#producer可靠"><span class="nav-text">producer可靠</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#comsumer的可靠性"><span class="nav-text">Comsumer的可靠性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#显示提交偏移量"><span class="nav-text">显示提交偏移量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#验证系统的可靠性"><span class="nav-text">验证系统的可靠性</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#messageconverter"><span class="nav-text">MessageConverter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#avro"><span class="nav-text">Avro</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#offset"><span class="nav-text">offset</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#resume"><span class="nav-text">resume</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#streamlistener"><span class="nav-text">@StreamListener</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#condition"><span class="nav-text">condition</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有用的代码入入口"><span class="nav-text">有用的代码入入口</span></a></li></ol></div>
             
 
           </div>
