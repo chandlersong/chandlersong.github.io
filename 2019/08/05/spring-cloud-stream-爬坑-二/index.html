@@ -112,24 +112,25 @@
 
 
 
-  <meta name="description" content="share my technique experience">
-<meta name="keywords" content="java">
-<meta property="og:type" content="website">
-<meta property="og:title" content="cs blog">
-<meta property="og:url" content="https://chandlersong.me/archives/index.html">
+  <meta name="description" content="kafka原生相关 partition  基本资料 这个没有做例子。文档中说，简单的来说，就是这两个例子partitionSelectorExpression和partitionSelectorClass这两个例子。  key 好像spring cloud stream并不是对kafka的key进行了原生支持。而更像是一个workaround的支持。放在header里面。 其实我觉得">
+<meta name="keywords" content="kafka,爬坑,spring clould stream">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring cloud stream 爬坑(二)">
+<meta property="og:url" content="https://chandlersong.me/2019/08/05/spring-cloud-stream-爬坑-二/index.html">
 <meta property="og:site_name" content="cs blog">
-<meta property="og:description" content="share my technique experience">
+<meta property="og:description" content="kafka原生相关 partition  基本资料 这个没有做例子。文档中说，简单的来说，就是这两个例子partitionSelectorExpression和partitionSelectorClass这两个例子。  key 好像spring cloud stream并不是对kafka的key进行了原生支持。而更像是一个workaround的支持。放在header里面。 其实我觉得">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-05T13:33:53.732Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cs blog">
-<meta name="twitter:description" content="share my technique experience">
+<meta name="twitter:title" content="spring cloud stream 爬坑(二)">
+<meta name="twitter:description" content="kafka原生相关 partition  基本资料 这个没有做例子。文档中说，简单的来说，就是这两个例子partitionSelectorExpression和partitionSelectorClass这两个例子。  key 好像spring cloud stream并不是对kafka的key进行了原生支持。而更像是一个workaround的支持。放在header里面。 其实我觉得">
 
 
 
 
 
 
-  <link rel="canonical" href="https://chandlersong.me/archives/"/>
+  <link rel="canonical" href="https://chandlersong.me/2019/08/05/spring-cloud-stream-爬坑-二/"/>
 
 
 
@@ -139,7 +140,7 @@
   };
 </script>
 
-  <title>归档 | cs blog</title>
+  <title>spring cloud stream 爬坑(二) | cs blog</title>
   
 
 
@@ -195,7 +196,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-archive">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -264,7 +265,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
   </li>
@@ -297,443 +298,247 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2019/08/05/spring-cloud-stream-爬坑-二/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chandler song">
+      <meta itemprop="description" content="share my technique experience">
+      <meta itemprop="image" content="/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cs blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">spring cloud stream 爬坑(二)
+              
+            
+          </h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-05 21:33:53" itemprop="dateCreated datePublished" datetime="2019-08-05T21:33:53+08:00">2019-08-05</time>
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 30 篇日志。 继续努力。
-      </span>
-      
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spring-cloud/" itemprop="url" rel="index"><span itemprop="name">spring cloud</span></a></span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
 
-        
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/05/spring-cloud-stream-爬坑-二/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/08/05/spring-cloud-stream-爬坑-二/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/08/05/spring-cloud-stream-爬坑-二/" itemprop="url">
-              
-                <span itemprop="name">spring cloud stream 爬坑(二)</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-08-05T21:33:53+08:00"
-              content="2019-08-05" >
-          08-05
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/08/02/spring-cloud-stream-爬坑-一/" itemprop="url">
-              
-                <span itemprop="name">spring cloud stream 爬坑(一)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-08-02T21:22:15+08:00"
-              content="2019-08-02" >
-          08-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/29/kafka爬坑-docker中部署/" itemprop="url">
-              
-                <span itemprop="name">kafka爬坑-docker中部署</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-07-29T00:19:19+08:00"
-              content="2019-07-29" >
-          07-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/06/20/zookeeper基本概念/" itemprop="url">
-              
-                <span itemprop="name">zookeeper基本概念</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-06-20T21:19:58+08:00"
-              content="2019-06-20" >
-          06-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h2 id="kafka原生相关">kafka原生相关</h2>
+<h3 id="partition">partition</h3>
+<ul>
+<li><a href="https://cloud.spring.io/spring-cloud-static/spring-cloud-stream-binder-kafka/2.1.0.RC1/multi/multi__partitioning_with_the_kafka_binder.html" target="_blank" rel="noopener">基本资料</a> 这个没有做例子。文档中说，简单的来说，就是这两个例子<code>partitionSelectorExpression</code>和<code>partitionSelectorClass</code>这两个例子。</li>
+</ul>
+<h3 id="key">key</h3>
+<p>好像spring cloud stream并不是对kafka的key进行了原生支持。而更像是一个workaround的支持。放在header里面。<br>
+其实我觉得其实stream里面的header。完全可以替代key的大部分作用。比如上说上面的partition的定义，其实这里Stream对整个消息队列还是有着很多的封装的。</p>
+<p><a href="https://stackoverflow.com/questions/40536566/spring-cloud-streams-not-setting-the-kafka-key-in-the-message" target="_blank" rel="noopener">stackover flow的workaround</a>。用<code>KafkaHeaders.MESSAGE_KEY</code>从message的header里面取。</p>
+<h3 id="多态">多态</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@StreamListener</span>(JsonBinding.JSON_CONSUMER)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processJson</span><span class="params">(Message&lt;Company&gt; message)</span> </span>&#123;</span><br><span class="line">    log.info(<span class="string">"company is &#123;&#125;"</span>, message.getPayload());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@StreamListener</span>(JsonBinding.JSON_CONSUMER)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processJson</span><span class="params">(CompanyA message)</span> </span>&#123;</span><br><span class="line">    log.info(<span class="string">"company A is &#123;&#125;"</span>, message.getName());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@StreamListener</span>(JsonBinding.JSON_CONSUMER)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processJson</span><span class="params">(CompanyB message)</span> </span>&#123;</span><br><span class="line">    log.info(<span class="string">"company B is &#123;&#125;"</span>, message.getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面这段代码。channel的里面的contextType是json。那么就是发的时候，就会进相应的子类方法。<br>
+其实如果Avro这类，则可以<strong>写在header</strong>里面。效果差不多 然后<strong>执行顺序</strong>。貌似是随机的。启动的之后就固定了的。</p>
+<h2 id="avro">Avro</h2>
+<p><a href="https://docs.spring.io/spring-cloud-stream/docs/current/reference/html/schema-evolution.html" target="_blank" rel="noopener">官方教程</a></p>
+<p>confluent的schema resigter感觉支持不是太好。看了一下源代码<code>ConfluentSchemaRegistryClient</code>。只是简单的做了注册的工作。没有升级。换句话说。升级需要你手动自己做。</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/06/08/jenkins-自学爬坑-二/" itemprop="url">
-              
-                <span itemprop="name">jenkins 自学爬坑(二) </span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-06-08T20:45:52+08:00"
-              content="2019-06-08" >
-          06-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/06/03/jenkins-pipeline自学/" itemprop="url">
-              
-                <span itemprop="name">jenkins pipeline自学</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-06-03T21:48:32+08:00"
-              content="2019-06-03" >
-          06-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/06/03/zookeeper基础/" itemprop="url">
-              
-                <span itemprop="name">zookeeper基础</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-06-03T21:45:10+08:00"
-              content="2019-06-03" >
-          06-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/18/kafka客户端监管/" itemprop="url">
-              
-                <span itemprop="name">kafka客户端监管</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-05-18T13:44:02+08:00"
-              content="2019-05-18" >
-          05-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/12/kafka监控基础和broker监控/" itemprop="url">
-              
-                <span itemprop="name">kafka监控基础和broker监控</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-05-12T22:04:23+08:00"
-              content="2019-05-12" >
-          05-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/02/kafka管理/" itemprop="url">
-              
-                <span itemprop="name">kafka管理</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-05-02T15:06:15+08:00"
-              content="2019-05-02" >
-          05-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>赏</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/reward/weixin.jpg" alt="chandler song 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/kafka/" rel="tag"># kafka</a>
+          
+            <a href="/tags/爬坑/" rel="tag"># 爬坑</a>
+          
+            <a href="/tags/spring-clould-stream/" rel="tag"># spring clould stream</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/02/spring-cloud-stream-爬坑-一/" rel="next" title="spring cloud stream 爬坑(一)">
+                <i class="fa fa-chevron-left"></i> spring cloud stream 爬坑(一)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -754,8 +559,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -894,6 +708,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#kafka原生相关"><span class="nav-text">kafka原生相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#partition"><span class="nav-text">partition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#key"><span class="nav-text">key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多态"><span class="nav-text">多态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#avro"><span class="nav-text">Avro</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -1027,6 +857,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
 
   
 
