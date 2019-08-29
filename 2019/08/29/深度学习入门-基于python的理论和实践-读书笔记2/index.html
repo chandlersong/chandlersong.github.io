@@ -112,25 +112,25 @@
 
 
 
-  <meta name="description" content="kafka的基础配置。主要是从《kafka权威指南》的笔记">
-<meta name="keywords" content="MQ,kafka">
+  <meta name="description" content="《深度学习入门-基于python的理论和实践》的读书笔记(后面几章)">
+<meta name="keywords" content="读书笔记,深度学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kafka 配置">
-<meta property="og:url" content="https://chandlersong.me/2019/03/08/kafka-配置/index.html">
+<meta property="og:title" content="深度学习入门-基于python的理论和实践--读书笔记2">
+<meta property="og:url" content="https://chandlersong.me/2019/08/29/深度学习入门-基于python的理论和实践-读书笔记2/index.html">
 <meta property="og:site_name" content="cs blog">
-<meta property="og:description" content="kafka的基础配置。主要是从《kafka权威指南》的笔记">
+<meta property="og:description" content="《深度学习入门-基于python的理论和实践》的读书笔记(后面几章)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-08T12:52:26.633Z">
+<meta property="og:updated_time" content="2019-08-29T14:14:41.624Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="kafka 配置">
-<meta name="twitter:description" content="kafka的基础配置。主要是从《kafka权威指南》的笔记">
+<meta name="twitter:title" content="深度学习入门-基于python的理论和实践--读书笔记2">
+<meta name="twitter:description" content="《深度学习入门-基于python的理论和实践》的读书笔记(后面几章)">
 
 
 
 
 
 
-  <link rel="canonical" href="https://chandlersong.me/2019/03/08/kafka-配置/"/>
+  <link rel="canonical" href="https://chandlersong.me/2019/08/29/深度学习入门-基于python的理论和实践-读书笔记2/"/>
 
 
 
@@ -140,7 +140,7 @@
   };
 </script>
 
-  <title>kafka 配置 | cs blog</title>
+  <title>深度学习入门-基于python的理论和实践--读书笔记2 | cs blog</title>
   
 
 
@@ -318,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2019/03/08/kafka-配置/">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2019/08/29/深度学习入门-基于python的理论和实践-读书笔记2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chandler song">
@@ -335,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">kafka 配置
+          <h1 class="post-title" itemprop="name headline">深度学习入门-基于python的理论和实践--读书笔记2
               
             
           </h1>
@@ -360,13 +360,9 @@
                 
               
 
-              <time title="创建时间：2019-03-08 20:51:04 / 修改时间：20:52:26" itemprop="dateCreated datePublished" datetime="2019-03-08T20:51:04+08:00">2019-03-08</time>
+              <time title="创建时间：2019-08-29 22:14:41" itemprop="dateCreated datePublished" datetime="2019-08-29T22:14:41+08:00">2019-08-29</time>
             
 
-            
-              
-
-              
             
           </span>
 
@@ -382,7 +378,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/中间件/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a></span>
 
                 
                 
@@ -397,8 +393,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/08/kafka-配置/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/03/08/kafka-配置/" itemprop="commentCount"></span>
+                <a href="/2019/08/29/深度学习入门-基于python的理论和实践-读书笔记2/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/08/29/深度学习入门-基于python的理论和实践-读书笔记2/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -426,71 +422,31 @@
       
 
       
-        <p>kafka的基础配置。主要是从《kafka权威指南》的笔记 <a id="more"></a></p>
-<h1 id="思维导图">思维导图</h1>
-<p><a href="http://naotu.baidu.com/file/25a14ed1f3050e7f3fcc42a70c410275?token=c74473d15f793ec3" target="_blank" rel="noopener">思维导图</a></p>
-<h1 id="常规配置">常规配置</h1>
+        <p>《深度学习入门-基于python的理论和实践》的读书笔记(后面几章) <a id="more"></a></p>
+<h2 id="个人感想">个人感想</h2>
+<p>整个深度计算的流程，概括的来说。就是 定义随机点(参数) –&gt; 计算损失 –&gt; 计算梯度–&gt; 更新点(参数）： 追求损失函数到满意值的一个过程</p>
+<p>而层相关的概念，主要是为了简化计算。具体可以见第五章计算图的说法。而简化计算。主要是两个方面。</p>
 <ol type="1">
-<li>broker.id: 集群唯一</li>
-<li>port： 端口</li>
-<li>zookeeper.connect: zookeeper地址</li>
+<li>简化正向计算，使得计算能够比较方面的理解，一个层可以抽象为一种计算。而整个AI的推演过程中，这样使得人能够理解</li>
+<li>简化反向计算，也就是计算梯度，这样可以方便的进行一些更新参数</li>
 </ol>
-<ul>
-<li>格式是 hostname:port/path</li>
-<li>多组用分号隔开</li>
-</ul>
-<ol start="4" type="1">
-<li>log.dirs: 消息的磁盘位置。后面可以看到，消息基本都是以log。</li>
-</ol>
-<ul>
-<li>多组可以用逗号隔开。</li>
-</ul>
-<ol start="5" type="1">
-<li>num.recovery.thread.per.data.dir:可以理解为启动的那一次的并发线程数。可以大一点，因为防止重启。左后用的数据个数，是这个数值乘以目录树。以下为几个时间点。
-<ul>
-<li>正常启动， 用于打开每个分区的日志片段</li>
-<li>奔溃重启后，检查和截短每个分区</li>
-<li>关闭时候，关闭日志片段。</li>
-</ul></li>
-<li>auto.create.topic.enable:自动创建主题。可能有以下几个时间点。
-<ul>
-<li>当一个生产者开始写时候。</li>
-<li>当一个消费者开始读取时候</li>
-<li>客户端向主题发送元数据请求时。</li>
-</ul></li>
-</ol>
-<h1 id="主题默认配置">主题默认配置</h1>
-<ol type="1">
-<li>num.partitions: 新主题包含多少分区。
-<ul>
-<li>分区可以张家，不能减少</li>
-</ul></li>
-<li><p>log.retention.ms/log.retention.hours/log.retention.minutes: 主题保留的时间。如果有多个被设置。那么具体数值最小的参数。</p></li>
-<li><p>log.retention.bytes: 分区保存的最大字节数。主题就是所有分区的和。</p></li>
-<li>log.segment.bytes: 这里是日志片段。不是太清楚，感觉像是borker上物理的文件大小。
-<ul>
-<li>如果消息到borker上，就被写入segment</li>
-<li>segment满了，就停止写入。等待过期之后释放。</li>
-</ul></li>
-<li><p>log。segment.ms: 多久被关闭。</p></li>
-<li><p>message.max。bytes：消息的大小限制</p></li>
-</ol>
-<h2 id="总结">总结</h2>
-<ul>
-<li>segment关闭，只是不再写入？</li>
-<li>当有几个配置。比如<code>log。segment.ms</code>和<code>log.segment.byte</code>同时配置，则是看先触发哪一个。</li>
-</ul>
-<h1 id="硬件">硬件</h1>
-<ol type="1">
-<li>磁盘影响生产者，内存影响消费者</li>
-<li>AWS。建议用M4和r3。
-<ul>
-<li>M4允许较长的保留数据</li>
-<li>R3有较高的吞吐量</li>
-<li>对于AWS不是太熟，貌似现在这些都升级了。</li>
-</ul></li>
-<li>java GC: 其实具体配置可能比较考验水平。但是作者说，kafka内存使用率非常高。容易产生对象，需要早点启动。</li>
-</ol>
+<p>参数和超参的差异要了解。</p>
+<h2 id="笔记">笔记</h2>
+<h3 id="第六章阅读笔记">第六章阅读笔记</h3>
+<p>看到这里，觉得这本书主要讲了几点。 第一，什么深度学习，深度学习有多少相关的元素。 第二，就是元素怎么优化。</p>
+<p>没有将具体怎么设计或者说编排这些元素。</p>
+<p>激活函数(第三章) 损失函数的比较方法(第四章） 参数调试方式(五章) 一些杂项。权重，Normalization，防止过拟合，还有超参的调整(第六章)</p>
+<h3 id="第七章">第七章</h3>
+<h4 id="关于卷积层">关于卷积层</h4>
+<p>这里的卷积层，就好像中间有个镂空的方格，把背景看一遍。然后每看一次的这个镂空的地方看的东西，获得一个snapshot。报告</p>
+<p>这个卷积层就好像是一个滤镜，或者说特征。然后分析的是他的报告的感觉。</p>
+<h4 id="关于im2col函数">关于im2col函数</h4>
+<p>这个函数，做的就是为了方便计算而做了一个转换。</p>
+<p>卷积计算，其实是吧滤波器在原始数据上面一块一块的扫过去(做卷积计算)。</p>
+<p>而这个，就是把一块一块变成一行数据。然后滤波器也是做一样的事情。最后，就是2维数据和2维数据之间做的计算。</p>
+<p>就是为了方便一点。</p>
+<p>其实这里我完全看不懂。这个im2col是怎么干的。就是知道他要把一个高纬度的东西拍平。</p>
+<p>其实这里关键还是要有线性代数的知识。脑子里面一片混乱啊。</p>
 
       
     </div>
@@ -535,9 +491,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/MQ/" rel="tag"># MQ</a>
+            <a href="/tags/读书笔记/" rel="tag"># 读书笔记</a>
           
-            <a href="/tags/kafka/" rel="tag"># kafka</a>
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
           
         </div>
       
@@ -550,8 +506,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/04/kafka搭建最简环境/" rel="next" title="kafka搭建最简环境">
-                <i class="fa fa-chevron-left"></i> kafka搭建最简环境
+              <a href="/2019/08/26/nodejs-one/" rel="next" title="nodejs-one">
+                <i class="fa fa-chevron-left"></i> nodejs-one
               </a>
             
           </div>
@@ -559,10 +515,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/01/kafka收发/" rel="prev" title="kafka收发">
-                kafka收发 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -778,7 +730,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#思维导图"><span class="nav-text">思维导图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常规配置"><span class="nav-text">常规配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#主题默认配置"><span class="nav-text">主题默认配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#硬件"><span class="nav-text">硬件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#个人感想"><span class="nav-text">个人感想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#笔记"><span class="nav-text">笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第六章阅读笔记"><span class="nav-text">第六章阅读笔记</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第七章"><span class="nav-text">第七章</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于卷积层"><span class="nav-text">关于卷积层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于im2col函数"><span class="nav-text">关于im2col函数</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
