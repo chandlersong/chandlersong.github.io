@@ -112,27 +112,25 @@
 
 
 
-  <meta name="description" content="关于java8 中的stream，Optional以及我对java8画的一张思维导图">
-<meta name="keywords" content="java">
+  <meta name="description" content="Go 自学笔记。主要还是在读《Go语言实战》的第四章的笔记 主要是数组，切片和map">
+<meta name="keywords" content="Go,自学">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java8-stream以及其他">
-<meta property="og:url" content="https://chandlersong.me/2018/07/11/java8-stream以及其他/index.html">
+<meta property="og:title" content="Go-自学入门3">
+<meta property="og:url" content="https://chandlersong.me/2019/09/17/Go-自学入门3/index.html">
 <meta property="og:site_name" content="cs blog">
-<meta property="og:description" content="关于java8 中的stream，Optional以及我对java8画的一张思维导图">
+<meta property="og:description" content="Go 自学笔记。主要还是在读《Go语言实战》的第四章的笔记 主要是数组，切片和map">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://on-img.com/chart_image/5b2b374fe4b0d4a19d7f7e6e.png?_=1530969194910">
-<meta property="og:updated_time" content="2018-07-11T14:09:38.000Z">
+<meta property="og:updated_time" content="2019-09-16T22:35:36.816Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java8-stream以及其他">
-<meta name="twitter:description" content="关于java8 中的stream，Optional以及我对java8画的一张思维导图">
-<meta name="twitter:image" content="http://on-img.com/chart_image/5b2b374fe4b0d4a19d7f7e6e.png?_=1530969194910">
+<meta name="twitter:title" content="Go-自学入门3">
+<meta name="twitter:description" content="Go 自学笔记。主要还是在读《Go语言实战》的第四章的笔记 主要是数组，切片和map">
 
 
 
 
 
 
-  <link rel="canonical" href="https://chandlersong.me/2018/07/11/java8-stream以及其他/"/>
+  <link rel="canonical" href="https://chandlersong.me/2019/09/17/Go-自学入门3/"/>
 
 
 
@@ -142,7 +140,7 @@
   };
 </script>
 
-  <title>java8-stream以及其他 | cs blog</title>
+  <title>Go-自学入门3 | cs blog</title>
   
 
 
@@ -320,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2018/07/11/java8-stream以及其他/">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2019/09/17/Go-自学入门3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chandler song">
@@ -337,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">java8-stream以及其他
+          <h1 class="post-title" itemprop="name headline">Go-自学入门3
               
             
           </h1>
@@ -362,13 +360,9 @@
                 
               
 
-              <time title="创建时间：2018-07-11 22:07:44 / 修改时间：22:09:38" itemprop="dateCreated datePublished" datetime="2018-07-11T22:07:44+08:00">2018-07-11</time>
+              <time title="创建时间：2019-09-17 06:35:36" itemprop="dateCreated datePublished" datetime="2019-09-17T06:35:36+08:00">2019-09-17</time>
             
 
-            
-              
-
-              
             
           </span>
 
@@ -384,7 +378,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java笔记/" itemprop="url" rel="index"><span itemprop="name">java笔记</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Go/" itemprop="url" rel="index"><span itemprop="name">Go</span></a></span>
 
                 
                 
@@ -399,8 +393,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/07/11/java8-stream以及其他/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/11/java8-stream以及其他/" itemprop="commentCount"></span>
+                <a href="/2019/09/17/Go-自学入门3/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/09/17/Go-自学入门3/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -428,41 +422,89 @@
       
 
       
-        <p>关于java8 中的stream，Optional以及我对java8画的一张思维导图 <a id="more"></a></p>
-<h1 id="总的思维导图">总的思维导图</h1>
-<p><img src="http://on-img.com/chart_image/5b2b374fe4b0d4a19d7f7e6e.png?_=1530969194910" alt="image"> # Stream API ## 流的特点 当操作stream的时候，需要考虑每一个步骤的操作对象。 - <strong>pipelines</strong> 在官方文档其提出这个概念，相对于循环，我觉得最大的区别就在于此，以前循环，就是在考虑一个循环的过程，而现在考虑的是一个对象如何在<strong>pipelines上面流淌</strong>。 - 对象类型：包括输入输出。觉得很多方法，要考虑好pipelines上下问的连接输入输出。 - 操作方式：是对本对象操作，还是类型转化，还是统计。</p>
-<p>这里我的概念还是有点模糊，只是淡淡的感觉，不要做几件事情。 一来，我觉得stream的核心还是一次只做一件事情。这样语法也简单。方便阅读。 二来，当有几件事情的时候，很多方法用起来就很变扭。</p>
-<h2 id="方法">方法</h2>
-<p>方法分类为 <em>intermediate</em>和<em>terminal</em>两种。前者是过程，后者是终结。<br>
-方法其实有有很多。但是每个方法都有其特定的事情，在写留的时候，我觉得第一步还是在于分解和规划。分解在于把你的事情分解成一个<em>intermediate</em>或<em>terminal</em>能够处理的事情。而规划，则是这些事情的前后顺序</p>
-<blockquote>
-<p>Intermediate：<br>
-map (mapToInt, flatMap 等)、 filter、 distinct、 sorted、 peek、 limit、 skip、 parallel、 sequential、 unordered<br>
-Terminal：<br>
-forEach、 forEachOrdered、 toArray、 reduce、 collect、 min、 max、 count、 anyMatch、 allMatch、 noneMatch、 findFirst、 findAny、 iterator</p>
-</blockquote>
-<p>这里列举了几个方法。 看了一圈，基本来说，大部分看名字都知道怎么用。这里展开就没有太大的意义。</p>
-<h3 id="reduce">reduce</h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">T <span class="title">reduce</span><span class="params">(T identity, BinaryOperator&lt;T&gt; accumulator)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">Optional&lt;T&gt; <span class="title">reduce</span><span class="params">(BinaryOperator&lt;T&gt; accumulator)</span>  </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">&lt;U&gt; U <span class="title">reduce</span><span class="params">(U identity,</span></span></span><br><span class="line"><span class="function"><span class="params">             BiFunction&lt;U,? <span class="keyword">super</span> T,U&gt; accumulator,</span></span></span><br><span class="line"><span class="function"><span class="params">             BinaryOperator&lt;U&gt; combiner)</span></span></span><br></pre></td></tr></table></figure>
-<p><code>BinaryOperator&lt;T&gt; accumulator</code> 这个是核心方法。reduce的核心就是在这里。</p>
-<h3 id="map">map</h3>
-<p>就是转换对象。</p>
-<h3 id="collect-和-collectors">collect 和 Collectors</h3>
-<h4 id="collectors">Collectors</h4>
-<p>主要是这四个方法 - creation of a new result container (supplier())<br>
-- 创建新的结果容器。就是返回值的对象。 - incorporating a new data element into a result container (accumulator()) - 把一个新元素放入容器。简单说的，就是如何把结果A，放入返回值，感觉返回值像是当个生成的。 - combining two result containers into one (combiner()) - 返回值的组合 - performing an optional final transform on the container (finisher()) - 之后的操作</p>
-<p>在这里，collect的本质是一种归集(accumulates)。</p>
-<h2 id="reference">reference</h2>
-<p><a href="https://www.ibm.com/developerworks/cn/java/j-lo-java8streamapi/index.html" target="_blank" rel="noopener">介绍文档</a><br>
-<a href="https://docs.oracle.com/javase/8/docs/api/index.html?overview-summary.html" target="_blank" rel="noopener">官方文档</a></p>
-<h1 id="optional">Optional</h1>
-<h2 id="orelseget">orElseGet</h2>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;Object&gt; test = Optional.empty();</span><br><span class="line"></span><br><span class="line">Object o1 = test.orElseGet(() -&gt; <span class="keyword">new</span> Object());</span><br><span class="line">Object o2 = test.orElseGet(() -&gt; <span class="keyword">new</span> Object());</span><br><span class="line"></span><br><span class="line">logger.info(<span class="string">"o1 and o2 is same:&#123;&#125;"</span>,(o1==o2));</span><br><span class="line">logger.info(<span class="string">"test.get():&#123;&#125;"</span>,test.orElse(<span class="string">"still null"</span>));</span><br><span class="line">Object o3 = test.orElseGet(<span class="keyword">this</span>::createObject);</span><br><span class="line">Object o4 = test.orElseGet(<span class="keyword">this</span>::createObject);</span><br><span class="line">logger.info(<span class="string">"o3 and o4 is same:&#123;&#125;"</span>,(o3==o4));</span><br></pre></td></tr></table></figure>
-<p>可以看到，OrElseGet是每次调用的。这里并不是要用懒加载。这个方法都会被调用一次。</p>
-<h1 id="reference-1">reference</h1>
-<h2 id="java8">java8</h2>
-<p><a href="http://www.importnew.com/11908.html#optional" target="_blank" rel="noopener">参考一</a><br>
-<a href="https://www.jianshu.com/p/5b800057f2d8" target="_blank" rel="noopener">参考二</a></p>
+        <p>Go 自学笔记。主要还是在读《Go语言实战》的第四章的笔记 主要是数组，切片和map</p>
+<a id="more"></a>
+<h2 id="个人感想">个人感想</h2>
+<p>array和map基本都是基本操作，每个语言都差不多的东西。</p>
+<p>切片(slice)觉得是一个不错的炫技的东西。但是不能把他当成java的<strong>List</strong>来用。主要是以下几点</p>
+<ul>
+<li>slice的底层是array。但<strong>不是</strong>List完全封装的。感觉上，从设计理念上来说，他更像是可变的array，而不是List</li>
+<li>如果要对slice进行append操作。那么要考虑capacity这个是否会超。感觉这个是挺蛋疼的操作。因为一旦超了，slice就会生成新的底层数组复制，对底层数组的影响就<strong>不一致</strong>
+<ul>
+<li>由于这一条，感觉slice不太适合做为参数的返回值，除非是说明只能事只读。</li>
+</ul></li>
+<li><a href="https://github.com/golang/go/wiki/SliceTricks" target="_blank" rel="noopener">官方的几个骚操作</a>
+<ul>
+<li>如果不触发底层数组的复制，性能会很快。这样写很骚。否则，估计会很慢。</li>
+<li>觉得这类如果做为第三方类库可能更好，更安全一点。</li>
+<li>其实可以分装成方法。</li>
+</ul></li>
+</ul>
+<h2 id="看书笔记">看书笔记</h2>
+<ul>
+<li>数组，基本算是常规操作，没有什么特别
+<ul>
+<li>初始化的时候不定长的办法<code>[...]int{1, 2, 3, 4, 5}</code>,就是<code>[...]</code>。</li>
+<li>复制的时候，要一样大小。否则会编译不过。</li>
+<li>作为方法的时候，最好是传址，因为Go里面，都是<strong>复制</strong>。如果复制的话，要整个的数组</li>
+</ul></li>
+<li><a href="https://www.runoob.com/go/go-pointers.html" target="_blank" rel="noopener">指针</a>: 里面有很详细的说明，其实对于像用java这类的我来说，有点不习惯。不过记忆一下就好，就是在传递大对象的时候，就要考虑这个问题。</li>
+<li><a href="https://golang.org/pkg/fmt/" target="_blank" rel="noopener">String format语法</a></li>
+<li>map: 创建方式有两种。<code>make(map[string]int)</code> 和 <code>map[string]int{&quot;red&quot;: 1}</code>
+<ul>
+<li>方法参数传的是值，不是址。这个感觉有点神奇</li>
+<li>删除操作很神奇<code>delete(dict2, &quot;red&quot;)</code></li>
+<li>判断存不存在最好以一下方法，<code>value, exists := dict1[&quot;blue&quot;]</code>。尽管来说，exists不存在也提供了方法，但是万一默认为空呢？</li>
+</ul></li>
+</ul>
+<h3 id="切片slice">切片(Slice)</h3>
+<ul>
+<li>两个创建语法<code>make([]int, 5)</code>和<code>[] int{1, 2, 3, 4, 5}</code></li>
+<li>切片是数组或者队列这类的数据结构，而是一种对数组的<strong>操作方式</strong></li>
+<li>三个组件
+<ul>
+<li>指向数组头的指针</li>
+<li>标识可以访问的长度</li>
+<li>数组的容量，<strong>不能小于长度</strong></li>
+</ul></li>
+<li>空切片 <code>var emptySlice [] int</code></li>
+<li><a href="https://blog.golang.org/go-slices-usage-and-internals" target="_blank" rel="noopener">官方说明</a>
+<ul>
+<li><a href="https://github.com/golang/go/wiki/SliceTricks" target="_blank" rel="noopener">Slice的几个用法</a></li>
+</ul></li>
+</ul>
+<h3 id="创建子切片">创建子切片</h3>
+<ul>
+<li>子切片和源切片是<strong>共享内存</strong>的</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">slice := []<span class="keyword">int</span>&#123;<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>&#125;</span><br><span class="line"></span><br><span class="line">newSlice := slice[<span class="number">1</span>:<span class="number">3</span>:<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+<p>上面说的三个组件，</p>
+<ul>
+<li>指针：第一个表示</li>
+<li>长度：第二个减去第第一个</li>
+<li>容量：第三个减去第一个。</li>
+</ul>
+<h3 id="append">append</h3>
+<p>说句真的，觉得这个方法好恶心。有点行为不一样。因为共享内存， 当用了append之后，</p>
+<ul>
+<li>长度小于等于容量的时候，则是会修改原底层数组。</li>
+<li>长度大于容量的时候，则会创建一个新的底层数组。
+<ul>
+<li>增长的策略是翻倍。</li>
+</ul></li>
+</ul>
+<p>危险的code</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">slice := []<span class="keyword">int</span>&#123;<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>,<span class="number">60</span>&#125;</span><br><span class="line"></span><br><span class="line">newSlice := slice[<span class="number">2</span>:<span class="number">4</span>:<span class="number">5</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">fmt.Printf(<span class="string">"old slice is %d \n"</span>, slice)</span><br><span class="line">fmt.Printf(<span class="string">"new slice is %d \n"</span>, newSlice)</span><br><span class="line"></span><br><span class="line">newSlice = <span class="built_in">append</span>(newSlice,<span class="number">70</span>)</span><br><span class="line"></span><br><span class="line">fmt.Printf(<span class="string">"old slice is %d \n"</span>, slice)</span><br><span class="line">fmt.Printf(<span class="string">"new slice is %d \n"</span>, newSlice)</span><br><span class="line"></span><br><span class="line">newSlice = <span class="built_in">append</span>(newSlice,<span class="number">80</span>)</span><br><span class="line"></span><br><span class="line">fmt.Printf(<span class="string">"old slice is %d \n"</span>, slice)</span><br><span class="line">fmt.Printf(<span class="string">"new slice is %d \n"</span>, newSlice)</span><br></pre></td></tr></table></figure>
+<p>output:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">old slice is [10 20 30 40 50 60]</span><br><span class="line">new slice is [30 40]</span><br><span class="line">old slice is [10 20 30 40 70 60]</span><br><span class="line">new slice is [30 40 70]</span><br><span class="line">old slice is [10 20 30 40 70 60]</span><br><span class="line">new slice is [30 40 70 80]</span><br></pre></td></tr></table></figure>
+<h3 id="注意点">注意点</h3>
+<ul>
+<li>底层array是否共享,这个在slice可能被外部编辑时，必须时刻注意
+<ul>
+<li>如果只读，就没这个问题。</li>
+</ul></li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">slice := []<span class="keyword">int</span>&#123;<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>, <span class="number">70</span>, <span class="number">80</span>, <span class="number">90</span>&#125;</span><br><span class="line"></span><br><span class="line">newSlice := <span class="built_in">append</span>(slice[:<span class="number">2</span>], slice[<span class="number">5</span>:]...)</span><br><span class="line"></span><br><span class="line">printCompareSlice(t, slice, newSlice)</span><br><span class="line"></span><br><span class="line">newSlice[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">printCompareSlice(t, slice, newSlice)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -507,7 +549,9 @@ forEach、 forEachOrdered、 toArray、 reduce、 collect、 min、 max、 count
       
         <div class="post-tags">
           
-            <a href="/tags/java/" rel="tag"># java</a>
+            <a href="/tags/Go/" rel="tag"># Go</a>
+          
+            <a href="/tags/自学/" rel="tag"># 自学</a>
           
         </div>
       
@@ -520,8 +564,8 @@ forEach、 forEachOrdered、 toArray、 reduce、 collect、 min、 max、 count
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/05/java8-function-api/" rel="next" title="java8--function api">
-                <i class="fa fa-chevron-left"></i> java8--function api
+              <a href="/2019/09/14/拾遗集-2019-01/" rel="next" title="拾遗集-2019-01">
+                <i class="fa fa-chevron-left"></i> 拾遗集-2019-01
               </a>
             
           </div>
@@ -529,10 +573,6 @@ forEach、 forEachOrdered、 toArray、 reduce、 collect、 min、 max、 count
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/16/数学-函数/" rel="prev" title="数学-函数">
-                数学-函数 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -752,7 +792,7 @@ forEach、 forEachOrdered、 toArray、 reduce、 collect、 min、 max、 count
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#总的思维导图"><span class="nav-text">总的思维导图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法"><span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#reduce"><span class="nav-text">reduce</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#map"><span class="nav-text">map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#collect-和-collectors"><span class="nav-text">collect 和 Collectors</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#collectors"><span class="nav-text">Collectors</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-text">reference</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#optional"><span class="nav-text">Optional</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#orelseget"><span class="nav-text">orElseGet</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reference-1"><span class="nav-text">reference</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java8"><span class="nav-text">java8</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#个人感想"><span class="nav-text">个人感想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#看书笔记"><span class="nav-text">看书笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#切片slice"><span class="nav-text">切片(Slice)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建子切片"><span class="nav-text">创建子切片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#append"><span class="nav-text">append</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意点"><span class="nav-text">注意点</span></a></li></ol></li></ol></div>
             
 
           </div>
