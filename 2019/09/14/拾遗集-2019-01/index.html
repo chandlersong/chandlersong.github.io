@@ -120,7 +120,7 @@
 <meta property="og:site_name" content="cs blog">
 <meta property="og:description" content="java处理csv的时候，excel打开乱码 Avro中，默认用string map to java.lang.String. not CharSequence Avro如何用在restful">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-14T14:46:46.548Z">
+<meta property="og:updated_time" content="2019-09-17T11:16:34.462Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="拾遗集-2019-01">
 <meta name="twitter:description" content="java处理csv的时候，excel打开乱码 Avro中，默认用string map to java.lang.String. not CharSequence Avro如何用在restful">
@@ -364,6 +364,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-17 19:16:34" itemprop="dateModified" datetime="2019-09-17T19:16:34+08:00">2019-09-17</time>
+              
+            
           </span>
 
           
@@ -451,6 +467,10 @@ BOM简单的来说，就是一个文件头标识。否则excel打开之后会乱
 <li>编译的时候，加入字段</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar /path/to/avro-tools-1.7.7.jar compile -string schema</span><br></pre></td></tr></table></figure>
+<p>反序列化的时候，都会通过这个配置来读取相应的配置来确定用什么类，而其他两种，在反序列化的时候，是读不到的，容易报错</p>
+<ul>
+<li>java中的<code>DatumReader</code>: 这个只是根据这个值来判断，而不提供外部的配置，具体可以见<strong>getString</strong></li>
+</ul>
 <h2 id="avro如何用在restful">Avro如何用在restful</h2>
 <p><a href="https://callistaenterprise.se/blogg/teknik/2018/09/25/avro-serialization-with-spring-mvc/" target="_blank" rel="noopener">主要还是参考这篇文章，可以接受json和avro的binary</a>。这篇文章，主要讲了以下几点</p>
 <ul>
@@ -608,7 +628,7 @@ BOM简单的来说，就是一个文件头标识。否则excel打开之后会乱
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-count">39</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

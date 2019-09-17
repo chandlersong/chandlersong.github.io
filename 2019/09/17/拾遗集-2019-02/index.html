@@ -112,25 +112,25 @@
 
 
 
-  <meta name="description" content="主要是Server端的一些配置。">
-<meta name="keywords" content="Eureka,阅读笔记">
+  <meta name="description" content="RestTemplate 默认url disable spring security IDEA Not annotated method overrides method annotated with @NotNull java8 Instant的时区转换 java8 时间">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Eureka Server">
-<meta property="og:url" content="https://chandlersong.me/2018/09/18/Eureka-Server/index.html">
+<meta property="og:title" content="拾遗集-2019-02">
+<meta property="og:url" content="https://chandlersong.me/2019/09/17/拾遗集-2019-02/index.html">
 <meta property="og:site_name" content="cs blog">
-<meta property="og:description" content="主要是Server端的一些配置。">
+<meta property="og:description" content="RestTemplate 默认url disable spring security IDEA Not annotated method overrides method annotated with @NotNull java8 Instant的时区转换 java8 时间">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-18T13:41:27.006Z">
+<meta property="og:updated_time" content="2019-09-17T13:57:56.852Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Eureka Server">
-<meta name="twitter:description" content="主要是Server端的一些配置。">
+<meta name="twitter:title" content="拾遗集-2019-02">
+<meta name="twitter:description" content="RestTemplate 默认url disable spring security IDEA Not annotated method overrides method annotated with @NotNull java8 Instant的时区转换 java8 时间">
 
 
 
 
 
 
-  <link rel="canonical" href="https://chandlersong.me/2018/09/18/Eureka-Server/"/>
+  <link rel="canonical" href="https://chandlersong.me/2019/09/17/拾遗集-2019-02/"/>
 
 
 
@@ -140,7 +140,7 @@
   };
 </script>
 
-  <title>Eureka Server | cs blog</title>
+  <title>拾遗集-2019-02 | cs blog</title>
   
 
 
@@ -318,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2018/09/18/Eureka-Server/">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2019/09/17/拾遗集-2019-02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chandler song">
@@ -335,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Eureka Server
+          <h1 class="post-title" itemprop="name headline">拾遗集-2019-02
               
             
           </h1>
@@ -360,13 +360,9 @@
                 
               
 
-              <time title="创建时间：2018-09-18 21:41:26 / 修改时间：21:41:27" itemprop="dateCreated datePublished" datetime="2018-09-18T21:41:26+08:00">2018-09-18</time>
+              <time title="创建时间：2019-09-17 21:57:56" itemprop="dateCreated datePublished" datetime="2019-09-17T21:57:56+08:00">2019-09-17</time>
             
 
-            
-              
-
-              
             
           </span>
 
@@ -382,7 +378,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spring-cloud/" itemprop="url" rel="index"><span itemprop="name">spring cloud</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/拾遗/" itemprop="url" rel="index"><span itemprop="name">拾遗</span></a></span>
 
                 
                 
@@ -397,8 +393,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/09/18/Eureka-Server/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/09/18/Eureka-Server/" itemprop="commentCount"></span>
+                <a href="/2019/09/17/拾遗集-2019-02/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/09/17/拾遗集-2019-02/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -426,31 +422,46 @@
       
 
       
-        <p>主要是Server端的一些配置。</p>
+        <ul>
+<li>RestTemplate 默认url</li>
+<li>disable spring security</li>
+<li>IDEA <strong>Not annotated method overrides method annotated with <span class="citation" data-cites="NotNull">@NotNull</span></strong></li>
+<li>java8 Instant的时区转换</li>
+<li>java8 时间</li>
+</ul>
 <a id="more"></a>
-<h1 id="总体">总体</h1>
-<p>Eureka Server内部内置了一个Client，通过这个Client端向着其他Server去注册。所以Client端能用的，这里基本都能用。</p>
-<h2 id="最小配置">最小配置</h2>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 18761</span><br><span class="line">logging:</span><br><span class="line">  .config: classpath:logback.xml</span><br><span class="line"></span><br><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    hostname: zone1</span><br><span class="line">  metadata-map:</span><br><span class="line">      mykey: customizedValue</span><br><span class="line">      zone: zone1</span><br><span class="line">  client:</span><br><span class="line">    serviceUrl:</span><br><span class="line">      defaultZone: http://zone2:18762/eureka/</span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: multi-eureka-server</span><br><span class="line">  jmx:</span><br><span class="line">    default-domain: simplest-eureka-server_1</span><br></pre></td></tr></table></figure>
-<p>这里唯一有点注意的就是zone怎么配。在官方文档里，对于zone几乎没有描述。查了一些文档之后，其实zone是分区的概念。可以用，也可以不用。</p>
-<p>注意点，也许在写例子的时候配了localhost会出一点问题。不清楚是显示问题，会不会有业务逻辑基于这些。</p>
-<ol type="1">
-<li>如果配了Localhost。<code>General Info-available-replicas</code>一只为空，而是在<code>unavailable-replicas</code>里面。但是注册的信息会相互沟通</li>
-</ol>
-<p>具体看<a href="https://stackoverflow.com/questions/40984999/eureka-replicas-unavailable" target="_blank" rel="noopener">stackoverflow-jebeaudet</a></p>
-<ol start="2" type="1">
-<li>要配hostname <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    hostname: zone1</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="多服务器配置">多服务器配置</h2>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    hostname: zone3</span><br><span class="line">  client:</span><br><span class="line">    serviceUrl:</span><br><span class="line">      defaultZone: http://zone1:18761/eureka/,http://zone2:18762/eureka/</span><br></pre></td></tr></table></figure>
-<ol type="1">
-<li><p>配置多个服务器，不能用yml的数组表示，必须要用逗号。感觉，配置就是把相应的Class映射到对应的yml里面。</p></li>
-<li>注册是单向的。 举个例子来说，如果A和B相互注册，C如果向A注册。那么会有以下几点。
+<h2 id="resttemplate-默认url">RestTemplate 默认Url</h2>
+<p>发觉这个只是在测试时候用的比较多，现在很少用RestTemplate直接写了吧。<a href="https://stackoverflow.com/questions/44684823/how-to-add-base-uri-in-resttemplate" target="_blank" rel="noopener">具体可以看这里</a> 5.0的写法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RestTemplate restTemplate = <span class="keyword">new</span> RestTemplate();</span><br><span class="line">restTemplate.setUriTemplateHandler(<span class="keyword">new</span> DefaultUriBuilderFactory(<span class="string">"http://localhost:8080"</span>));</span><br><span class="line">restTemplate.getForObject(<span class="string">"/myservice"</span>, String.class);</span><br></pre></td></tr></table></figure>
+<h2 id="disable-spring-security">disable spring security</h2>
+<p>有这个需求还是在写测试的时候，因为要单独测试一个service。但是因为dependency里面有security的依赖，神不知鬼不觉的就启动了。<br>
+在<a href="https://stackoverflow.com/questions/44684823/how-to-add-base-uri-in-resttemplate" target="_blank" rel="noopener">stackoverflow上的讨论</a>看到有很多解决方案，但是发觉都是老版本的，最后找到一个5.0能用的。</p>
+<p>原理看了配置就懂，就是不启动自动配置而已。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">spring.autoconfigure.exclude:</span> <span class="string">org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration</span></span><br></pre></td></tr></table></figure>
+<h2 id="idea-not-annotated-method-overrides-method-annotated-with-notnull">IDEA <strong>Not annotated method overrides method annotated with <span class="citation" data-cites="NotNull">@NotNull</span></strong></h2>
+<p>其实这个算是强迫症的问题。还是<a href="https://stackoverflow.com/questions/24495448/not-annotated-method-overrides-method-annotated-with-notnull" target="_blank" rel="noopener">stackoverflow上的讨论</a><br>
+发觉解决办法，就是简单的参数前加个<code>@Nonnull</code></p>
+<h2 id="java8-instant的时区转换">java8 Instant的时区转换</h2>
+<p>直接上代码，从原理上说，</p>
 <ul>
-<li>注册到C的服务，会同步到A，但是注册到A的不会，同步到C，由此可一直，其实同步，是一个<strong>推得过程</strong></li>
-<li>A和B会相互为Replica。但是C不是A的replica</li>
-</ul></li>
-</ol>
+<li>只是改变显示,内部的值不变。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Instant now = Instant.now(Clock.systemUTC());</span><br><span class="line">logger.info(<span class="string">"instant now with utc:&#123;&#125;"</span>, now);</span><br><span class="line">logger.info(<span class="string">"instant now with utc,epochMilli:&#123;&#125;"</span>, now.toEpochMilli());</span><br><span class="line">logger.info(<span class="string">"date from now epoch second:&#123;&#125;"</span>, <span class="keyword">new</span> Date(now.toEpochMilli()));</span><br><span class="line"></span><br><span class="line">ZonedDateTime zoneNow = now.atZone(ZoneId.systemDefault());</span><br><span class="line">logger.info(<span class="string">"zone now is &#123;&#125;"</span>, zoneNow);</span><br><span class="line"><span class="keyword">long</span> timeZoneSeconds = zoneNow.toEpochSecond();</span><br><span class="line">logger.info(<span class="string">"zone now with utc,epoch second:&#123;&#125;"</span>, timeZoneSeconds);</span><br><span class="line">logger.info(<span class="string">"date from zone epoch second:&#123;&#125;"</span>, <span class="keyword">new</span> Date(timeZoneSeconds * <span class="number">1000</span>));</span><br><span class="line"></span><br><span class="line">OffsetDateTime offsetDateTime = now.atOffset(ZoneOffset.ofHours(<span class="number">8</span>));</span><br><span class="line">logger.info(<span class="string">"offset date time is &#123;&#125;"</span>, offsetDateTime);</span><br><span class="line">logger.info(<span class="string">"offset date epoch second &#123;&#125;"</span>, offsetDateTime.toEpochSecond());</span><br></pre></td></tr></table></figure>
+<p>output</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">19:16:28.775 [main] INFO me.study.java.eight.time.InstantDemos - instant now with utc:2019-09-17T11:16:28.775Z</span><br><span class="line">19:16:28.837 [main] INFO me.study.java.eight.time.InstantDemos - instant now with utc,epochMilli:1568718988775</span><br><span class="line">19:16:28.837 [main] INFO me.study.java.eight.time.InstantDemos - date from now epoch second:Tue Sep 17 19:16:28 CST 2019</span><br><span class="line">19:16:28.853 [main] INFO me.study.java.eight.time.InstantDemos - zone now is 2019-09-17T19:16:28.775+08:00[Asia/Shanghai]</span><br><span class="line">19:16:28.853 [main] INFO me.study.java.eight.time.InstantDemos - zone now with utc,epoch second:1568718988</span><br><span class="line">19:16:28.853 [main] INFO me.study.java.eight.time.InstantDemos - date from zone epoch second:Tue Sep 17 19:16:28 CST 2019</span><br><span class="line">19:16:28.853 [main] INFO me.study.java.eight.time.InstantDemos - offset date time is 2019-09-17T19:16:28.775+08:00</span><br><span class="line">19:16:28.853 [main] INFO me.study.java.eight.time.InstantDemos - offset date epoch second 1568718988</span><br></pre></td></tr></table></figure>
+<h2 id="java8-时间">java8 时间</h2>
+<ul>
+<li>Instant： 表示时间戳比较合适，表示是一种瞬时的时间。</li>
+<li>LocalDateTime： 本地时间</li>
+<li>ZonedDateTime: 时区时间，默认就是本地的</li>
+</ul>
+<p>一些方法：</p>
+<ul>
+<li>adjustInto 和 with：其实这些方法的本质还是用于校准时间。上面一些类其实并不是每个单位都能校准的。比如Instant好像只能到分钟，这个具体看单位</li>
+<li>TemporalAdjusters，可以作为with的参数，这个提供了一些常用的好方法。</li>
+</ul>
+<p>example code:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">ZonedDateTime zoneNow = ZonedDateTime.now();</span><br><span class="line">logger.info(<span class="string">"zone now:&#123;&#125;"</span>, zoneNow);</span><br><span class="line">logger.info(<span class="string">"next friday:&#123;&#125;"</span>, zoneNow.with(TemporalAdjusters.lastDayOfMonth()));</span><br><span class="line">logger.info(<span class="string">"with hour 2:&#123;&#125;"</span>, zoneNow.withHour(<span class="number">2</span>));</span><br><span class="line"></span><br><span class="line">LocalDateTime localNow = LocalDateTime.now();</span><br><span class="line">logger.info(<span class="string">"local now:&#123;&#125;"</span>, localNow);</span><br><span class="line">logger.info(<span class="string">"local now to instant:&#123;&#125;"</span>, localNow.atZone(ZoneId.systemDefault()).toInstant());</span><br><span class="line">logger.info(<span class="string">"local now to instant:&#123;&#125;"</span>, localNow.toInstant(ZoneOffset.UTC));</span><br><span class="line"></span><br><span class="line">Instant now = Instant.now(Clock.systemUTC());</span><br><span class="line">logger.info(<span class="string">"instant now:&#123;&#125;"</span>, now);</span><br><span class="line">logger.info(<span class="string">"instant now:&#123;&#125;"</span>, now.minus(<span class="number">30</span>, ChronoUnit.DAYS));</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -495,9 +506,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Eureka/" rel="tag"># Eureka</a>
-          
-            <a href="/tags/阅读笔记/" rel="tag"># 阅读笔记</a>
+            <a href="/tags/java/" rel="tag"># java</a>
           
         </div>
       
@@ -510,8 +519,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/08/Docker总结/" rel="next" title="Docker总结">
-                <i class="fa fa-chevron-left"></i> Docker总结
+              <a href="/2019/09/17/Go-自学入门3/" rel="next" title="Go-自学入门3">
+                <i class="fa fa-chevron-left"></i> Go-自学入门3
               </a>
             
           </div>
@@ -519,10 +528,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/20/Hystrix/" rel="prev" title="Hystrix">
-                Hystrix <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -742,7 +747,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#总体"><span class="nav-text">总体</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#最小配置"><span class="nav-text">最小配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多服务器配置"><span class="nav-text">多服务器配置</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#resttemplate-默认url"><span class="nav-text">RestTemplate 默认Url</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#disable-spring-security"><span class="nav-text">disable spring security</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#idea-not-annotated-method-overrides-method-annotated-with-notnull"><span class="nav-text">IDEA Not annotated method overrides method annotated with @NotNull</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java8-instant的时区转换"><span class="nav-text">java8 Instant的时区转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java8-时间"><span class="nav-text">java8 时间</span></a></li></ol></div>
             
 
           </div>
