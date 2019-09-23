@@ -112,25 +112,25 @@
 
 
 
-  <meta name="description" content="java处理csv的时候，excel打开乱码 Avro中，默认用string map to java.lang.String. not CharSequence Avro如何用在restful">
-<meta name="keywords" content="java">
+  <meta name="description" content="java生成文件夹乱码 强制docker支持中文 java泛型创建数组">
+<meta name="keywords" content="java,docker">
 <meta property="og:type" content="article">
-<meta property="og:title" content="拾遗集-2019-01">
-<meta property="og:url" content="https://chandlersong.me/2019/09/14/拾遗集-2019-01/index.html">
+<meta property="og:title" content="拾遗集-2019-03">
+<meta property="og:url" content="https://chandlersong.me/2019/09/23/拾遗集-2019-03/index.html">
 <meta property="og:site_name" content="cs blog">
-<meta property="og:description" content="java处理csv的时候，excel打开乱码 Avro中，默认用string map to java.lang.String. not CharSequence Avro如何用在restful">
+<meta property="og:description" content="java生成文件夹乱码 强制docker支持中文 java泛型创建数组">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-17T11:16:34.462Z">
+<meta property="og:updated_time" content="2019-09-23T12:39:20.231Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="拾遗集-2019-01">
-<meta name="twitter:description" content="java处理csv的时候，excel打开乱码 Avro中，默认用string map to java.lang.String. not CharSequence Avro如何用在restful">
+<meta name="twitter:title" content="拾遗集-2019-03">
+<meta name="twitter:description" content="java生成文件夹乱码 强制docker支持中文 java泛型创建数组">
 
 
 
 
 
 
-  <link rel="canonical" href="https://chandlersong.me/2019/09/14/拾遗集-2019-01/"/>
+  <link rel="canonical" href="https://chandlersong.me/2019/09/23/拾遗集-2019-03/"/>
 
 
 
@@ -140,7 +140,7 @@
   };
 </script>
 
-  <title>拾遗集-2019-01 | cs blog</title>
+  <title>拾遗集-2019-03 | cs blog</title>
   
 
 
@@ -318,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2019/09/14/拾遗集-2019-01/">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2019/09/23/拾遗集-2019-03/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chandler song">
@@ -335,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">拾遗集-2019-01
+          <h1 class="post-title" itemprop="name headline">拾遗集-2019-03
               
             
           </h1>
@@ -360,25 +360,9 @@
                 
               
 
-              <time title="创建时间：2019-09-14 22:46:46" itemprop="dateCreated datePublished" datetime="2019-09-14T22:46:46+08:00">2019-09-14</time>
+              <time title="创建时间：2019-09-23 20:39:20" itemprop="dateCreated datePublished" datetime="2019-09-23T20:39:20+08:00">2019-09-23</time>
             
 
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-09-17 19:16:34" itemprop="dateModified" datetime="2019-09-17T19:16:34+08:00">2019-09-17</time>
-              
             
           </span>
 
@@ -409,8 +393,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/09/14/拾遗集-2019-01/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/09/14/拾遗集-2019-01/" itemprop="commentCount"></span>
+                <a href="/2019/09/23/拾遗集-2019-03/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/09/23/拾遗集-2019-03/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -439,45 +423,27 @@
 
       
         <ul>
-<li>java处理csv的时候，excel打开乱码</li>
-<li>Avro中，默认用string map to java.lang.String. not CharSequence</li>
-<li>Avro如何用在restful</li>
+<li>java生成文件夹乱码</li>
+<li>强制docker支持中文</li>
+<li>java泛型创建数组</li>
 </ul>
 <a id="more"></a>
-<h2 id="java处理csv的时候excel打开乱码">java处理csv的时候，excel打开乱码</h2>
-<p>java默认文件，不会加入BOM。但是excel需要BOM去解析。所以需要自己写BOM（byte-order mark)<br>
-BOM简单的来说，就是一个文件头标识。否则excel打开之后会乱码</p>
+<h2 id="java文件夹乱码">java文件夹乱码</h2>
+<p><a href="https://blog.csdn.net/Petershusheng/article/details/56666194" target="_blank" rel="noopener">方案一</a> 修改<code>sun.jnu.encoding</code>这个环境变量</p>
+<p><a href="https://blog.csdn.net/petershusheng/article/details/68491874" target="_blank" rel="noopener">方案二</a> 通过<code>LC_ALL</code></p>
+<h2 id="docker中文">docker中文</h2>
+<p><a href="https://blog.csdn.net/ysm_sd/article/details/50674484" target="_blank" rel="noopener">docker转换成中文</a></p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ENV</span> LANG zh_CN.UTF-<span class="number">8</span></span><br><span class="line"><span class="keyword">ENV</span> LC_ALL zh_CN.UTF-<span class="number">8</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://www.cnblogs.com/hellojesson/p/10831479.html" target="_blank" rel="noopener">有时候可能无效。需要打命令，可以写入Dockerfile</a></p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo localedef -i en_US -f UTF-<span class="number">8</span> en_US.UTF-<span class="number">8</span></span><br></pre></td></tr></table></figure>
+<h2 id="linux下java修改文件夹权限">Linux下java修改文件夹权限</h2>
+<p><a href="https://blog.csdn.net/oeSeven/article/details/79130420" target="_blank" rel="noopener">java 修改linux文件夹权限</a></p>
 <ul>
-<li><a href="https://blog.csdn.net/kkdelta/article/details/50503930" target="_blank" rel="noopener">具体原理解释</a></li>
-<li><a href="https://blog.csdn.net/tjj3027/article/details/80257007" target="_blank" rel="noopener">几个地方要用的写法</a></li>
-<li><a href="https://daimojingdeyu.iteye.com/blog/397661" target="_blank" rel="noopener">读也有问题。这里详细解释了</a></li>
+<li>1.8的api</li>
+<li>windows下面要报错</li>
 </ul>
-<h2 id="avro中默认用string-map-to-java.lang.string.-not-charsequence">Avro中，默认用string map to java.lang.String. not CharSequence</h2>
-<p><a href="https://stackoverflow.com/questions/25118727/how-to-generate-fields-of-type-string-instead-of-charsequence-using-avro" target="_blank" rel="noopener">资料</a></p>
-<p>avro默认在java中生成的是<code>CharSequence</code>。要想string，有三种方法</p>
-<ul>
-<li>在maven的配置中加入全局中加入</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.avro<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>avro-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;avro.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">stringType</span>&gt;</span>String<span class="tag">&lt;/<span class="name">stringType</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>单个字段</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;name&quot;: &quot;name&quot;,</span><br><span class="line">    &quot;type&quot;: &#123;</span><br><span class="line">        &quot;type&quot;: &quot;string&quot;,</span><br><span class="line">        &quot;avro.java.string&quot;: &quot;String&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>编译的时候，加入字段</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar /path/to/avro-tools-1.7.7.jar compile -string schema</span><br></pre></td></tr></table></figure>
-<p>反序列化的时候，都会通过这个配置来读取相应的配置来确定用什么类，而其他两种，在反序列化的时候，是读不到的，容易报错</p>
-<ul>
-<li>java中的<code>DatumReader</code>: 这个只是根据这个值来判断，而不提供外部的配置，具体可以见<strong>getString</strong></li>
-</ul>
-<h2 id="avro如何用在restful">Avro如何用在restful</h2>
-<p><a href="https://callistaenterprise.se/blogg/teknik/2018/09/25/avro-serialization-with-spring-mvc/" target="_blank" rel="noopener">主要还是参考这篇文章，可以接受json和avro的binary</a>。这篇文章，主要讲了以下几点</p>
-<ul>
-<li><p>利用<strong>SpecificRecordBase</strong> 和 <strong>org.apache.avro.io</strong>包下面的class来通例的序列化和反序列化。Avro序列化的时候需要知道<strong>schema</strong>和具体哪个类。这个 在处理的时候，其实有点麻烦，官方的解决办法就是用schema register center。但是有时候这些有点小题大做。而这个方法是不错的。我把他的逻辑直接整合到一个class里面。 <a href="https://github.com/chandlersong/springCloudExamples/blob/master/services/avro-entry/src/main/java/me/study/springcloud/io/AvroMessageConverter.java" target="_blank" rel="noopener">AvroMessageConverter.java</a> 核心代码在里面。其实文中的例子，还是有分层很多。可以学点其他东西。</p></li>
-<li><p>定义你自己<strong>MediaType</strong>，在我例子中，用的<em>application/avro</em>，但是很多地方喜欢用<em>application/</em>+avro*。个人喜好吧</p></li>
-<li><p>注册，其实这个算是spring的东西。就是在5.0中，接口改了改成了<strong>WebMvcConfigurer</strong></p></li>
-</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">storeFile</span><span class="params">(File file, String filename)</span> <span class="keyword">throws</span> IllegalStateException, IOException </span>&#123;</span><br><span class="line">   File dest = <span class="keyword">new</span> File(pathResolver.getPath(filename, prefix));</span><br><span class="line">   FileUtils.moveFile(file, dest);</span><br><span class="line">   <span class="comment">//设置权限</span></span><br><span class="line">   Set&lt;PosixFilePermission&gt; perms = <span class="keyword">new</span> HashSet&lt;PosixFilePermission&gt;();</span><br><span class="line">   perms.add(PosixFilePermission.OWNER_READ); <span class="comment">//设置所有者的读取权限</span></span><br><span class="line">   perms.add(PosixFilePermission.OWNER_WRITE);<span class="comment">//设置所有者的写权限</span></span><br><span class="line">   perms.add(PosixFilePermission.OWNER_EXECUTE);<span class="comment">//设置所有者的执行权限</span></span><br><span class="line">   perms.add(PosixFilePermission.GROUP_READ);<span class="comment">//设置组的读取权限</span></span><br><span class="line">   perms.add(PosixFilePermission.GROUP_EXECUTE);<span class="comment">//设置组的读取权限</span></span><br><span class="line">   perms.add(PosixFilePermission.OTHERS_READ);<span class="comment">//设置其他的读取权限</span></span><br><span class="line">   perms.add(PosixFilePermission.OTHERS_EXECUTE);<span class="comment">//设置其他的读取权限</span></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">//设置文件和文件夹的权限</span></span><br><span class="line">    Path pathParent = Paths.get(dest.getParentFile().getAbsolutePath());</span><br><span class="line">    Path pathDest = Paths.get(dest.getAbsolutePath());</span><br><span class="line">    Files.setPosixFilePermissions(pathParent, perms);/修改文件夹路径的权限</span><br><span class="line">    Files.setPosixFilePermissions(pathDest, perms); <span class="comment">//修改图片文件的权限</span></span><br><span class="line">   &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">     logger.info(e.getMessage());</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">## java泛型创建数组</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">  <span class="keyword">private</span> T[] createG(Class&lt;? extends T[]&gt; clazz) &#123;</span><br><span class="line">        Class&lt;?&gt; componentType = clazz.getComponentType();</span><br><span class="line">        T[] result = (T[]) Array.newInstance(componentType, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://stackoverflow.com/questions/53180405/how-to-cast-a-generic-arraylist-to-a-generic-array" target="_blank" rel="noopener">reference</a></p>
 
       
     </div>
@@ -524,6 +490,8 @@ BOM简单的来说，就是一个文件头标识。否则excel打开之后会乱
           
             <a href="/tags/java/" rel="tag"># java</a>
           
+            <a href="/tags/docker/" rel="tag"># docker</a>
+          
         </div>
       
 
@@ -535,8 +503,8 @@ BOM简单的来说，就是一个文件头标识。否则excel打开之后会乱
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/14/Go-自学入门2/" rel="next" title="Go-自学入门2">
-                <i class="fa fa-chevron-left"></i> Go-自学入门2
+              <a href="/2019/09/17/拾遗集-2019-02/" rel="next" title="拾遗集-2019-02">
+                <i class="fa fa-chevron-left"></i> 拾遗集-2019-02
               </a>
             
           </div>
@@ -545,8 +513,8 @@ BOM简单的来说，就是一个文件头标识。否则excel打开之后会乱
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/09/17/Go-自学入门3/" rel="prev" title="Go-自学入门3">
-                Go-自学入门3 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/09/23/GO-自学入门4/" rel="prev" title="GO-自学入门4">
+                GO-自学入门4 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -767,7 +735,7 @@ BOM简单的来说，就是一个文件头标识。否则excel打开之后会乱
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#java处理csv的时候excel打开乱码"><span class="nav-text">java处理csv的时候，excel打开乱码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#avro中默认用string-map-to-java.lang.string.-not-charsequence"><span class="nav-text">Avro中，默认用string map to java.lang.String. not CharSequence</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#avro如何用在restful"><span class="nav-text">Avro如何用在restful</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#java文件夹乱码"><span class="nav-text">java文件夹乱码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker中文"><span class="nav-text">docker中文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux下java修改文件夹权限"><span class="nav-text">Linux下java修改文件夹权限</span></a></li></ol></div>
             
 
           </div>
