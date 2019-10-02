@@ -112,25 +112,25 @@
 
 
 
-  <meta name="description" content="《zookeeper_distributed_process_coordination》 第一章笔记">
-<meta name="keywords" content="zookeeper">
+  <meta name="description" content="Go 自学笔记。主要还是在读《Go语言实战》的第六章的笔记主要是关于类型的">
+<meta name="keywords" content="Go,自学">
 <meta property="og:type" content="article">
-<meta property="og:title" content="zookeeper基础">
-<meta property="og:url" content="https://chandlersong.me/2019/06/03/zookeeper基础/index.html">
+<meta property="og:title" content="Go-自学入门5">
+<meta property="og:url" content="https://chandlersong.me/2019/10/02/Go-自学入门5/index.html">
 <meta property="og:site_name" content="cs blog">
-<meta property="og:description" content="《zookeeper_distributed_process_coordination》 第一章笔记">
+<meta property="og:description" content="Go 自学笔记。主要还是在读《Go语言实战》的第六章的笔记主要是关于类型的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-04T13:32:33.431Z">
+<meta property="og:updated_time" content="2019-10-02T02:19:11.585Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zookeeper基础">
-<meta name="twitter:description" content="《zookeeper_distributed_process_coordination》 第一章笔记">
+<meta name="twitter:title" content="Go-自学入门5">
+<meta name="twitter:description" content="Go 自学笔记。主要还是在读《Go语言实战》的第六章的笔记主要是关于类型的">
 
 
 
 
 
 
-  <link rel="canonical" href="https://chandlersong.me/2019/06/03/zookeeper基础/"/>
+  <link rel="canonical" href="https://chandlersong.me/2019/10/02/Go-自学入门5/"/>
 
 
 
@@ -140,7 +140,7 @@
   };
 </script>
 
-  <title>zookeeper基础 | cs blog</title>
+  <title>Go-自学入门5 | cs blog</title>
   
 
 
@@ -318,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2019/06/03/zookeeper基础/">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2019/10/02/Go-自学入门5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chandler song">
@@ -335,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">zookeeper基础
+          <h1 class="post-title" itemprop="name headline">Go-自学入门5
               
             
           </h1>
@@ -360,25 +360,9 @@
                 
               
 
-              <time title="创建时间：2019-06-03 21:45:10" itemprop="dateCreated datePublished" datetime="2019-06-03T21:45:10+08:00">2019-06-03</time>
+              <time title="创建时间：2019-10-02 10:19:11" itemprop="dateCreated datePublished" datetime="2019-10-02T10:19:11+08:00">2019-10-02</time>
             
 
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-06-04 21:32:33" itemprop="dateModified" datetime="2019-06-04T21:32:33+08:00">2019-06-04</time>
-              
             
           </span>
 
@@ -394,7 +378,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/中间件/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Go/" itemprop="url" rel="index"><span itemprop="name">Go</span></a></span>
 
                 
                 
@@ -409,8 +393,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/06/03/zookeeper基础/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/06/03/zookeeper基础/" itemprop="commentCount"></span>
+                <a href="/2019/10/02/Go-自学入门5/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/10/02/Go-自学入门5/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -438,42 +422,70 @@
       
 
       
-        <p>《zookeeper_distributed_process_coordination》 第一章笔记 <a id="more"></a></p>
-<h1 id="基本功能">基本功能</h1>
-<h2 id="synchronization-primitives">Synchronization primitives</h2>
-<p>同步原始信息。其中包括 - leader election - locks - Configuration metadata</p>
-<h2 id="zookeeper提供的功能">zookeeper提供的功能</h2>
+        <p>Go 自学笔记。主要还是在读《Go语言实战》的第六章的笔记主要是关于类型的</p>
+<a id="more"></a>
+<h2 id="个人感想">个人感想</h2>
+<ol type="1">
+<li>Go的关于并发理念其实是一种经验总结，把以前很多经验，给整合到语言层面去了。其实这也是Go一直秉持的理念</li>
+<li>并发和并行。书中解释的很完美，其实读了之后，有种醍醐灌顶的感觉，说真的，以前一种把这两个概念给混淆。不过这个概念清楚了之后，很多东西其实反而豁然开朗</li>
+<li>channel其实就是一个简单的MQ。不过功能很少</li>
+</ol>
+<h2 id="第一天">第一天</h2>
 <ul>
-<li>Strong consistency, ordering and durability guarantees</li>
-<li>the ability to implement typical synchronization primitives</li>
-<li>A simpler way to deal with many aspects of concurrency that often lead to incorrect behavior in real distributed systems.</li>
-</ul>
-<h2 id="zookeeper不做的事情">zookeeper不做的事情</h2>
+<li>Go语言的并发同步模型来自于一个叫做通信顺序进程(Communicating Sequential Processes,CSP)的泛型。</li>
+<li>逻辑处理器和goroutine：类似于netty的机制。逻辑处理器可以理解为主线程。而goroutine，其实是一个个逻辑单元。由逻辑处理来决定，goroutine是否能够被执行以及和线程调度的相关内容。
 <ul>
-<li>is not for bulk storage
-<ul>
-<li>spartes application data from control and coordination,that’s for zookeeper</li>
+<li>goroutine:是一个独立的运算单元</li>
+<li>当一个goroutine抢占阻塞资源，而被阻塞时候，这个线程会被挂起，然后一条新的线程回合逻辑处理器挂钩。</li>
+<li>如果是网络，则是会进入特别的网络轮询器。不知道会不会产生自己新的轮询器？</li>
+<li>这个叫做<strong>分离</strong></li>
+<li>最多创建10000个线程，通过runtime/debug包的<strong>SetMaxTreads</strong>来更改</li>
+<li>逻辑处理器，类似于CPU，如果一个goroutine运行时间过长，则是会提前退出的。</li>
 </ul></li>
-<li>zookeeper does’t implement the tasks. but offer the tools to do the these tasks for the distributed application.</li>
-</ul>
-<h2 id="distributed-systems-with-zookeeper">distributed systems with zookeeper</h2>
-<h3 id="advatage">advatage</h3>
+<li>并发（concurrency）不是并行（parallelisim）。这个是反复强调的事情。其实这也是Go的理念。
 <ul>
-<li>commponent to be designed and implemented independently</li>
-<li>enable system architect to reason more easily about corrdination</li>
-</ul>
-<h3 id="faceing-problem">faceing problem</h3>
+<li>并行关键是同时做很多事情</li>
+<li>并发是同时管理很多事情。</li>
+<li>其实我的理解是，并行关键是事情快点做，类似于快速响应，而并发的关键在于事情要做好。程序不要爆掉。可以放在后面做。</li>
+<li>书中的<em>图6-2</em>和<em>图6-3</em>说的比较详细，但是这里没有办法显示出来。</li>
+</ul></li>
+<li><strong>defer</strong>这个关键词，好像是挺有用的，延时加载
 <ul>
-<li>Message delays</li>
-<li>Processer speed</li>
-<li>Clock drift</li>
+<li>多个<strong>defer</strong>的时候，顺序是倒过来的。</li>
+</ul></li>
+<li><code>runtime.GOMAXPROCS(1)</code> 设定逻辑处理器的最大值</li>
+<li><code>sync.WaitGroup</code> java里面的CountdownLatch</li>
 </ul>
-<p>it’s very hard in practice to tell if a process has crashed or if any of these factors is introducing some arbitray delap</p>
-<h1 id="examples-of-master-worker-application">Examples of Master-Worker application</h1>
-<p>three key problem - master crashes: need a backup master - split brain - worker crashes - detect the worker crashes<br>
-- Communication failures - Exactly-Once and At-Most-Once Senmantics - synchronization primitives like locks - zk use ephemeral node&quot; - zk will periodically check node is alive</p>
-<p>requirment of master-worker architecture - Master election - Crash detection - Group membership management - meta management</p>
-<p>CAP - Consistency - Availablity - Partition-tolerance</p>
+<h2 id="第二天">第二天</h2>
+<ul>
+<li><strong>runtime.Gosched</strong>: goroutine退出现在线程。等待下次被调用。</li>
+<li><strong>go build –race</strong>: 检查程序中有没有一些线程问题。</li>
+<li>可以在头上这样定义一下文件的变量</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span>&#123;</span><br><span class="line">    counter <span class="keyword">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>共享资源
+<ul>
+<li><code>atomic.AddInt64(&amp;atomicCount, 1)</code>: 这个不是互斥，而是在Go中，共享变量，是其他goroutine copy到自己，然后就是利用这个，不停的去同步。</li>
+<li><code>mutex *sync.Mutex</code>，互斥锁。用法和final一样。</li>
+</ul></li>
+<li>channel:本质上来说，就是一个MQ
+<ul>
+<li>基本操作</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">unbuffered := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">buffered := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>,<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">buffered &lt;- <span class="string">"add value to channel"</span></span><br><span class="line">value := &lt;-buffered</span><br></pre></td></tr></table></figure>
+<ul>
+<li>无缓冲: 接受和发送都会被阻塞</li>
+<li>有缓冲：只有接受在没值的时候会被阻塞。
+<ul>
+<li>关闭后，只能取，不能塞</li>
+<li>已关闭，没数据的channel，会返回该通道的零值。如果加入可选标志，还能得到通道信息。就是<code>value,ok :=&lt;=channel</code>中的ok值会是false。这样判断比较好。</li>
+<li>本身不支持timeout。这里是支持timeout的<a href="https://blog.golang.org/go-concurrency-patterns-timing-out-and" target="_blank" rel="noopener">官方方法</a>: 用select分支来做</li>
+<li><a href="https://stanzhai.site/blog/post/stanzhai/go%E4%B8%BAchannel%E8%AE%BE%E7%BD%AE%E8%B6%85%E6%97%B6%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BF" target="_blank" rel="noopener">这里说明了一个问题</a>： 就是timeout的routinue时间太长。timeout的期间的goroutinue不停的进入逻辑处理器。造成问题。而这个，就是等到返回值之后，终止了goroutine</li>
+</ul></li>
+</ul></li>
+<li><a href="https://yourbasic.org/golang/create-error/" target="_blank" rel="noopener">处理错误的三种方法</a>: 简单的来说，就是创建一个对象。做为第二参数扔回去。</li>
+</ul>
 
       
     </div>
@@ -518,7 +530,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/zookeeper/" rel="tag"># zookeeper</a>
+            <a href="/tags/Go/" rel="tag"># Go</a>
+          
+            <a href="/tags/自学/" rel="tag"># 自学</a>
           
         </div>
       
@@ -531,8 +545,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/18/kafka客户端监管/" rel="next" title="kafka客户端监管">
-                <i class="fa fa-chevron-left"></i> kafka客户端监管
+              <a href="/2019/09/23/GO-自学入门4/" rel="next" title="GO-自学入门4">
+                <i class="fa fa-chevron-left"></i> GO-自学入门4
               </a>
             
           </div>
@@ -540,10 +554,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/03/jenkins-pipeline自学/" rel="prev" title="jenkins pipeline自学">
-                jenkins pipeline自学 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -763,7 +773,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本功能"><span class="nav-text">基本功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronization-primitives"><span class="nav-text">Synchronization primitives</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zookeeper提供的功能"><span class="nav-text">zookeeper提供的功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zookeeper不做的事情"><span class="nav-text">zookeeper不做的事情</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#distributed-systems-with-zookeeper"><span class="nav-text">distributed systems with zookeeper</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#advatage"><span class="nav-text">advatage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#faceing-problem"><span class="nav-text">faceing problem</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#examples-of-master-worker-application"><span class="nav-text">Examples of Master-Worker application</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#个人感想"><span class="nav-text">个人感想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一天"><span class="nav-text">第一天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二天"><span class="nav-text">第二天</span></a></li></ol></div>
             
 
           </div>
