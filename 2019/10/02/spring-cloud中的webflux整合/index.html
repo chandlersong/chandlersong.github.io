@@ -112,25 +112,25 @@
 
 
 
-  <meta name="description" content="《zookeeper_distributed_process_coordination》 第二到第四章笔记">
-<meta name="keywords" content="zookeeper">
+  <meta name="description" content="在把webflux整合到spring cloud里面，踩过的坑。  调用方式 自定义的MediaType，文中用的是转换成Avro">
+<meta name="keywords" content="webflux,feign,reactive">
 <meta property="og:type" content="article">
-<meta property="og:title" content="zookeeper基本概念">
-<meta property="og:url" content="https://chandlersong.me/2019/06/20/zookeeper基本概念/index.html">
+<meta property="og:title" content="spring cloud中的webflux整合">
+<meta property="og:url" content="https://chandlersong.me/2019/10/02/spring-cloud中的webflux整合/index.html">
 <meta property="og:site_name" content="cs blog">
-<meta property="og:description" content="《zookeeper_distributed_process_coordination》 第二到第四章笔记">
+<meta property="og:description" content="在把webflux整合到spring cloud里面，踩过的坑。  调用方式 自定义的MediaType，文中用的是转换成Avro">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-20T13:20:49.915Z">
+<meta property="og:updated_time" content="2019-10-02T06:24:56.726Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zookeeper基本概念">
-<meta name="twitter:description" content="《zookeeper_distributed_process_coordination》 第二到第四章笔记">
+<meta name="twitter:title" content="spring cloud中的webflux整合">
+<meta name="twitter:description" content="在把webflux整合到spring cloud里面，踩过的坑。  调用方式 自定义的MediaType，文中用的是转换成Avro">
 
 
 
 
 
 
-  <link rel="canonical" href="https://chandlersong.me/2019/06/20/zookeeper基本概念/"/>
+  <link rel="canonical" href="https://chandlersong.me/2019/10/02/spring-cloud中的webflux整合/"/>
 
 
 
@@ -140,7 +140,7 @@
   };
 </script>
 
-  <title>zookeeper基本概念 | cs blog</title>
+  <title>spring cloud中的webflux整合 | cs blog</title>
   
 
 
@@ -318,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2019/06/20/zookeeper基本概念/">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2019/10/02/spring-cloud中的webflux整合/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chandler song">
@@ -335,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">zookeeper基本概念
+          <h1 class="post-title" itemprop="name headline">spring cloud中的webflux整合
               
             
           </h1>
@@ -360,13 +360,9 @@
                 
               
 
-              <time title="创建时间：2019-06-20 21:19:58 / 修改时间：21:20:49" itemprop="dateCreated datePublished" datetime="2019-06-20T21:19:58+08:00">2019-06-20</time>
+              <time title="创建时间：2019-10-02 14:24:56" itemprop="dateCreated datePublished" datetime="2019-10-02T14:24:56+08:00">2019-10-02</time>
             
 
-            
-              
-
-              
             
           </span>
 
@@ -382,7 +378,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/中间件/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spring-cloud/" itemprop="url" rel="index"><span itemprop="name">spring cloud</span></a></span>
 
                 
                 
@@ -397,8 +393,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/06/20/zookeeper基本概念/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/06/20/zookeeper基本概念/" itemprop="commentCount"></span>
+                <a href="/2019/10/02/spring-cloud中的webflux整合/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/10/02/spring-cloud中的webflux整合/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -426,91 +422,90 @@
       
 
       
-        <p>《zookeeper_distributed_process_coordination》 第二到第四章笔记 <a id="more"></a></p>
-<h1 id="笔记重点">笔记重点</h1>
+        <p>在把webflux整合到spring cloud里面，踩过的坑。</p>
 <ul>
-<li>zookeeper通过暴露一些列类似于文件系统的api来帮助进行分布式的计算</li>
-<li>常用命令
+<li>调用方式</li>
+<li>自定义的MediaType，文中用的是转换成Avro</li>
+</ul>
+<a id="more"></a>
+<h2 id="个人总结">个人总结</h2>
 <ul>
-<li>create /path data</li>
-<li>delete /path</li>
-<li>exists /path</li>
-<li>setData /path data</li>
-<li>getData /path</li>
-<li>getChildren /path</li>
-<li>quit： 退出命令行</li>
+<li>比较推荐用的是<em>WebClient</em>,但是要集成进服务发现的话，需要集成一些东西。
+<ul>
+<li>feign好像对这块不太热心，估计reative的支持，需要改很多底层的东西。毕竟调用方式决定了</li>
+<li>第三方<em>feign-reactive</em>其实是我第一个选择的方案，但是在实际使用中，发觉一般。很多细节的方式不好，文档也少，而且维护的好像不多。</li>
+</ul></li>
+<li>关于一些encode和decode这些，我发觉还是比较搞的。
+<ul>
+<li>webflux分了三层。但是最好用的还是第三天发现的。</li>
 </ul></li>
 </ul>
-<h1 id="znode">znode</h1>
+<h2 id="第一天">第一天</h2>
 <ul>
-<li>可以保存数据。如果保存数据，全都是字节。需要自己去<strong>序列化/反序列化</strong></li>
-<li>分类
+<li><a href="https://github.com/Playtika/feign-reactive" target="_blank" rel="noopener">feign-reactive</a>: 貌似默认的feign是不支持reactive的。
 <ul>
-<li>persistent</li>
-<li>ephemeral: <code>create -e /master &quot;data&quot;</code></li>
-<li>Sequential:<code>create -s /tasks/task- &quot;data&quot;</code>,will be <code>/tasks/task-000000000</code></li>
+<li><a href="https://github.com/kptfh/feign-reactive-sample" target="_blank" rel="noopener">examples</a></li>
+<li><a href="https://github.com/OpenFeign/feign-reactive/issues/10" target="_blank" rel="noopener">项目是私人的</a>：感觉挺好用的。但是配置起来比较麻烦。比方我想用avro来做。用起来就很麻烦
+<ul>
+<li>必须要有服务发现</li>
+<li>配置很麻烦，比如我的encoder和decode很麻烦</li>
+<li>吃exception：比方我想用avro来做restful的接口，但是最后发觉，还是一直不行。因为吃了exception</li>
+</ul></li>
+</ul></li>
+<li><a href="http://www.itmuch.com/spring-cloud-sum/spring-cloud-timeout/" target="_blank" rel="noopener">spring cloud的timeout的组合</a></li>
+<li><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html#webflux-codecs" target="_blank" rel="noopener">message转换的地方</a>
+<ul>
+<li><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html#webflux-config-message-codecs" target="_blank" rel="noopener">地方二</a></li>
 </ul></li>
 </ul>
-<h2 id="ephemeral-node">ephemeral Node</h2>
-<p>两种情况会被删除 1. session丢失 2. creator删除</p>
-<p>注意点 1. 不能有children</p>
-<h2 id="versin">versin</h2>
-<p>每个Znode都有一个versin number。而这个verison number每次会根据数据变化自动增加。</p>
-<h2 id="watch-and-notifications">Watch and Notifications</h2>
-<ol type="1">
-<li>A watch is one-shot operation
+<h2 id="第二天">第二天</h2>
 <ul>
-<li>注册一个watch，在收到了notification之后，watch就会失效，需要重新注册。</li>
-<li>zookeeper保证，notifcation会在其他change作用于watch的node前，送达到client端。但是<strong>不保证</strong>重新注册，在其他的变化之前。觉得不太适合高并发的场景</li>
+<li>从上文搞清楚，发觉webflux中的message其实抽象了好几层。比较简单的还是直接用<em>Encoder</em>和<em>Decoder</em>。最后<em>DecoderHttpMessageReader</em>和<em>EncoderHttpMessageWriter</em>
+<ul>
+<li>writer的时候，记住<strong>OutputStream要Flush</strong></li>
 </ul></li>
-<li>notification的种类
+<li>webflux貌似和spring boot原来的不兼容,同一个项目没办法引入两个。</li>
+</ul>
+<h2 id="第三天">第三天</h2>
 <ul>
-<li>data change: <code>stat /master true</code></li>
-<li>children change</li>
-<li>znode being created or deleted</li>
+<li>webflux的codec的配置好像比较麻烦，比较死，必须继承<em>WebFluxConfigurer</em>,重写<em>configureHttpMessageCodecs</em></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">configurer.customCodecs().reader(createAvroReader());</span><br><span class="line">configurer.customCodecs().writer(createAvroWriter());</span><br></pre></td></tr></table></figure>
+<ul>
+<li><a href="https://www.baeldung.com/spring-5-webclient" target="_blank" rel="noopener">webclient hello world</a>
+<ul>
+<li><a href="https://www.baeldung.com/spring-webclient-resttemplate" target="_blank" rel="noopener">webclient and restfulTemplate比较</a>：webclient非阻塞，restfultemplate阻塞</li>
 </ul></li>
-<li>收到<code>Disconnected Event</code>并不是表示session已经死了。因为可能是网络的问题。这些zk的连接包自己会帮你处理。</li>
-<li>转换zk server的时候，貌似服务器会帮助你去检查相应的服务器。</li>
-<li>对于一个A，B两个变化很快。注册了watch。只会收到A的notification。重新watch的时候，可能会丢掉B的变化
+<li><span class="citation" data-cites="NonNull">[Not annotated method overrides method annotated with @NonNull]</span>(https://stackoverflow.com/questions/52989267/not-annotated-method-overrides-method-annotated-with-nonnull)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="meta">@NonNull</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> NumberViewHolder <span class="title">onCreateViewHolder</span><span class="params">(ViewGroup viewGroup, <span class="keyword">int</span> viewType)</span> </span>&#123; &#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>这个是哦户，就要自己去检查了。</li>
+<li><a href="https://spring.io/guides/gs/reactive-rest-service/" target="_blank" rel="noopener">一个关于ServerResponse的例子</a>
+<ul>
+<li>感觉这个和以前不一样。由routinue,而不是annatation来设定相关的路径</li>
 </ul></li>
-<li>watch其实挺消耗内存的，如果注册多个，则是因为通知，拖慢整个服务器进程。
+<li><a href="https://www.baeldung.com/spring-webflux-404" target="_blank" rel="noopener">返回error code</a>:好几种，慢慢看</li>
+</ul>
+<h2 id="第四天">第四天</h2>
 <ul>
-<li>可以通过注册sequence node，谁注册的最小，谁就是master</li>
+<li>webFlux打error用的doOnError</li>
+<li>feign对于reactive支持的不是很好。
+<ul>
+<li>有一个第三方的库，我前面说了。但是发觉不是很好用。</li>
+<li>官方的库好久也没有更新，而且那个包也不是原生的支持。</li>
 </ul></li>
-</ol>
-<h1 id="zookeeper-architecture">zookeeper Architecture</h1>
-<p>两种模式.standalone和quorum</p>
-<h2 id="quorums">quorums</h2>
-<p>其实书中说了问题，本质就是zookeeper采用的paxo算法来保证一致性。</p>
-<h2 id="session">session</h2>
-<p>客户端必须先建立session，才能执行命令。<br>
-在session中，命令都是有序的，都是FIFO 连接可以用<code>zkCli -server ip:port</code></p>
-<p>lifecycle - CONNECTING - CONNECTED - CLOSED - NOT_CONNECTED: 第一个状态</p>
-<p>在session中，比较要留意的是timeout。如果在一个timeout的周期内，server没有收到信息，则是会断开session。<br>
-默认的情况下面。<br>
-client如果1/3的周期内，没有收到发一个心跳<br>
-如果2/3的周期内，没有收到消息，则会开始查找新的server</p>
-<p>还有一点要注意的是，在zookeeper内部，所有的东西都是有序的。包括连接。</p>
-<p>连接的时候，只要连接一个就好了。</p>
-<p>注意点 - session会在zookeeper之间服务器自动转换。即如果和A断开，会自动连到B。并保持连接。 - 用不着自己管理和zk的连接。</p>
-<h1 id="杂项">杂项</h1>
+<li>简单的配置等级</li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">logging:</span></span><br><span class="line"><span class="attr">  level:</span></span><br><span class="line">    <span class="string">com.springframework.cloud:</span> <span class="string">warn</span></span><br><span class="line">    <span class="string">com.netflix.discovery:</span> <span class="string">warn</span></span><br><span class="line">    <span class="string">com.netflix.hystrix:</span> <span class="string">debug</span></span><br><span class="line">    <span class="string">org.springframework.web:</span> <span class="string">debug</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>ACL好像叫权限控制</li>
-<li>Multiop：简单的来说就是一个transition</li>
-<li>Order
+<li>webclient和服务发现: 官网上面的方法没法用
 <ul>
-<li>Order of writes：每个server执行写操作不是同步。但是次序是想通的</li>
-<li>Order of Reads: 重要的数据，最好不要依赖读，而是要依赖于watch</li>
-<li>Order of Notifications: 原文有点饶，我的理解是所有东西都是接收的到时order的。</li>
+<li><code>LoadBalancerClient lbClient</code>: 可以autowire</li>
+<li><a href="https://github.com/spring-cloud/spring-cloud-commons/issues/295" target="_blank" rel="noopener">github上的讨论，简单的来说就是webClient先初始化</a></li>
+<li><a href="https://www.jianshu.com/p/f09fa02a383f" target="_blank" rel="noopener">简书上面关于具体的工作的机制</a></li>
 </ul></li>
 </ul>
-<h1 id="爬坑">爬坑</h1>
-<h2 id="client-id和client-port语法变化">client id和client port语法变化</h2>
-<p>发觉从3.5开始的改动 标准： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server.&lt;positive id&gt; = &lt;address1&gt;:&lt;port1&gt;:&lt;port2&gt;[:role];[&lt;client port address&gt;:]&lt;client port&gt;**</span><br></pre></td></tr></table></figure></p>
-<p>例子 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">server.5 = 125.23.63.23:1234:1235;1236</span><br><span class="line">server.5 = 125.23.63.23:1234:1235:participant;1236</span><br><span class="line">server.5 = 125.23.63.23:1234:1235:observer;1236</span><br><span class="line">server.5 = 125.23.63.23:1234:1235;125.23.63.24:1236</span><br><span class="line">server.5 = 125.23.63.23:1234:1235:participant;125.23.63.23:1236</span><br></pre></td></tr></table></figure></p>
-<p>因为我搭建环境的时候，docker image不是3.5了。按照官方的例子不断报错。然后强制升到3.5.1之后就好了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">WebClient.builder()</span><br><span class="line">.filter((<span class="keyword">new</span> LoadBalancerExchangeFilterFunction(lbClient)));</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -555,7 +550,11 @@ client如果1/3的周期内，没有收到发一个心跳<br>
       
         <div class="post-tags">
           
-            <a href="/tags/zookeeper/" rel="tag"># zookeeper</a>
+            <a href="/tags/webflux/" rel="tag"># webflux</a>
+          
+            <a href="/tags/feign/" rel="tag"># feign</a>
+          
+            <a href="/tags/reactive/" rel="tag"># reactive</a>
           
         </div>
       
@@ -568,8 +567,8 @@ client如果1/3的周期内，没有收到发一个心跳<br>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/08/jenkins-自学爬坑-二/" rel="next" title="jenkins 自学爬坑(二) ">
-                <i class="fa fa-chevron-left"></i> jenkins 自学爬坑(二) 
+              <a href="/2019/10/02/Go-自学入门5/" rel="next" title="Go-自学入门5">
+                <i class="fa fa-chevron-left"></i> Go-自学入门5
               </a>
             
           </div>
@@ -577,10 +576,6 @@ client如果1/3的周期内，没有收到发一个心跳<br>
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/29/kafka爬坑-docker中部署/" rel="prev" title="kafka爬坑-docker中部署">
-                kafka爬坑-docker中部署 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -806,7 +801,7 @@ client如果1/3的周期内，没有收到发一个心跳<br>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#笔记重点"><span class="nav-text">笔记重点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#znode"><span class="nav-text">znode</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ephemeral-node"><span class="nav-text">ephemeral Node</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#versin"><span class="nav-text">versin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#watch-and-notifications"><span class="nav-text">Watch and Notifications</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#zookeeper-architecture"><span class="nav-text">zookeeper Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#quorums"><span class="nav-text">quorums</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#session"><span class="nav-text">session</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#杂项"><span class="nav-text">杂项</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#爬坑"><span class="nav-text">爬坑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#client-id和client-port语法变化"><span class="nav-text">client id和client port语法变化</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#个人总结"><span class="nav-text">个人总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一天"><span class="nav-text">第一天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二天"><span class="nav-text">第二天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三天"><span class="nav-text">第三天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四天"><span class="nav-text">第四天</span></a></li></ol></div>
             
 
           </div>
