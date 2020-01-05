@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="pM_XAEV2nmir_K1lg0_6faxEzP6oJBFlK4cHejszh8k" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+<link href="https://cdn.staticfile.org/font-awesome/4.6.2/css/font-awesome.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="第一天  sam这个工具贼难用。贼难用。很多例子都跑不起来。至少用python跑，一堆的错。  go  sam build在go中不能用。但是其他命令还是能够工作的  在例子中，有一个Makefile。感觉还可以  go tool: no such tool &amp;quot;compile&amp;quot; 可能是windows下面的一个问题，需要安装GCC  主要是这个讨论 也有">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="aws-sam-1">
+<meta property="og:url" content="https://chandlersong.me/2020/01/05/aws-sam-1/index.html">
+<meta property="og:site_name" content="cs blog">
+<meta property="og:description" content="第一天  sam这个工具贼难用。贼难用。很多例子都跑不起来。至少用python跑，一堆的错。  go  sam build在go中不能用。但是其他命令还是能够工作的  在例子中，有一个Makefile。感觉还可以  go tool: no such tool &amp;quot;compile&amp;quot; 可能是windows下面的一个问题，需要安装GCC  主要是这个讨论 也有">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-01-05T06:54:47.893Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="aws-sam-1">
+<meta name="twitter:description" content="第一天  sam这个工具贼难用。贼难用。很多例子都跑不起来。至少用python跑，一堆的错。  go  sam build在go中不能用。但是其他命令还是能够工作的  在例子中，有一个Makefile。感觉还可以  go tool: no such tool &amp;quot;compile&amp;quot; 可能是windows下面的一个问题，需要安装GCC  主要是这个讨论 也有">
+
+
+
+
+
+
+  <link rel="canonical" href="https://chandlersong.me/2020/01/05/aws-sam-1/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>aws-sam-1 | cs blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-9797056-15"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-9797056-15');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">cs blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chandlersong.me/2020/01/05/aws-sam-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chandler song">
+      <meta itemprop="description" content="share my technique experience">
+      <meta itemprop="image" content="/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cs blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">aws-sam-1
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-05 14:53:38 / 修改时间：14:54:47" itemprop="dateCreated datePublished" datetime="2020-01-05T14:53:38+08:00">2020-01-05</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/01/05/aws-sam-1/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2020/01/05/aws-sam-1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="第一天">第一天</h2>
+<ul>
+<li>sam这个工具贼难用。贼难用。很多例子都跑不起来。至少用python跑，一堆的错。</li>
+</ul>
+<h3 id="go">go</h3>
+<ul>
+<li><a href="https://github.com/awslabs/aws-sam-cli/issues/861" target="_blank" rel="noopener">sam build</a>在go中不能用。但是其他命令还是能够工作的
+<ul>
+<li>在例子中，有一个Makefile。感觉还可以</li>
+</ul></li>
+<li><code>go tool: no such tool &quot;compile&quot;</code> 可能是windows下面的一个问题，需要安装GCC
+<ul>
+<li><a href="https://github.com/golang/go/issues/33680" target="_blank" rel="noopener">主要是这个讨论</a></li>
+<li><a href="https://blog.csdn.net/piaoxue1949/article/details/80614577" target="_blank" rel="noopener">也有说环境变量弄错的</a></li>
+<li><a href="https://stackoverflow.com/questions/51182422/all-of-a-sudden-go-tool-no-such-tool-compile" target="_blank" rel="noopener">GOTOOLDIR设置错</a>
+<ul>
+<li>我这次的问题是这个环境变量指向一个不存在的目录，不过发觉好像改环境变量无法改变。就是把目录下面的copy过去了。</li>
+<li>具体目录在<code>$Go/pkg/tool</code></li>
+</ul></li>
+</ul></li>
+<li><p><code>go env</code>能够看环境变量</p></li>
+<li><p><code>pywintypes.error: (2, 'WaitNamedPipe', '系统找不到指定的文件。')</code>这个好像是需要安装docker的。</p></li>
+</ul>
+<h2 id="第二天">第二天</h2>
+<ul>
+<li><a href="https://blog.rowanudell.com/getting-started-with-aws-sam-cli-and-golang/" target="_blank" rel="noopener">有一个makefile，但是写的有点水</a></li>
+<li><a href="https://medium.com/@tuomovee/go-serverless-with-sam-860c62f63ba4" target="_blank" rel="noopener">一个可以看看的例子</a></li>
+<li><code>DOCKER_HOST</code>这个变量：<a href="https://github.com/thoeni/aws-sam-local" target="_blank" rel="noopener">reference</a></li>
+</ul>
+<h2 id="section">2019-12-30</h2>
+<ul>
+<li><a href="https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction" target="_blank" rel="noopener">配置的reference</a>：这里觉得有点绕。配置脚本，是基于<em>CloudFormation</em>。但是在sam里面，他又有自己的定制，所以需要在头上设置了<code>Transform: AWS::Serverless-2016-10-31</code>.而就是那个配置项的reference
+<ul>
+<li><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html" target="_blank" rel="noopener">Cloud formation的配置</a>: 感觉还是有点不同</li>
+</ul></li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Resources:</span></span><br><span class="line"><span class="attr">  HelloWorldFunction:</span></span><br><span class="line"><span class="attr">    Type:</span> <span class="attr">AWS::Serverless::Function</span> <span class="comment"># More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction</span></span><br><span class="line"><span class="attr">    Properties:</span></span><br><span class="line"><span class="attr">      CodeUri:</span> <span class="string">aws-lambda/</span></span><br><span class="line"><span class="attr">      Handler:</span> <span class="string">aws-lambda</span></span><br><span class="line"><span class="attr">      Runtime:</span> <span class="string">go1.x</span></span><br><span class="line"><span class="attr">      Tracing:</span> <span class="string">Active</span> <span class="comment"># https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html</span></span><br><span class="line"><span class="attr">      Events:</span></span><br><span class="line"><span class="attr">        CatchAll:</span></span><br><span class="line"><span class="attr">          Type:</span> <span class="string">Api</span> <span class="comment"># More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api</span></span><br><span class="line"><span class="attr">          Properties:</span></span><br><span class="line"><span class="attr">            Path:</span> <span class="string">/hello</span></span><br><span class="line"><span class="attr">            Method:</span> <span class="string">GET</span></span><br><span class="line"><span class="attr">      Environment:</span> <span class="comment"># More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object</span></span><br><span class="line"><span class="attr">        Variables:</span></span><br><span class="line"><span class="attr">          PARAM1:</span> <span class="string">VALUE</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Events:中的CatchAll好像是随便取的。关键其子项还是<strong>Type</strong></li>
+</ul>
+<h3 id="不同环境解决办法">不同环境解决办法</h3>
+<ul>
+<li><a href="https://stackoverflow.com/questions/48104665/aws-sam-local-environment-variables" target="_blank" rel="noopener">最后一个</a></li>
+<li><a href="https://medium.com/@TomKeeber/configuring-aws-sam-templates-for-different-environments-64043e281fdc" target="_blank" rel="noopener">定义环境变量</a></li>
+</ul>
+<h2 id="第三天">第三天</h2>
+<ol type="1">
+<li><code>sam local</code>貌似只会启动一个关于lambda的，不会启动其他。</li>
+<li><a href="https://stackoverflow.com/questions/12457130/what-will-happen-if-we-insert-into-dynamo-db-with-a-duplicate-hash-key" target="_blank" rel="noopener">dynamo关于duplicate key的处理方式</a>
+<ul>
+<li><code>conditional put</code></li>
+</ul></li>
+<li>run docker in docker
+<ul>
+<li><a href="https://medium.com/monsoon-engineering/running-aws-sam-in-a-docker-container-2491596672c2" target="_blank" rel="noopener">一个第三方的尝试</a></li>
+<li><a href="https://github.com/awslabs/aws-sam-cli/issues/181" target="_blank" rel="noopener">官方关于这类需求的讨论</a></li>
+<li><a href="https://github.com/awslabs/aws-sam-cli/issues/55" target="_blank" rel="noopener">另一个issue</a></li>
+</ul></li>
+</ol>
+<h2 id="第四天">第四天</h2>
+<h3 id="本地部署的时候不同环境">本地部署的时候不同环境</h3>
+<p>本质来说，还都是用<code>sam local start-api</code>这条命令。然后不同参数</p>
+<ol type="1">
+<li>参数为<code>-t</code>。定义不同的temaplate，其实对于测试单个函数，或者个人的lambda问题不大，但是整体的话，其实改动成本挺高的。</li>
+<li><p><code>--env-vars env_test.json</code>。貌似只能事resource级别。这样有个问题，如果两个lambda，用相同的参数，比如读相同的表。就要用好几个相同的了,下面是配置文件的例子 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"HelloWorldFunction"</span>: &#123;</span><br><span class="line">    <span class="attr">"SOME_VAR"</span>: <span class="string">"123"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li>
+<li><p><code>--parameter-overrides SomeVar=define_out_side</code>。麻烦的地方就要写在命令行里面。不过相对于来说。我觉得还是比较方便和全面的。</p></li>
+</ol>
+<h2 id="第五天">第五天</h2>
+<h3 id="sam跑在docker上">sam跑在docker上</h3>
+<ol type="1">
+<li><a href="https://github.com/serverless/serverless/issues/4710" target="_blank" rel="noopener">不要用Alpine的镜像，貌似是和Go相关的</a></li>
+<li>Make file相关
+<ul>
+<li>ignore error，命令行前面加上<code>-</code>,类似于<code>-rm</code>,还可以这么写<code>-@rm</code></li>
+<li><code>$</code>是特殊字符,转义也比较简单,就<code>$$</code>就行了。</li>
+<li><code>\</code> 换行符</li>
+</ul></li>
+<li><code>sam local start-api --host 0.0.0.0</code>:可以提供远程访问</li>
+<li>docker的本目录
+<ul>
+<li>现在建议用<code>--mount</code></li>
+<li>但是还是可以 <code>-v $(pwd)</code></li>
+</ul></li>
+</ol>
+<h2 id="第六天">第六天</h2>
+<h3 id="sam跑在docker上-1">sam跑在docker上</h3>
+<p>有一个找不到handler的错误。这个可能是docker相关的。其实主要是，volume会从主机上线找。<br>
+sam本质上，就是其一个contianer，然后把本地的文件mount到这个contianer上去。<br>
+如果把sam封装进入一个docker，比如A，如果是用宿主机的docker。就会<code>-v /var/run/docker.sock:/var/run/docker.sock</code>。其实其调用了还是宿主机的docker。那么sam其的contianer B，mount上去的路径是就是宿主机的路径，而不是containerA的路径，就有可能找不到</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>赏</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/reward/weixin.jpg" alt="chandler song 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/18/aws-lambda-1/" rel="next" title="aws lambda 1">
+                <i class="fa fa-chevron-left"></i> aws lambda 1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/avatar.jpeg"
+                alt="chandler song" />
+            
+              <p class="site-author-name" itemprop="name">chandler song</p>
+              <p class="site-description motion-element" itemprop="description">share my technique experience</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:chandler605@outlook.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一天"><span class="nav-text">第一天</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#go"><span class="nav-text">go</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二天"><span class="nav-text">第二天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#section"><span class="nav-text">2019-12-30</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#不同环境解决办法"><span class="nav-text">不同环境解决办法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三天"><span class="nav-text">第三天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四天"><span class="nav-text">第四天</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本地部署的时候不同环境"><span class="nav-text">本地部署的时候不同环境</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五天"><span class="nav-text">第五天</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sam跑在docker上"><span class="nav-text">sam跑在docker上</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六天"><span class="nav-text">第六天</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sam跑在docker上-1"><span class="nav-text">sam跑在docker上</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chandler song</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.3.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="https://cdn.staticfile.org/jquery/2.1.3/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://cdn.staticfile.org/velocity/1.2.1/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://cdn.staticfile.org/velocity/1.2.1/velocity.ui.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '4R5ANGVDPXhEGCFlj4Rsj4qs-gzGzoHsz',
+        appKey: 'dLVpOwTwFUr2qmzjGby7wEND',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
